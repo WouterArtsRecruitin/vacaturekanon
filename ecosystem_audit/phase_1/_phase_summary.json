@@ -1,0 +1,138 @@
+{
+  "phase": 1,
+  "name": "Inventory Scan",
+  "started": "2026-01-18T15:38:39.003172",
+  "filesystem": {
+    "scan_timestamp": "2026-01-18T15:37:58.204454",
+    "root_path": "/Users/wouterarts/Recruitin",
+    "scripts": [],
+    "configs": [
+      {
+        "name": "github_repositories.json",
+        "path": "ecosystem_audit/phase_1/github_repositories.json",
+        "type": ".json"
+      },
+      {
+        "name": "filesystem_inventory.json",
+        "path": "ecosystem_audit/phase_1/filesystem_inventory.json",
+        "type": ".json"
+      },
+      {
+        "name": "api_integrations.json",
+        "path": "ecosystem_audit/phase_1/api_integrations.json",
+        "type": ".json"
+      },
+      {
+        "name": "google_drive_structure.json",
+        "path": "ecosystem_audit/phase_1/google_drive_structure.json",
+        "type": ".json"
+      },
+      {
+        "name": "claude_projects.json",
+        "path": "ecosystem_audit/phase_1/claude_projects.json",
+        "type": ".json"
+      },
+      {
+        "name": "_phase_summary.json",
+        "path": "ecosystem_audit/phase_1/_phase_summary.json",
+        "type": ".json"
+      }
+    ],
+    "data_files": [
+      {
+        "name": "github_repositories.json",
+        "path": "ecosystem_audit/phase_1/github_repositories.json",
+        "size_kb": 1.66
+      },
+      {
+        "name": "filesystem_inventory.json",
+        "path": "ecosystem_audit/phase_1/filesystem_inventory.json",
+        "size_kb": 1.67
+      },
+      {
+        "name": "api_integrations.json",
+        "path": "ecosystem_audit/phase_1/api_integrations.json",
+        "size_kb": 2.63
+      },
+      {
+        "name": "google_drive_structure.json",
+        "path": "ecosystem_audit/phase_1/google_drive_structure.json",
+        "size_kb": 2.14
+      },
+      {
+        "name": "claude_projects.json",
+        "path": "ecosystem_audit/phase_1/claude_projects.json",
+        "size_kb": 1.9
+      },
+      {
+        "name": "_phase_summary.json",
+        "path": "ecosystem_audit/phase_1/_phase_summary.json",
+        "size_kb": 10.35
+      }
+    ],
+    "directories": [
+      "Performance Cyclus - Documenten",
+      "ecosystem_audit"
+    ],
+    "cron_jobs": [
+      "0 9 * * * /Users/wouterarts/mcp-servers/daily-news-automation.sh",
+      "0 */2 * * * cd /Users/wouterarts/carerix_automation && python3 onedrive_linkedin_automation.py >> onedrive_automation.log 2>&1"
+    ],
+    "claude_analysis": {
+      "summary": "Recruitin automation ecosystem toont een gefaseerde audit van verschillende technische componenten, met focus op data-inventarisatie en geautomatiseerde processen. De structuur wijst op een methodische aanpak voor ecosystem mapping en integratie.",
+      "key_scripts": [
+        {
+          "name": "daily-news-automation.sh",
+          "purpose": "Dagelijkse nieuwsgeautomatiseerd proces",
+          "priority": "medium"
+        },
+        {
+          "name": "onedrive_linkedin_automation.py",
+          "purpose": "OneDrive en LinkedIn data synchronisatie/extract",
+          "priority": "high"
+        }
+      ],
+      "automation_patterns": [
+        "Periodieke cron job uitvoering",
+        "JSON-based ecosystem documentatie",
+        "Gefaseerde audit methode"
+      ],
+      "organization_score": 7,
+      "risks": [
+        "Beperkte script documentatie",
+        "Mogelijke log file management issues",
+        "Geen zichtbare backup mechanismen"
+      ],
+      "quick_wins": [
+        "Centraliseer script logging",
+        "Implementeer formele backup strategie",
+        "Toevoegen metadata aan json configuraties"
+      ]
+    }
+  },
+  "google_drive": {
+    "scan_timestamp": "2026-01-18T15:38:12.466139",
+    "status": "analysis_completed",
+    "note": "Actual Drive scan requires Google Drive API integration",
+    "recommendation": "{\n  \"recommended_structure\": {\n    \"folders\": [\n      \"Recruitment Master Folder\",\n      \"Kandidaten Database\",\n      \"Interview Documenten\",\n      \"Job Descriptions\",\n      \"Offer Letters & Contracts\",\n      \"Onboarding Materials\",\n      \"Recruitment Analytics\",\n      \"Screening Templates\",\n      \"Automation Scripts\"\n    ],\n    \"templates\": [\n      \"Initial Screening Template\",\n      \"Interview Evaluation Form\",\n      \"Candidate Scorecard\",\n      \"Reference Check Template\",\n      \"Offer Letter Template\", \n      \"Rejection Email Template\",\n      \"Skills Assessment Matrix\"\n    ],\n    \"reference_materials\": [\n      \"Recruitment Process Flowchart\",\n      \"Company Hiring Guidelines\",\n      \"Skills Competency Rubrics\",\n      \"Legal Compliance Documentation\",\n      \"Interview Best Practices Guide\",\n      \"Diversity & Inclusion Checklist\"\n    ]\n  },\n  \"sharing_best_practices\": [\n    \"Recruitment Team - Full Access\",\n    \"Hiring Managers - Limited View\",\n    \"HR Leadership - Comprehensive Dashboard\",\n    \"Use Role-Based Permissions\",\n    \"Anonymize Sensitive Candidate Data\",\n    \"Enable Version Control\"\n  ],\n  \"sync_strategy\": {\n    \"desktop_sync\": true,\n    \"auto_sync_folders\": [\n      \"Templates\",\n      \"Interview Documenten\", \n      \"Screening Templates\"\n    ],\n    \"exclude_from_sync\": [\n      \"Kandidaten Database\",\n      \"Sensitive Personnel Files\"\n    ]\n  },\n  \"scan_commands\": [\n    \"Use Google Drive Audit Log\",\n    \"Implement CloudAlly Backup\",\n    \"Regular Permissions Scan\",\n    \"Automated Access Review Tools\",\n    \"Deploy DLP (Data Loss Prevention) Scans\"\n  ]\n}"
+  },
+  "github": {
+    "scan_timestamp": "2026-01-18T15:38:19.123399",
+    "status": "analysis_completed",
+    "note": "Actual GitHub scan requires GitHub API or gh CLI",
+    "recommendation": "{\n  \"recommended_repos\": [\n    {\"name\": \"recruitment-automation\", \"purpose\": \"Core automation platform\", \"private\": true},\n    {\"name\": \"candidate-tracking-system\", \"purpose\": \"Database and workflow management\", \"private\": true},\n    {\"name\": \"interview-scheduler\", \"purpose\": \"Interview coordination tools\", \"private\": true},\n    {\"name\": \"assessment-toolkit\", \"purpose\": \"Candidate evaluation scripts\", \"private\": false},\n    {\"name\": \"recruitment-templates\", \"purpose\": \"Email and communication templates\", \"private\": true}\n  ],\n  \"code_organization\": [\n    \"Modular microservice architecture\",\n    \"Separate concerns between data, logic, and UI components\",\n    \"Use dependency injection\",\n    \"Consistent naming conventions\",\n    \"Environment-specific configuration management\"\n  ],\n  \"documentation_needs\": [\n    \"Comprehensive README with setup instructions\",\n    \"Architecture decision records\",\n    \"API documentation\",\n    \"Installation and deployment guides\",\n    \"Security and compliance wiki pages\"\n  ],\n  \"cicd_recommendations\": [\n    \"Automated unit testing workflow\",\n    \"Security vulnerability scanning\",\n    \"Code quality checks\",\n    \"Automated deployment to staging/production\",\n    \"Performance benchmark tests\"\n  ],\n  \"scan_commands\": [\n    \"gh repo list --visibility private\",\n    \"gh secret list\",\n    \"gh workflow list\",\n    \"gh repo view --web\",\n    \"gh repo create <name> --private --template\"\n  ]\n}"
+  },
+  "claude_projects": {
+    "scan_timestamp": "2026-01-18T15:38:27.063287",
+    "status": "analysis_completed",
+    "note": "Actual Claude Projects scan requires manual review or API access",
+    "recommendation": "Hier is een geoptimaliseerde Claude Projects setup voor Recruiting:\n\n{\n  \"recommended_projects\": [\n    {\n      \"name\": \"Kandidaat Screening\",\n      \"purpose\": \"CV analyse, kandidaat matching, eerste selectie\",\n      \"reference_files\": [\n        \"Functieprofielen\",\n        \"Competentie-overzichten\", \n        \"Standaard CV template\",\n        \"Recruitmentbeleid\"\n      ],\n      \"custom_instructions\": \"Analyseer kandidaten objectief, focus op skills, match met functievereisten, vermijd bias\"\n    },\n    {\n      \"name\": \"Interview Voorbereiding\",\n      \"purpose\": \"Interview script genereren, relevante vragen opstellen\",\n      \"reference_files\": [\n        \"Functiespecifieke competenties\",\n        \"Gedragsprofielen\",\n        \"Interview assessment formulieren\"\n      ],\n      \"custom_instructions\": \"Cre\u00eber gestructureerde interviews, diepgaande situationele vragen, competentie-gerichte benadering\"\n    },\n    {\n      \"name\": \"Kandidaat Communicatie\",\n      \"purpose\": \"Gepersonaliseerde communicatie, feedback, voortgang\",\n      \"reference_files\": [\n        \"Standaard email templates\",\n        \"Communicatierichtlijnen\",\n        \"Kandidaat tracking document\"\n      ],\n      \"custom_instructions\": \"Professionele, empathische communicatie, persoonlijke touch, transparantie\"\n    }\n  ],\n  \"usage_guidelines\": [\n    \"Kandidaat Screening: eerste filtering CV's\",\n    \"Interview Voorbereiding: 1-2 dagen voor sollicitatiegesprek\",\n    \"Kandidaat Communicatie: continue proces tijdens recruitment\"\n  ],\n  \"integration_opportunities\": [\n    \"ATS systeem koppeling\",\n    \"LinkedIn profiel analyse extensie\",\n    \"Geautomatiseerde kandidaat matching\"\n  ]\n}"
+  },
+  "api_integrations": {
+    "scan_timestamp": "2026-01-18T15:38:39.001772",
+    "status": "analysis_completed",
+    "note": "Actual API tests require credentials - run separately",
+    "recommendation": "{\n  \"apis\": [\n    {\n      \"service\": \"Pipedrive\",\n      \"auth_method\": \"OAuth 2.0 / API Token\",\n      \"test_endpoint\": \"/users/me\",\n      \"test_command\": \"curl -H 'Authorization: Bearer YOUR_API_TOKEN' https://api.pipedrive.com/v1/users/me\",\n      \"rate_limits\": \"1 request/second, 50,000 requests/day\",\n      \"estimated_monthly_cost\": \"$50-$100 depending on user tier\"\n    },\n    {\n      \"service\": \"Gmail\",\n      \"auth_method\": \"OAuth 2.0 / Google Workspace API\",\n      \"test_endpoint\": \"/gmail/v1/users/me/profile\",\n      \"test_command\": \"python google_api_test.py --get_profile\",\n      \"rate_limits\": \"250 queries/day for basic accounts, 1500/day for enterprise\",\n      \"estimated_monthly_cost\": \"Free with Google Workspace account\"\n    },\n    {\n      \"service\": \"Hugging Face\",\n      \"auth_method\": \"API Token\",\n      \"test_endpoint\": \"/models/inference/test\",\n      \"test_command\": \"curl -X POST https://api-inference.huggingface.co/models/gpt2 -H 'Authorization: Bearer YOUR_TOKEN'\",\n      \"rate_limits\": \"30 requests/minute for free tier\",\n      \"estimated_monthly_cost\": \"$0-$200 based on model complexity\"\n    },\n    {\n      \"service\": \"Meta Ads\",\n      \"auth_method\": \"OAuth 2.0 / Access Token\",\n      \"test_endpoint\": \"/me/adaccounts\",\n      \"test_command\": \"curl -G -d 'access_token=TOKEN' https://graph.facebook.com/v16.0/me/adaccounts\",\n      \"rate_limits\": \"200 calls/hour per ad account\",\n      \"estimated_monthly_cost\": \"$100-$500 depending on ad spend\"\n    },\n    {\n      \"service\": \"Apollo.io\",\n      \"auth_method\": \"API Key\",\n      \"test_endpoint\": \"/v1/organizations/search\",\n      \"test_command\": \"curl -H 'Cache-Control: no-cache' -H 'Authorization: Bearer YOUR_API_KEY' https://api.apollo.io/v1/organizations/search\",\n      \"rate_limits\": \"100 requests/minute\",\n      \"estimated_monthly_cost\": \"$50-$200 depending on plan\"\n    }\n  ],\n  \"integration_health_check\": {\n    \"recommended_approach\": [\n      \"Create comprehensive test suite\",\n      \"Mock external API responses\",\n      \"Implement circuit breakers\",\n      \"Set up monitoring and alerting\",\n      \"Periodic integration tests\",\n      \"Validate authentication flows\",\n      \"Check rate limit handling\",\n      \"Error response mapping\"\n    ],\n    \"monitoring_tools\": [\n      \"Datadog\",\n      \"New Relic\",\n      \"Prometheus\",\n      \"Sentry\"\n    ],\n    \"test_frequency\": {\n      \"critical_apis\": \"Daily\",\n      \"secondary_apis\": \"Weekly\"\n    }\n  }\n}"
+  },
+  "completed": "2026-01-18T15:38:39.003187"
+}

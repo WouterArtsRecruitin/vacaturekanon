@@ -1,0 +1,108 @@
+{
+  "scan_timestamp": "2026-01-18T15:37:58.204454",
+  "root_path": "/Users/wouterarts/Recruitin",
+  "scripts": [],
+  "configs": [
+    {
+      "name": "github_repositories.json",
+      "path": "ecosystem_audit/phase_1/github_repositories.json",
+      "type": ".json"
+    },
+    {
+      "name": "filesystem_inventory.json",
+      "path": "ecosystem_audit/phase_1/filesystem_inventory.json",
+      "type": ".json"
+    },
+    {
+      "name": "api_integrations.json",
+      "path": "ecosystem_audit/phase_1/api_integrations.json",
+      "type": ".json"
+    },
+    {
+      "name": "google_drive_structure.json",
+      "path": "ecosystem_audit/phase_1/google_drive_structure.json",
+      "type": ".json"
+    },
+    {
+      "name": "claude_projects.json",
+      "path": "ecosystem_audit/phase_1/claude_projects.json",
+      "type": ".json"
+    },
+    {
+      "name": "_phase_summary.json",
+      "path": "ecosystem_audit/phase_1/_phase_summary.json",
+      "type": ".json"
+    }
+  ],
+  "data_files": [
+    {
+      "name": "github_repositories.json",
+      "path": "ecosystem_audit/phase_1/github_repositories.json",
+      "size_kb": 1.66
+    },
+    {
+      "name": "filesystem_inventory.json",
+      "path": "ecosystem_audit/phase_1/filesystem_inventory.json",
+      "size_kb": 1.67
+    },
+    {
+      "name": "api_integrations.json",
+      "path": "ecosystem_audit/phase_1/api_integrations.json",
+      "size_kb": 2.63
+    },
+    {
+      "name": "google_drive_structure.json",
+      "path": "ecosystem_audit/phase_1/google_drive_structure.json",
+      "size_kb": 2.14
+    },
+    {
+      "name": "claude_projects.json",
+      "path": "ecosystem_audit/phase_1/claude_projects.json",
+      "size_kb": 1.9
+    },
+    {
+      "name": "_phase_summary.json",
+      "path": "ecosystem_audit/phase_1/_phase_summary.json",
+      "size_kb": 10.35
+    }
+  ],
+  "directories": [
+    "Performance Cyclus - Documenten",
+    "ecosystem_audit"
+  ],
+  "cron_jobs": [
+    "0 9 * * * /Users/wouterarts/mcp-servers/daily-news-automation.sh",
+    "0 */2 * * * cd /Users/wouterarts/carerix_automation && python3 onedrive_linkedin_automation.py >> onedrive_automation.log 2>&1"
+  ],
+  "claude_analysis": {
+    "summary": "Recruitin automation ecosystem toont een gefaseerde audit van verschillende technische componenten, met focus op data-inventarisatie en geautomatiseerde processen. De structuur wijst op een methodische aanpak voor ecosystem mapping en integratie.",
+    "key_scripts": [
+      {
+        "name": "daily-news-automation.sh",
+        "purpose": "Dagelijkse nieuwsgeautomatiseerd proces",
+        "priority": "medium"
+      },
+      {
+        "name": "onedrive_linkedin_automation.py",
+        "purpose": "OneDrive en LinkedIn data synchronisatie/extract",
+        "priority": "high"
+      }
+    ],
+    "automation_patterns": [
+      "Periodieke cron job uitvoering",
+      "JSON-based ecosystem documentatie",
+      "Gefaseerde audit methode"
+    ],
+    "organization_score": 7,
+    "risks": [
+      "Beperkte script documentatie",
+      "Mogelijke log file management issues",
+      "Geen zichtbare backup mechanismen"
+    ],
+    "quick_wins": [
+      "Centraliseer script logging",
+      "Implementeer formele backup strategie",
+      "Toevoegen metadata aan json configuraties"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac OS & Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Local media outputs
+/tmp/
+/meta-campaigns/
+/landing-pages/
+
+# Video
+*.mp4
+*.mov

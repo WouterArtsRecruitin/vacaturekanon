@@ -1,0 +1,5 @@
+# Recruitin Automation Dependencies (Render / Cloud Ready)
+python-dotenv==1.0.1
+requests==2.31.0
+PyJWT==2.8.0
+supabase==2.3.4
