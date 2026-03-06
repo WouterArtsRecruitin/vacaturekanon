@@ -3,25 +3,8 @@ services:
     name: vacaturekanon-webhook
     env: python
     region: frankfurt
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python3 webhooks/handler.py"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python webhooks/handler.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
-      - key: WEBHOOK_PORT
-        value: 8080
-      - key: WEBHOOK_SECRET
-        fromGroup: vacaturekanon-secrets
-      - key: JOTFORM_API_KEY
-        fromGroup: vacaturekanon-secrets
-      - key: SLACK_WEBHOOK_URL
-        fromGroup: vacaturekanon-secrets
-      - key: PIPEDRIVE_API_KEY
-        fromGroup: vacaturekanon-secrets
-      - key: PIPEDRIVE_DOMAIN
-        value: recruitinbv
-      - key: NETLIFY_TOKEN
-        fromGroup: vacaturekanon-secrets
-      - key: ANTHROPIC_API_KEY
-        fromGroup: vacaturekanon-secrets

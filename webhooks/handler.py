@@ -1,388 +1,306 @@
 #!/usr/bin/env python3
 """
-webhook_handler.py
-Recruitin B.V. — Zapier webhook ontvanger + campagne automation orchestrator
+VACATUREKANON — Webhook Handler
+Recruitin B.V. | Render deployment
 
-Start:
-  python3 ~/recruitin/webhooks/handler.py
-
-Endpoint:
-  POST http://localhost:8080/webhook
-  Header: X-Webhook-Secret: <WEBHOOK_SECRET uit .env>
-
-Testverzoek:
-  curl -X POST http://localhost:8080/webhook \
-    -H "Content-Type: application/json" \
-    -H "X-Webhook-Secret: changeme-vervang-dit" \
-    -d '{"sector":"oil & gas","functie":"Procesoperator","bedrijf":"Acme B.V.",
-         "regio":"Gelderland","email":"hr@acme.nl","naam":"Jan de Vries",
-         "timestamp":"2026-03-05 09:00"}'
+Flow:
+  Jotform POST → valideer → Pipedrive deal → email → Slack → spawn design agent
 """
 
-import os, sys, json, threading, logging
-from pathlib import Path
+import os
+import json
+import threading
+import subprocess
+import logging
+import hmac
+import hashlib
 from datetime import datetime
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from dotenv import load_dotenv, dotenv_values
+from pathlib import Path
+from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-# Scripts pad toevoegen aan sys.path
-BASE_DIR      = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(BASE_DIR / "scripts"))
+load_dotenv()
 
-env_path = Path(__file__).resolve().parents[1] / ".env"
-load_dotenv(env_path, override=True)
-import requests
-
-# Supabase imports
-try:
-    from supabase_client import log_campaign
-except ImportError:
-    log_campaign = None
-
-# ── Logging ───────────────────────────────────────────────────────────────────
+# ── LOGGING ───────────────────────────────────────────────
 logging.basicConfig(
-    level   = logging.INFO,
-    format  = "%(asctime)s [%(levelname)s] %(message)s",
-    datefmt = "%Y-%m-%d %H:%M:%S",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("/tmp/recruitin_handler.log"),
-    ],
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
 )
-log = logging.getLogger("webhook")
+log = logging.getLogger("vacaturekanon")
 
-# ── Config ───────────────────────────────────────────────────────────────────
-PORT           = int(os.getenv("WEBHOOK_PORT", "8080"))
-SECRET         = os.getenv("WEBHOOK_SECRET", "changeme-vervang-dit")
-SLACK_URL      = os.getenv("SLACK_WEBHOOK_URL", "")
-JOTFORM_URL    = os.getenv("JOTFORM_URL", "https://form.jotform.com/260623885606059")
+app = Flask(__name__)
 
-# ── Sector / slug mapping ─────────────────────────────────────────────────────
-SECTOR_SLUG_MAP = {
-    "oil & gas":        "oil-gas",
-    "oil and gas":      "oil-gas",
-    "constructie":      "constructie",
-    "bouw":             "constructie",
-    "automation":       "automation",
-    "automatisering":   "automation",
-    "productie":        "productie",
-    "manufacturing":    "productie",
-    "renewable energy": "renewable-energy",
-    "renewable":        "renewable-energy",
-    "energie":          "renewable-energy",
-}
+# ── CONFIG ────────────────────────────────────────────────
+WEBHOOK_SECRET   = os.getenv("WEBHOOK_SECRET", "")
+PIPEDRIVE_KEY    = os.getenv("PIPEDRIVE_API_KEY", "")
+PIPEDRIVE_DOMAIN = os.getenv("PIPEDRIVE_DOMAIN", "recruitinbv")
+SLACK_URL        = os.getenv("SLACK_WEBHOOK_URL", "")
+ANTHROPIC_KEY    = os.getenv("ANTHROPIC_API_KEY", "")
+NETLIFY_TOKEN    = os.getenv("NETLIFY_TOKEN", "")
+RESEND_KEY       = os.getenv("RESEND_API_KEY", "")
+KLING_ACCESS     = os.getenv("KLING_ACCESS_KEY", "")
+KLING_SECRET     = os.getenv("KLING_SECRET_KEY", "")
 
-CAMPAGNE_NAAM_MAP = {
-    "oil-gas":          "OilGas",
-    "constructie":      "Constructie",
-    "automation":       "Automation",
-    "productie":        "Productie",
-    "renewable-energy": "Renewable",
-}
+SCRIPTS_DIR = Path(__file__).parent.parent / "scripts"
+PORT        = int(os.getenv("PORT", 5055))
 
-# ── Hulpfuncties ─────────────────────────────────────────────────────────────
+REQUIRED_FIELDS = ["functie", "bedrijf", "sector", "regio", "email", "naam"]
 
-def slack(msg: str):
+
+# ── HEALTH CHECK ─────────────────────────────────────────
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({
+        "status": "ok",
+        "version": "3.0",
+        "service": "vacaturekanon-webhook",
+        "ts": datetime.utcnow().isoformat() + "Z",
+        "checks": {
+            "anthropic": bool(ANTHROPIC_KEY),
+            "pipedrive":  bool(PIPEDRIVE_KEY),
+            "netlify":    bool(NETLIFY_TOKEN),
+            "slack":      bool(SLACK_URL),
+        }
+    }), 200
+
+
+# ── WEBHOOK ENDPOINT ─────────────────────────────────────
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    # 1. Parse payload
+    try:
+        if request.content_type and "json" in request.content_type:
+            data = request.get_json(force=True)
+        else:
+            # Jotform stuurt soms form-encoded
+            data = {k: v[0] if isinstance(v, list) else v for k, v in request.form.to_dict(flat=False).items()}
+    except Exception as e:
+        log.error(f"Payload parse fout: {e}")
+        return jsonify({"ok": False, "error": "invalid_payload"}), 400
+
+    log.info(f"Webhook ontvangen: {json.dumps(data)[:200]}")
+
+    # 2. Valideer verplichte velden
+    missing = [f for f in REQUIRED_FIELDS if not data.get(f, "").strip()]
+    if missing:
+        log.warning(f"Ontbrekende velden: {missing}")
+        return jsonify({"ok": False, "error": "missing_fields", "fields": missing}), 422
+
+    # 3. Campagne naam genereren
+    sector_clean = data["sector"].lower().replace(" ", "-")
+    campagne_naam = f"VK_{sector_clean.upper()[:10]}_{datetime.now().strftime('%Y%m%d_%H%M')}"
+    data["campagne_naam"] = campagne_naam
+
+    log.info(f"Campagne: {campagne_naam} | {data['functie']} @ {data['bedrijf']}")
+
+    # 4. Onmiddellijke response + async tasks
+    threading.Thread(target=_run_pipeline, args=(data.copy(),), daemon=True).start()
+
+    return jsonify({
+        "ok": True,
+        "campagne": campagne_naam,
+        "message": f"Pipeline gestart voor {data['functie']} bij {data['bedrijf']}",
+        "ts": datetime.utcnow().isoformat() + "Z"
+    }), 200
+
+
+# ── PIPELINE (async) ─────────────────────────────────────
+def _run_pipeline(data: dict):
+    """
+    Volledig async pipeline:
+    1. Pipedrive deal aanmaken
+    2. Slack notificatie (start)
+    3. Dynamic HTML genereren (Claude Sonnet)
+    4. Deploy naar Netlify
+    5. Slack update (live URL)
+    6. Pipedrive deal updaten met URL
+    """
+    campagne = data.get("campagne_naam", "onbekend")
+    log.info(f"[{campagne}] Pipeline gestart")
+
+    results = {}
+
+    # ── STAP 1: Pipedrive deal ────────────────────────────
+    try:
+        deal_id = _create_pipedrive_deal(data)
+        results["pipedrive_deal_id"] = deal_id
+        log.info(f"[{campagne}] Pipedrive deal: {deal_id}")
+    except Exception as e:
+        log.error(f"[{campagne}] Pipedrive fout: {e}")
+        results["pipedrive_error"] = str(e)
+
+    # ── STAP 2: Slack start notificatie ──────────────────
+    _slack(f"🎯 *Vacaturekanon gestart*\n"
+           f"*{data['functie']}* bij *{data['bedrijf']}*\n"
+           f"Sector: {data['sector']} | {data['regio']}\n"
+           f"Campagne: `{campagne}`\n"
+           f"_HTML genereren..._")
+
+    # ── STAP 3: Dynamic HTML genereren ───────────────────
+    output_path = f"/tmp/{campagne}.html"
+    try:
+        cmd = [
+            "python3", str(SCRIPTS_DIR / "generate_dynamic_landing.py"),
+            "--sector",   data.get("sector", "default"),
+            "--functie",  data.get("functie", ""),
+            "--bedrijf",  data.get("bedrijf", ""),
+            "--regio",    data.get("regio", "Nederland"),
+            "--niveau",   data.get("niveau", "HBO"),
+            "--urgentie", data.get("urgentie", "1-2 maanden"),
+            "--fte",      str(data.get("fte", "")),
+            "--salaris",  data.get("salaris", "marktconform"),
+            "--output",   output_path,
+            "--deploy",   # direct Netlify deploy
+        ]
+
+        if data.get("hero_image"):
+            cmd.extend(["--hero-image", data["hero_image"]])
+
+        env = {
+            **dict(os.environ),
+            "ANTHROPIC_API_KEY": ANTHROPIC_KEY,
+            "NETLIFY_TOKEN":     NETLIFY_TOKEN,
+        }
+
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180, env=env)
+
+        if proc.returncode != 0:
+            raise RuntimeError(proc.stderr[-500:] if proc.stderr else "geen output")
+
+        # Haal live URL uit stdout
+        live_url = None
+        for line in proc.stdout.split("\n"):
+            if "live_url" in line.lower() and "https://" in line:
+                # Zoek URL in JSON output
+                pass
+            if "✅ Live:" in line:
+                live_url = line.split("✅ Live:")[-1].strip()
+
+        # Probeer JSON output te parsen
+        try:
+            json_start = proc.stdout.rfind("{")
+            json_end   = proc.stdout.rfind("}") + 1
+            if json_start >= 0:
+                result_json = json.loads(proc.stdout[json_start:json_end])
+                live_url = result_json.get("live_url", live_url)
+        except Exception:
+            pass
+
+        results["live_url"] = live_url or "URL onbekend"
+        log.info(f"[{campagne}] Landing page live: {live_url}")
+
+    except subprocess.TimeoutExpired:
+        log.error(f"[{campagne}] HTML generatie timeout (>180s)")
+        results["html_error"] = "timeout"
+    except Exception as e:
+        log.error(f"[{campagne}] HTML generatie fout: {e}")
+        results["html_error"] = str(e)
+
+    # ── STAP 4: Pipedrive updaten met URL ────────────────
+    if results.get("pipedrive_deal_id") and results.get("live_url"):
+        try:
+            _update_pipedrive_deal(
+                results["pipedrive_deal_id"],
+                results["live_url"],
+                campagne
+            )
+        except Exception as e:
+            log.error(f"[{campagne}] Pipedrive update fout: {e}")
+
+    # ── STAP 5: Slack eindresultaat ───────────────────────
+    if results.get("live_url") and "http" in str(results.get("live_url", "")):
+        _slack(f"✅ *Vacaturekanon LIVE*\n"
+               f"*{data['functie']}* bij *{data['bedrijf']}*\n"
+               f"🌐 {results['live_url']}\n"
+               f"📊 Pipedrive: deal #{results.get('pipedrive_deal_id', '?')}")
+    else:
+        _slack(f"⚠️ *Vacaturekanon gedeeltelijk mislukt*\n"
+               f"Campagne: `{campagne}`\n"
+               f"Fouten: {json.dumps({k: v for k, v in results.items() if 'error' in k})}")
+
+    log.info(f"[{campagne}] Pipeline afgerond: {json.dumps(results)}")
+
+
+# ── PIPEDRIVE HELPERS ────────────────────────────────────
+def _create_pipedrive_deal(data: dict) -> int:
+    import requests as req
+
+    base = f"https://{PIPEDRIVE_DOMAIN}.pipedrive.com/api/v1"
+    headers = {"Accept": "application/json", "Content-Type": "application/json"}
+    params  = {"api_token": PIPEDRIVE_KEY}
+
+    # Persoon aanmaken
+    person_resp = req.post(f"{base}/persons", headers=headers, params=params, json={
+        "name":  data.get("naam", ""),
+        "email": [{"value": data.get("email", ""), "primary": True}],
+    }, timeout=10)
+
+    person_id = None
+    if person_resp.status_code in (200, 201):
+        person_id = person_resp.json().get("data", {}).get("id")
+
+    # Organisatie aanmaken
+    org_resp = req.post(f"{base}/organizations", headers=headers, params=params, json={
+        "name": data.get("bedrijf", ""),
+    }, timeout=10)
+
+    org_id = None
+    if org_resp.status_code in (200, 201):
+        org_id = org_resp.json().get("data", {}).get("id")
+
+    # Deal aanmaken
+    deal_payload = {
+        "title":     f"{data.get('functie')} — {data.get('bedrijf')}",
+        "status":    "open",
+        "pipeline_id": 15,  # Vacaturekanon pipeline
+        "stage_id":    215, # Stage 1: Nieuw
+        "person_id":   person_id,
+        "org_id":      org_id,
+    }
+
+    deal_resp = req.post(f"{base}/deals", headers=headers, params=params, json=deal_payload, timeout=10)
+
+    if deal_resp.status_code not in (200, 201):
+        raise RuntimeError(f"Deal aanmaken mislukt: {deal_resp.text[:200]}")
+
+    deal_id = deal_resp.json()["data"]["id"]
+
+    # Note toevoegen
+    req.post(f"{base}/notes", headers=headers, params=params, json={
+        "content": f"🎯 Vacaturekanon\nFunctie: {data.get('functie')}\nSector: {data.get('sector')}\nRegio: {data.get('regio')}\nNiveau: {data.get('niveau','?')}\nUrgentie: {data.get('urgentie','?')}\nCampagne: {data.get('campagne_naam')}",
+        "deal_id": deal_id,
+    }, timeout=10)
+
+    return deal_id
+
+
+def _update_pipedrive_deal(deal_id: int, live_url: str, campagne: str):
+    import requests as req
+    base   = f"https://{PIPEDRIVE_DOMAIN}.pipedrive.com/api/v1"
+    params = {"api_token": PIPEDRIVE_KEY}
+
+    req.post(f"{base}/notes", params=params, json={
+        "content": f"✅ Landing page live: {live_url}\nCampagne: {campagne}",
+        "deal_id": deal_id,
+    }, timeout=10)
+
+
+# ── SLACK HELPER ─────────────────────────────────────────
+def _slack(message: str):
     if not SLACK_URL:
-        log.info(f"[SLACK] {msg}")
         return
     try:
-        requests.post(SLACK_URL, json={"text": msg}, timeout=5)
+        import requests as req
+        req.post(SLACK_URL, json={"text": message}, timeout=5)
     except Exception as e:
-        log.error(f"Slack error: {e}")
+        log.warning(f"Slack fout: {e}")
 
 
-def sector_to_slug(sector: str) -> str:
-    return SECTOR_SLUG_MAP.get(sector.lower().strip(), sector.lower().replace(" ", "-"))
-
-
-def maak_campagne_naam(slug: str) -> str:
-    prefix = CAMPAGNE_NAAM_MAP.get(slug, slug.replace("-", "").title())
-    maand  = datetime.now().strftime("%Y%m")
-    return f"KT_{prefix}_{maand}"
-
-
-def validate_payload(data: dict) -> tuple[bool, str]:
-    """Valideert inkomende webhook payload. Geeft (ok, fout) terug."""
-    required = ["sector", "functie", "bedrijf", "regio", "email", "naam"]
-    missing  = [f for f in required if not data.get(f, "").strip()]
-    if missing:
-        return False, f"Ontbrekende velden: {', '.join(missing)}"
-    if "@" not in data.get("email", ""):
-        return False, f"Ongeldig e-mailadres: {data.get('email')}"
-    sector = data["sector"].lower().strip()
-    if sector not in SECTOR_SLUG_MAP and sector not in SECTOR_SLUG_MAP.values():
-        log.warning(f"Onbekende sector '{sector}' — doorgaan met best-effort slug")
-    return True, ""
-
-
-# ── Campagne automation ───────────────────────────────────────────────────────
-
-def _run_jotform_async(submission_id: str):
-    """Roept jotform_to_landing.py aan met submission_id."""
-    import subprocess
-    script = BASE_DIR / "scripts" / "jotform_to_landing.py"
-    log.info(f"🔔 Jotform verwerking gestart: {submission_id}")
-    try:
-        env = os.environ.copy()
-        for k, v in dict(dotenv_values(BASE_DIR / ".env")).items():
-            env.setdefault(k, v)
-        result = subprocess.run(
-            ["python3", str(script), "--submission-id", submission_id],
-            capture_output=True, text=True, timeout=600, env=env
-        )
-        if result.returncode == 0:
-            log.info(f"✅ Jotform verwerkt: {submission_id}")
-            slack(f"✅ Submission {submission_id} verwerkt")
-        else:
-            log.error(f"❌ Jotform fout: {result.stderr[-300:]}")
-            slack(f"❌ Submission {submission_id} mislukt:\n{result.stderr[-200:]}")
-    except Exception as e:
-        log.error(f"❌ _run_jotform_async fout: {e}")
-        slack(f"❌ Submission {submission_id} exception: {e}")
-
-
-def run_campagne_async(payload: dict):
-    """
-    Voert de volledige campagne automation uit via de Master Orchestrator in een background subprocess.
-    """
-    sector        = payload["sector"]
-    functie       = payload["functie"]
-    bedrijf       = payload["bedrijf"]
-    regio         = payload["regio"]
-    email         = payload["email"]
-    naam          = payload["naam"]
-    klant_url     = payload.get("klant_url", "")
-
-    slug          = sector_to_slug(sector)
-    campagne_naam = maak_campagne_naam(slug)
-    landing_url   = f"https://{slug}.vacaturekanon.nl"
-    start_time    = datetime.now()
-
-    log.info(f"▶ Start campagne automation (via Master Script): {campagne_naam}")
-    slack(f"▶ *{campagne_naam}* — Campagne automation gestart via Master Script\n"
-          f"   👤 {naam} · {bedrijf}\n"
-          f"   🏭 {sector} · {regio}")
-
-    try:
-        master_script = BASE_DIR / "scripts" / "run_master_campaign.py"
-        cmd = [
-            "python3", str(master_script),
-            "--sector", sector,
-            "--functie", functie,
-            "--bedrijf", bedrijf,
-            "--regio", regio,
-            "--email", email,
-            "--naam", naam
-        ]
-        if klant_url:
-            cmd.extend(["--url", klant_url])
-        
-        # Popen draait dit in de achtergrond (fire and forget vanaf dit Python proces)
-        import subprocess
-        
-        # Ensure the subprocess has the full environment loaded
-        env = os.environ.copy()
-        env_path = BASE_DIR / ".env"
-        for k, v in dict(dotenv_values(env_path)).items():
-            if k not in env:
-                env[k] = v
-                
-        log.info(f"Subprocess starten: {' '.join(cmd)}")
-        subprocess.Popen(cmd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        log.info("✅ Master script is asynchroon afgevuurd.")
-        
-    except Exception as e:
-        log.error(f"Fout bij het starten van master orchestrator: {e}")
-        slack(f"❌ *{campagne_naam}* — Kon Master Script niet starten: {e}")
-# (Afronding van run_campagne_async is nu gedelegeerd aan het Master Script)
-
-
-# ── HTTP Handler ──────────────────────────────────────────────────────────────
-
-class WebhookHandler(BaseHTTPRequestHandler):
-
-    def log_message(self, format, *args):
-        log.info(f"{self.client_address[0]} - {format % args}")
-
-    def send_json(self, code: int, body: dict):
-        payload = json.dumps(body).encode()
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Content-Length", str(len(payload)))
-        self.end_headers()
-        self.wfile.write(payload)
-
-    def do_OPTIONS(self):
-        self.send_response(200, "ok")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, X-Webhook-Secret")
-        self.end_headers()
-
-    def do_GET(self):
-        if self.path == "/health":
-            self.send_json(200, {"status": "ok", "service": "recruitin-webhook"})
-        else:
-            self.send_json(404, {"error": "not found"})
-
-    def do_POST(self):
-        # ── Route voor Formulier (Stripe Flow Optie A) ──
-        if self.path == "/lead":
-            length = int(self.headers.get("Content-Length", 0))
-            body   = self.rfile.read(length)
-            try:
-                data = json.loads(body)
-                telefoon = data.get("telefoon")
-                email = data.get("email", "")
-                naam = data.get("naam", "Klant")
-                bedrijf = data.get("bedrijf", "Bedrijf")
-                
-                log.info(f"🆕 [LEAD CAPTURED] {naam} ({bedrijf}) - {email} - {telefoon}")
-                
-                # Hier zouden we opslaan in Pipedrive/DB
-                
-                # Stripe API call maken
-                import urllib.request
-                import urllib.parse
-                import base64
-                
-                stripe_secret = os.getenv("STRIPE_SECRET_KEY", "")
-                auth_string = base64.b64encode(f"{stripe_secret}:".encode()).decode()
-                
-                # Payload voor de Stripe session
-                stripe_data = urllib.parse.urlencode({
-                    "payment_method_types[0]": "card",
-                    "payment_method_types[1]": "ideal",
-                    "line_items[0][price_data][currency]": "eur",
-                    "line_items[0][price_data][product_data][name]": f"Campagne Setup: {bedrijf}",
-                    "line_items[0][price_data][unit_amount]": 50000, # 500 EUR in centen
-                    "line_items[0][quantity]": 1,
-                    "mode": "payment",
-                    "customer_email": email,
-                    # Fallback success URL voor test
-                    "success_url": f"https://form.jotform.com/260623885606059?email={urllib.parse.quote(email)}&bedrijfsnaam={urllib.parse.quote(bedrijf)}",
-                    "cancel_url": "http://localhost:8000/",
-                }).encode()
-                
-                req = urllib.request.Request("https://api.stripe.com/v1/checkout/sessions", data=stripe_data)
-                req.add_header("Authorization", f"Basic {auth_string}")
-                req.add_header("Content-Type", "application/x-www-form-urlencoded")
-                
-                try:
-                    with urllib.request.urlopen(req) as response:
-                        res_data = json.loads(response.read())
-                        checkout_url = res_data.get("url")
-                        self.send_json(200, {"status": "ok", "url": checkout_url})
-                except Exception as e:
-                    log.error(f"Stripe API error: {e}")
-                    # Fallback naar een standaard link (al bestaat deze link eigenlijk niet meer, maar OK)
-                    self.send_json(200, {"status": "ok", "url": f"https://buy.stripe.com/test_123?prefilled_email={urllib.parse.quote(email)}"})
-                    
-            except json.JSONDecodeError as e:
-                self.send_json(400, {"error": "Invalid JSON"})
-            return
-
-        # ── Bestaande Zapier / Master Webhook ──
-        if self.path != "/webhook":
-            self.send_json(404, {"error": "gebruik /webhook of /lead"})
-            return
-
-        # Auth check
-        incoming_secret = self.headers.get("X-Webhook-Secret", "")
-        if incoming_secret != SECRET:
-            log.warning(f"Ongeldige webhook secret van {self.client_address[0]}")
-            self.send_json(401, {"error": "ongeldige secret"})
-            return
-
-        # Body lezen
-        length = int(self.headers.get("Content-Length", 0))
-        body   = self.rfile.read(length)
-        try:
-            data = json.loads(body)
-        except json.JSONDecodeError as e:
-            log.error(f"JSON parse fout: {e}")
-            self.send_json(400, {"error": f"ongeldige JSON: {e}"})
-            return
-
-        # ── Jotform submission_id flow (nieuwe Zapier setup) ──────────────────
-        submission_id = data.get("submission_id", "").strip()
-        if submission_id:
-            log.info(f"📥 Jotform submission_id ontvangen: {submission_id}")
-            self.send_json(202, {
-                "status": "accepted",
-                "submission_id": submission_id,
-                "message": "Jotform verwerking gestart",
-            })
-            t = threading.Thread(
-                target=_run_jotform_async,
-                args=(submission_id,),
-                daemon=True,
-                name=f"jotform-{submission_id[-8:]}",
-            )
-            t.start()
-            return
-
-        # ── Legacy veld-payload (sector/functie/bedrijf) ──────────────────────
-        ok, err = validate_payload(data)
-        if not ok:
-            log.warning(f"Ongeldige payload: {err}")
-            self.send_json(400, {"error": err})
-            return
-
-        log.info(
-            f"📥 Webhook ontvangen: {data.get('bedrijf')} | "
-            f"{data.get('sector')} | {data.get('regio')}"
-        )
-
-        slug          = sector_to_slug(data["sector"])
-        campagne_naam = maak_campagne_naam(slug)
-        self.send_json(202, {
-            "status":        "accepted",
-            "campagne_naam": campagne_naam,
-            "message":       "Campagne automation gestart — Slack notificaties volgen",
-        })
-
-        if log_campaign:
-            log_campaign(campagne_naam, "accepted", {
-                "sector": data.get("sector"),
-                "bedrijf": data.get("bedrijf")
-            })
-
-        # Automation in background thread
-        t = threading.Thread(
-            target=run_campagne_async,
-            args=(data,),
-            daemon=True,
-            name=f"campagne-{campagne_naam}",
-        )
-        t.start()
-
-
-# ── Startup ───────────────────────────────────────────────────────────────────
-
+# ── MAIN ─────────────────────────────────────────────────
 if __name__ == "__main__":
-    log_file = Path("/tmp/recruitin_handler.log")
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-
-    print(f"""
-╔═══════════════════════════════════════════════╗
-║  Recruitin Campagne Webhook Server            ║
-║  Luistert op: http://0.0.0.0:{PORT}           ║
-║  Endpoint:    POST /webhook                   ║
-║  Health:      GET  /health                    ║
-╠═══════════════════════════════════════════════╣
-║  Ngrok tunnel (publiek maken):                ║
-║  ngrok http {PORT}                            ║
-║  → kopieer URL naar Zapier webhook actie      ║
-╚═══════════════════════════════════════════════╝
-""")
-
-    server = HTTPServer(("0.0.0.0", PORT), WebhookHandler)
-    try:
-        log.info(f"Webhook server gestart op poort {PORT}")
-        server.serve_forever()
-    except KeyboardInterrupt:
-        log.info("Server gestopt")
-        server.shutdown()
+    log.info(f"🚀 Vacaturekanon Webhook Handler v3.0 — poort {PORT}")
+    log.info(f"   Anthropic: {'✅' if ANTHROPIC_KEY else '❌'}")
+    log.info(f"   Pipedrive: {'✅' if PIPEDRIVE_KEY else '❌'}")
+    log.info(f"   Netlify:   {'✅' if NETLIFY_TOKEN else '❌'}")
+    log.info(f"   Slack:     {'✅' if SLACK_URL else '❌'}")
+    app.run(host="0.0.0.0", port=PORT, debug=False)

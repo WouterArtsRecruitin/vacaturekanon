@@ -1,8 +1,5 @@
-# Recruitin Automation Dependencies (Render / Cloud Ready)
-python-dotenv==1.0.1
-requests==2.31.0
-PyJWT==2.8.0
-supabase==2.3.4
 flask==3.1.0
 anthropic==0.40.0
-beautifulsoup4==4.12.3
+python-dotenv==1.0.1
+requests==2.31.0
+gunicorn==21.2.0
