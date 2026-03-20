@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacaturekanon Enterprise</title>
+    
+    <!-- Ultra premium fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #000000;
+            --fg: #ffffff;
+            --muted: #888888;
+            --primary: #FF5500;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(10, 10, 10, 0.6);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* LENIS SMOOTH SCROLL STYLES */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        /* NOISE GRAIN */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 10vw);
+            max-width: 1200px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px 0 24px;
+            border-radius: 100px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-dot {
+            width: 8px; height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .header-btn {
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 12px 24px;
+            border-radius: 100px;
+            transition: transform 0.3s var(--ease);
+        }
+        
+        .header-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* FLUID BLOBS & WEBGL HERO */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #webgl-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .blob-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.7;
+            animation: float-blob 25s infinite alternate ease-in-out;
+            mix-blend-mode: screen;
+        }
+
+        .blob-1 { width: 800px; height: 800px; background: #FF5500; top: -20%; left: -10%; animation-duration: 25s; }
+        .blob-2 { width: 900px; height: 900px; background: #FF2200; bottom: -20%; right: -10%; animation-duration: 30s; animation-delay: -5s; }
+        .blob-3 { width: 700px; height: 700px; background: #5500FF; top: 30%; left: 40%; animation-duration: 20s; animation-delay: -10s; }
+        .blob-4 { width: 600px; height: 600px; background: #0088FF; bottom: 10%; left: -10%; animation-duration: 22s; animation-delay: -15s; }
+
+        @keyframes float-blob {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            33% { transform: translate(20vw, 15vh) scale(1.1) rotate(45deg); }
+            66% { transform: translate(-10vw, 25vh) scale(0.9) rotate(90deg); }
+            100% { transform: translate(-20vw, -10vh) scale(1.2) rotate(180deg); }
+        }
+
+        /* SCROLL TRIGGER ANIMATION */
+        .scroll-trigger {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0.6;
+            color: #fff;
+            animation: bounce 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .mouse-icon {
+            width: 20px;
+            height: 32px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .mouse-wheel {
+            width: 4px;
+            height: 6px;
+            background: #FF5500;
+            border-radius: 4px;
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-wheel 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
+            50% { transform: translate(-50%, 10px); opacity: 1; }
+        }
+
+        @keyframes scroll-wheel {
+            0% { transform: translate(-50%, 0); opacity: 1; }
+            100% { transform: translate(-50%, 10px); opacity: 0; }
+        }
+
+        /* INTRO SECTION (Right after image) */
+        #introduction {
+            padding: 120px 0 80px 0;
+            text-align: center;
+            background: var(--bg);
+            position: relative;
+            z-index: 5;
+        }
+
+        .intro-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            font-size: 13px;
+            font-weight: 500;
+            color: #ddd;
+            margin-bottom: 40px;
+        }
+
+        .intro-title {
+            font-size: clamp(4rem, 8vw, 8rem);
+            line-height: 0.9;
+            letter-spacing: -0.06em;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .intro-title .line { overflow: hidden; display: block; }
+        .intro-title .word { display: inline-block; }
+
+        .intro-title .text-orange {
+            background: linear-gradient(135deg, #FFaa00, #FF5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-desc {
+            font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+            line-height: 1.6;
+            color: var(--muted);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* METRICS MARQUEE (Sticky strip) */
+        .marquee-container {
+            position: relative;
+            z-index: 10;
+            background: rgba(10,10,10,0.8);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            padding: 30px 0;
+            overflow: hidden;
+            display: flex;
+            margin-top: -100px;
+        }
+
+        .marquee-content {
+            display: flex;
+            white-space: nowrap;
+            gap: 80px;
+            padding: 0 40px;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .marquee-val {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .marquee-lbl {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        /* TRUE BENTO GRID */
+        #platform {
+            padding: 150px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: #fff;
+            /* GSAP trigger class */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .section-header p {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin-inline: auto;
+        }
+
+        /* PREMIUM PROCESS EXPLAINER (Linear/Apple Style) */
+        #process {
+            padding: 150px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #process .section-header { margin-bottom: 120px; }
+        
+        .p-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 150px;
+            opacity: 0.4;
+            transition: all 1s var(--ease);
+        }
+        
+        .p-step:hover {
+            opacity: 1;
+        }
+
+        .p-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .p-text {
+            width: 45%;
+        }
+
+        .p-num {
+            font-size: 1.2rem;
+            color: var(--orange);
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .p-text h3 {
+            font-size: clamp(2.5rem, 4vw, 3.2rem);
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.1;
+            font-family: 'Cabinet Grotesk', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .p-text p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .p-media {
+            width: 45%;
+            position: relative;
+        }
+
+        .p-media img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), filter 0.6s var(--ease);
+            filter: grayscale(80%) sepia(20%);
+        }
+
+        .p-media::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: -20px; right: -20px; bottom: -20px;
+            background: radial-gradient(circle, rgba(255,94,0,0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .p-step:hover .p-media img {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 40px 80px rgba(255,94,0,0.15);
+            border-color: rgba(255,94,0,0.3);
+            filter: grayscale(0%) sepia(0%);
+        }
+
+        @media (max-width: 1024px) {
+            .p-step, .p-step:nth-child(even) { flex-direction: column; align-items: flex-start; gap: 40px; margin-bottom: 100px; }
+            .p-text, .p-media { width: 100%; }
+        }
+
+        /* VIDEO SHOWCASE (EXPLOSION ANIMATION) */
+        #showcase {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 50%, rgba(255,94,0,0.05) 0%, var(--bg) 60%);
+            perspective: 1200px;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        #camera {
+            width: 100%; height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        /* Particles Container */
+        #particles {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform-style: preserve-3d;
+            z-index: 99;
+        }
+
+        .data-shard {
+            position: absolute;
+            width: 8px; height: 8px;
+            background: var(--orange);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--orange), 0 0 20px var(--orange);
+            opacity: 0;
+        }
+        
+        .data-line {
+            position: absolute;
+            width: 40px; height: 2px;
+            background: #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
+            opacity: 0;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* SCENE 1: De Formulier Intake */
+        #scene-1 {
+            width: 400px;
+            padding: 30px;
+            transform-style: preserve-3d;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        .label { font-size: 0.8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .input-box {
+            width: 100%; height: 48px; background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border); border-radius: 8px;
+            color: white; font-family: 'Inter', sans-serif; font-size: 1rem;
+            padding: 0 15px; box-sizing: border-box;
+            line-height: 48px;
+        }
+
+        .type-text {
+            color: var(--orange); font-weight: 600; text-shadow: 0 0 10px rgba(255,94,0,0.5);
+        }
+
+        .launch-btn {
+            width: 100%; height: 50px;
+            background: linear-gradient(90deg, #ff5e00, #ff8c00);
+            border: none; border-radius: 8px;
+            color: white; font-weight: 700; font-size: 1rem;
+            cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255,94,0,0.3);
+            text-transform: uppercase; letter-spacing: 2px;
+            transition: transform 0.2s;
+        }
+        .launch-btn:hover { transform: scale(1.05); }
+
+        /* SCENE 2: De gegenereerde Landing Page (Bento Grid) */
+        #scene-2 {
+            width: 900px; height: 600px;
+            position: absolute;
+            display: grid;
+            grid-template-columns: 250px 1fr 200px;
+            grid-template-rows: 80px 1fr 150px;
+            gap: 20px;
+            pointer-events: none;
+            opacity: 0;
+            transform-style: preserve-3d;
+            z-index: 5;
+        }
+
+        .bento-block {
+            display: flex; flex-direction: column;
+            padding: 20px; box-sizing: border-box;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Dashboard blocks mapping */
+        .b-header { grid-column: 1 / 4; grid-row: 1; align-items: center; flex-direction: row; justify-content: space-between; }
+        .b-sidebar { grid-column: 1; grid-row: 2 / 4; }
+        .b-main-video { grid-column: 2; grid-row: 2; display: flex; justify-content: center; align-items: center;}
+        .b-candidates { grid-column: 3; grid-row: 2; }
+        .b-metrics { grid-column: 2 / 4; grid-row: 3; display: flex; flex-direction: row; justify-content: space-around;}
+
+        .b-header h2 { margin: 0; font-size: 24px; color: #fff; }
+        .metric { font-size: 32px; font-weight: 800; color: var(--orange); line-height: 1; }
+        .desc { font-size: 12px; color: var(--muted); }
+
+        .video-placeholder {
+            width: 100%; height: 100%; background: #000; border-radius: 12px;
+            position: relative; overflow: hidden;
+            border: 1px solid rgba(255,94,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .play-circle {
+            width: 60px; height: 60px; background: var(--orange); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 30px rgba(255,94,0,0.5);
+        }
+        .play-circle::after {
+            content: ''; border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+            border-left: 15px solid white; margin-left: 5px;
+        }
+
+        .profile-line {
+            width: 100%; height: 30px; background: rgba(255,255,255,0.05); border-radius: 6px; margin-bottom: 10px;
+            display: flex; align-items: center; padding: 0 10px; box-sizing: border-box;
+            border-left: 3px solid #00e5ff;
+        }
+        .avatar { width: 16px; height: 16px; border-radius: 50%; background: white; margin-right: 10px; }
+        .line-txt { width: 60%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        /* Replay logic */
+        #replay-btn {
+            position: absolute; bottom: 30px; right: 30px;
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 10px 20px; border-radius: 6px; cursor: pointer; z-index: 1000; opacity: 0;
+            pointer-events: none;
+        }
+        #replay-btn.active { pointer-events: all; }
+        #replay-btn:hover { color: white; border-color: rgba(255,94,0,0.5); }
+
+        /* BIG CTA */
+        #cta {
+            padding: 150px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255,85,0,0.1) 0%, var(--bg) 60%);
+        }
+
+        #cta h2 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            margin-bottom: 50px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            background: #fff;
+            color: #000;
+            padding: 24px 60px;
+            border-radius: 100px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform 0.4s var(--ease);
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255,255,255,0.2);
+        }
+        /* PAGE TRANSITION OVERLAY */
+        #page-transition {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000;
+            z-index: 99999;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #page-transition.is-loaded {
+            opacity: 0;
+        }
+
+        #mobile-scaler {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            perspective: 1200px;
+            transform: scale(1);
+            transition: transform 0.3s;
+        }
+        
+        @media (max-width: 1024px) { #mobile-scaler { transform: scale(0.7); } }
+        @media (max-width: 768px) { #mobile-scaler { transform: scale(0.45); } }
+        @media (max-width: 480px) { #mobile-scaler { transform: scale(0.35); } }
+
+    </style>
+</head>
+<body>
+    <div id="page-transition"></div>
+    <div class="noise"></div>
+
+    <section id="hero">
+        <div class="blob-container">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="blob blob-4"></div>
+        </div>
+        <canvas id="webgl-canvas"></canvas>
+        <div class="hero-bottom-fade"></div>
+
+        <div class="scroll-trigger">
+            <div class="mouse-icon">
+                <div class="mouse-wheel"></div>
+            </div>
+            <span>Scroll & Ontdek</span>
+        </div>
+    </section>
+
+    <!-- INTRODUCTIE SECTIE ERNA ONDER -->
+    <section id="introduction">
+        <div class="container" style="text-align: center; max-width: 900px; margin: 0 auto; padding-top: 100px;">
+            <div class="intro-pill" style="margin: 0 auto 30px auto;">Systeem Status: Actief</div>
+            <h1 class="intro-title" style="margin-bottom: 25px;">
+                <span class="line"><span class="word">Recruit.</span></span>
+                <span class="line"><span class="word">Automate.</span></span>
+                <span class="line"><span class="word text-orange">Dominate.</span></span>
+            </h1>
+            <p class="intro-desc" style="max-width: 600px; margin: 0 auto 40px auto; font-size: 1.3rem;">Structureel nieuwe monteurs en technische specialisten aan tafel krijgen, zónder dure headhunters. Ons systeem lanceert en beheert jouw complete wervingscampagnes op de automatische piloot.</p>
+            
+            <a href="#showcase" class="cta-btn" style="background: var(--orange); color: white; border: none; font-size: 16px; padding: 18px 45px; transform-style: preserve-3d; transition: all 0.3s var(--ease);">Start de Demo</a>
+        </div>
+    </section>
+
+    <!-- Premium Linear Process Explainer -->
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal-text">Hoe het werkt</h2>
+                <p class="reveal-fade">Bekijk de architectuur achter onze wervingscampagnes.</p>
+            </div>
+
+            <div class="process-steps">
+                
+                <div class="p-step">
+                    <div class="p-text">
+                        <span class="p-num">01</span>
+                        <h3>Intake & Creatie</h3>
+                        <p>Jij levert enkel de vacature-eisen aan. Onze systemen renderen direct een ijzersterke, volledig eigen landingspagina voor je op maat. Opgemaakt om technische vakkrachten te overtuigen met de harde feiten en een gestroomlijnd design.</p>
+                    </div>
+                    <div class="p-media">
+                        <img src="assets/ui/feature-1.png" alt="Dashboard AI Formulier">
+                    </div>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-text">
+                        <span class="p-num">02</span>
+                        <h3>Video & Social AI Ads</h3>
+                        <p>Geen saaie lappen tekst. We genereren ultra-premium videobeelden via AI Modellen (Kling) die letterlijk de authenticiteit van de sector en het werkveld op de tijdlijn van de potentiële kandidaat projecteren. Stopping thumbs instantly.</p>
+                    </div>
+                    <div class="p-media">
+                        <img src="assets/ui/feature-2.png" alt="Video Generation Interface">
+                    </div>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-text">
+                        <span class="p-num">03</span>
+                        <h3>Algoritmisch Campagne Beheer</h3>
+                        <p>Het mediabudget wordt bewaakt door intelligente optimalisatielussen. Slecht presterende advertenties worden gepauzeerd terwijl het framework opschaalt tot de allergoedkoopste sollicitaties overblijven in het dashboard.</p>
+                    </div>
+                    <div class="p-media">
+                        <img src="assets/ui/feature-3.png" alt="Meta Ads Autopilot Dashboard">
+                    </div>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-text">
+                        <span class="p-num">04</span>
+                        <h3>Directe Delivery</h3>
+                        <p>Zodra een engineer solliciteert, vliegen de gegevens direct je eigen mailbox en database in, klaar voor directe follow-up. Sneller dan de traditionele HeadHunters in de regio.</p>
+                    </div>
+                    <div class="p-media">
+                        <img src="assets/ui/feature-4.png" alt="Lead Status Interface">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase">
+        <div id="mobile-scaler">
+            <div id="camera">
+                <div id="particles"></div>
+
+                <!-- SCENE 1: Formulier -->
+                <div id="scene-1" class="glass-panel">
+                    <h2 style="margin-bottom: 30px; font-family: 'Cabinet Grotesk', sans-serif; font-size: 24px;">Start Vacature Engine</h2>
+                    
+                    <div class="input-group">
+                        <span class="label">Functietitel</span>
+                        <div class="input-box"><span class="type-text" id="target-typing"></span></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <span class="label">Regio & Straal</span>
+                        <div class="input-box" style="color: #a1a1aa;">Breda + 30km</div>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="label">Budget Setup</span>
+                        <div class="input-box" style="color: #a1a1aa;">€1500 / Meta Ads</div>
+                    </div>
+
+                    <button class="launch-btn" id="btn-launch" style="margin-top: 15px;">
+                        VRAAG COMPILATIE AAN
+                    </button>
+                </div>
+
+                <!-- SCENE 2: Gegenereerde Landingpage Dashboard -->
+                <div id="scene-2">
+                    <div class="bento-block glass-panel b-header">
+                        <h2>Onderhoudsmonteur WTB <span style="font-weight: 400; color: #a1a1aa;">| Breda</span></h2>
+                        <div style="padding: 6px 12px; background: rgba(0, 229, 255, 0.1); border: 1px solid #00e5ff; border-radius: 20px; color: #00e5ff; font-size: 12px; font-weight: 600;">ACTIVE</div>
+                    </div>
+
+                    <div class="bento-block glass-panel b-sidebar">
+                        <span class="label">Kandidaten Pijplijn</span><br>
+                        <div class="profile-line"><div class="avatar"></div><div class="line-txt"></div></div>
+                        <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 40%"></div></div>
+                        <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 70%"></div></div>
+                        <div class="profile-line" style="border-left-color: var(--orange);"><div class="avatar"></div><div class="line-txt" style="width: 50%"></div></div>
+                        <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 30%"></div></div>
+                    </div>
+
+                    <div class="bento-block glass-panel b-main-video" style="padding: 5px;">
+                        <div class="video-placeholder">
+                            <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+                                <source src="assets/showcase.mp4" type="video/mp4" onerror="this.onerror=null;this.src='https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-lines-and-dots-in-fast-movement-loop-32773-large.mp4'">
+                            </video>
+                            <div style="position: absolute;">
+                                <div class="play-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bento-block glass-panel b-candidates">
+                        <span class="label">Job Match AI</span><br>
+                        <div style="position: relative; width: 100px; height: 100px; border: 8px solid rgba(255,94,0,0.2); border-top-color: var(--orange); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 24px; font-weight: 800; color: white;">94%</span>
+                        </div>
+                    </div>
+
+                    <div class="bento-block glass-panel b-metrics">
+                        <div><span class="metric" id="count-impressions">0</span><br><span class="desc">Meta Weergaves</span></div>
+                        <div><span class="metric" id="count-clicks">0</span><br><span class="desc">Kliks</span></div>
+                        <div><span class="metric" id="count-leads">0</span><br><span class="desc">Nieuwe Leads</span></div>
+                    </div>
+                </div>
+                
+                <button id="replay-btn">Replay Animatie</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta">
+        <div class="container">
+            <h2 class="reveal-text">Klaar om recruitment<br>te automatiseren?</h2>
+            <a href="#" class="cta-btn">Vraag een Demo aan</a>
+        </div>
+    </section>
+
+    <!-- EXTREMELY HIGH END SCRIPTS: Lenis + GSAP + Three.js -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // 0. SMOOTH PAGE TRANSITIONS
+        function revealPage() {
+            document.getElementById('page-transition')?.classList.add('is-loaded');
+        }
+        window.addEventListener('DOMContentLoaded', revealPage);
+        window.addEventListener('load', revealPage);
+        setTimeout(revealPage, 500); // Failsafe fallback
+
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = link.getAttribute('href');
+                // Allow empty or strict hash links to smoothly scroll on the same page
+                if (!target || target.startsWith('#')) return;
+                
+                // Intercept actual page navigation
+                e.preventDefault();
+                document.getElementById('page-transition').classList.remove('is-loaded');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 800);
+            });
+        });
+
+        // 1. INIT SMOOTH SCROLL (Lenis)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Connect GSAP to Lenis
+        gsap.registerPlugin(ScrollTrigger);
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
+        gsap.ticker.lagSmoothing(0, 0);
+
+        // 2. INTRO ANIMATIONS (On Scroll)
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#introduction",
+                start: "top 75%",
+                end: "bottom center",
+                toggleActions: "play none none none"
+            },
+            defaults: { ease: "power4.out" }
+        });
+        
+        tl.from('.intro-pill', { opacity: 0, y: 30, duration: 1 })
+          .from('.intro-title .word', { y: '110%', duration: 1.2, stagger: 0.15 }, "-=0.8")
+          .from('.intro-desc', { opacity: 0, y: 20, duration: 1.5 }, "-=0.6")
+          .from('.cta-btn', { scale: 0.8, opacity: 0, duration: 1, ease: "back.out(1.7)" }, "-=1.0");
+
+        // 3. THREE.JS 3D DATA OCEAN (Not a globe!)
+        const canvas = document.querySelector('#webgl-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create a flat plane that we will animate into a data sea
+        const particlesGeometry = new THREE.PlaneGeometry(30, 30, 60, 60);
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.3,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        // Tilt the plane so it lays flat forming a ground/ceiling
+        particlesMesh.rotation.x = -Math.PI / 2 + 0.3;
+        particlesMesh.position.y = -2;
+        scene.add(particlesMesh);
+
+        camera.position.z = 4;
+        camera.position.y = 1;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.001;
+            mouseY = (event.clientY - windowHalfY) * 0.001;
+        });
+
+        const clock = new THREE.Clock();
+        const basePositions = new Float32Array(particlesGeometry.attributes.position.array);
+
+        function renderWebGL() {
+            requestAnimationFrame(renderWebGL);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Parallax camera slightly based on mouse
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y + 1) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Animate plane vertices to create a fluid wave surface
+            const positions = particlesGeometry.attributes.position.array;
+            for(let i = 0; i < positions.length; i += 3) {
+                const x = basePositions[i];
+                const y = basePositions[i+1];
+                // Math.sin creates the rising/falling wave on the Z axis of the flat plane
+                positions[i+2] = Math.sin((x + elapsedTime * 0.5)) * 0.5 + Math.cos((y + elapsedTime * 0.4)) * 0.5;
+            }
+            particlesGeometry.attributes.position.needsUpdate = true;
+
+            // Slowly rotate the whole sea
+            particlesMesh.rotation.z = elapsedTime * 0.05;
+
+            renderer.render(scene, camera);
+        }
+        renderWebGL();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // 5. PREMIUM PROCESS REVEAL ON SCROLL
+        gsap.utils.toArray('.p-step').forEach(step => {
+            gsap.to(step, {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: step,
+                    start: "top 75%",
+                    end: "center center",
+                    scrub: false
+                }
+            });
+        });
+
+        // 7. VIDEO PLAYER SCALE (Apple style)
+        // Starts at max-width 800px, scales up to 1400px when scrolled into center
+        gsap.fromTo("#main-video", 
+            { scale: 0.8, borderRadius: "80px" },
+            { 
+                scale: 1, 
+                borderRadius: "40px",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#showcase",
+                    start: "top bottom",
+                    end: "center center",
+                    scrub: 1
+                }
+            }
+        );
+
+        // 8. TEXT REVEALS ON SCROLL
+        gsap.utils.toArray('.reveal-text').forEach(text => {
+            gsap.from(text, {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 85%"
+                }
+            });
+        });
+        /* EXPLOSION ANIMATION LOGIC */
+        const uiCameraNode = document.getElementById('camera');
+        const showcaseNode = document.getElementById('showcase');
+        
+        // 3D Parallax on hover in showcase
+        showcaseNode.addEventListener('mousemove', (e) => {
+            const rect = showcaseNode.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; 
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+            gsap.to(uiCameraNode, { rotationY: x, rotationX: -y, duration: 0.8, ease: "power2.out" });
+        });
+
+        // Type Effect
+        const typeTarget = document.getElementById('target-typing');
+        const textToType = "Onderhoudsmonteur WTB";
+        let isAnimated = false;
+        
+        function typeEffect() {
+            typeTarget.innerHTML = "";
+            let i = 0;
+            const interval = setInterval(() => {
+                typeTarget.innerHTML += textToType.charAt(i);
+                i++;
+                if (i >= textToType.length) clearInterval(interval);
+            }, 80);
+        }
+
+        // Trigger typing when user scrolls into showcase view
+        ScrollTrigger.create({
+            trigger: "#showcase",
+            start: "top 50%",
+            onEnter: () => {
+                if(!isAnimated) setTimeout(typeEffect, 500);
+            },
+            once: true
+        });
+
+        const btnLaunch = document.getElementById('btn-launch');
+        const particlesContainer = document.getElementById('particles');
+        const replayBtn = document.getElementById('replay-btn');
+
+        btnLaunch.addEventListener('click', () => {
+            if(isAnimated) return;
+            isAnimated = true;
+
+            gsap.to(btnLaunch, { scale: 0.9, duration: 0.1 });
+            const explosionTl = gsap.timeline();
+
+            explosionTl.to('#scene-1', {
+                z: -500, opacity: 0, rotateX: 10, filter: "blur(20px)",
+                duration: 0.8, ease: "power4.in"
+            }, "+=0.1");
+
+            explosionTl.add(() => {
+                particlesContainer.innerHTML = "";
+                for(let i = 0; i < 200; i++) {
+                    const isLine = i > 150;
+                    const p = document.createElement('div');
+                    p.className = isLine ? 'data-line' : 'data-shard';
+                    particlesContainer.appendChild(p);
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = Math.random() * 800 + 100;
+                    const endX = Math.cos(angle) * radius;
+                    const endY = Math.sin(angle) * radius;
+                    const endZ = Math.random() * 1000 + 400; 
+
+                    gsap.fromTo(p, 
+                        { x: 0, y: 0, z: -100, scale: 0, rotationX: 0, rotationY: 0, rotationZ: 0, opacity: 1 },
+                        {
+                            x: endX, y: endY, z: endZ,
+                            scale: Math.random() * 1.5 + 0.5,
+                            rotationX: Math.random() * 720, rotationY: Math.random() * 720,
+                            rotationZ: isLine ? Math.atan2(endY, endX) * (180/Math.PI) : Math.random() * 360,
+                            opacity: 0, duration: Math.random() * 1.5 + 0.8, ease: "power4.out"
+                        }
+                    );
+                }
+            }, "-=0.3");
+
+            explosionTl.set('#scene-2', { opacity: 1, pointerEvents: 'all' }, "-=0.2");
+            const blocks = document.querySelectorAll('.bento-block');
+            
+            gsap.fromTo(blocks, 
+                { z: -1200, opacity: 0, scale: 0.2, rotationX: () => Math.random() * 90 - 45, rotationY: () => Math.random() * 90 - 45, filter: "blur(20px)" },
+                {
+                    z: 0, opacity: 1, scale: 1, rotationX: 0, rotationY: 0, filter: "blur(0px)",
+                    duration: 1.2, stagger: 0.08, ease: "back.out(1.4)"
+                }, "-=0.4"
+            );
+
+            explosionTl.to({val:0}, {val: 14208, roundProps:"val", duration: 2, onUpdate: function(){ document.getElementById('count-impressions').innerText = this.targets()[0].val.toLocaleString(); }}, "-=0.5");
+            explosionTl.to({val:0}, {val: 846, roundProps:"val", duration: 2.2, onUpdate: function(){ document.getElementById('count-clicks').innerText = this.targets()[0].val; }}, "-=2");
+            explosionTl.to({val:0}, {val: 14, roundProps:"val", duration: 2.5, onUpdate: function(){ document.getElementById('count-leads').innerText = this.targets()[0].val; }}, "-=2");
+
+            explosionTl.to(replayBtn, { opacity: 1, duration: 0.5 }, "+=1");
+            explosionTl.add(() => replayBtn.classList.add('active'));
+        });
+
+        replayBtn.addEventListener('click', () => {
+            isAnimated = false;
+            replayBtn.classList.remove('active');
+            gsap.set(replayBtn, {opacity: 0});
+            gsap.set('#scene-2', { opacity: 0, pointerEvents: 'none' });
+            gsap.set('#scene-1', { z: 500, opacity: 0, filter: "blur(20px)", scale: 1.5, rotateX: -20 });
+            gsap.to('#scene-1', { z: 0, opacity: 1, filter: "blur(0px)", scale: 1, rotateX: 0, duration: 1, ease: "power4.out" });
+            
+            typeTarget.innerHTML = "";
+            document.getElementById('count-impressions').innerText = "0";
+            document.getElementById('count-clicks').innerText = "0";
+            document.getElementById('count-leads').innerText = "0";
+            setTimeout(typeEffect, 1000);
+        });
+
+    </script>
+</body>
+</html>
