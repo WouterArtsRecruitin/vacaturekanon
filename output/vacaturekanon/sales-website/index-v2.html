@@ -1004,12 +1004,9 @@
     });
 
     // ── Page entrance ──
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.from('nav', { y: -80, opacity: 0, duration: 1, delay: 0.1 })
-      .from('.h-title .brand-name', { y: 40, opacity: 0, duration: 0.8 }, '-=0.4')
-      .from('.h-title .outline', { y: 40, opacity: 0, duration: 0.8 }, '-=0.5')
-      .from('.h-desc', { y: 25, opacity: 0, duration: 0.6 }, '-=0.4')
-      .from('.hero-visual', { x: 80, opacity: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8');
+    // ── Page entrance ──
+    // De hero (nav, h-title, hero-visual) animeerde in met vertraging. 
+    // Op verzoek van Wouter is deze introductie-animatie gestript zodat de startpagina direct 100% zichtbaar laadt.
 
 
     // ── Scroll reveals ──
