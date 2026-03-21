@@ -296,6 +296,82 @@ def _slack(message: str):
         log.warning(f"Slack fout: {e}")
 
 
+# ── BRAND INTELLIGENCE ENDPOINT ──────────────────────────
+@app.route("/brand-intelligence", methods=["POST"])
+def brand_intelligence():
+    """
+    Brand Intelligence Ads endpoint.
+    POST { "url": "https://example.com" }
+    Optional: "generate_images": true, "full_pipeline": true
+    """
+    try:
+        data = request.get_json(force=True)
+    except Exception as e:
+        log.error(f"Brand Intelligence payload parse fout: {e}")
+        return jsonify({"ok": False, "error": "invalid_payload"}), 400
+
+    url = data.get("url", "").strip()
+    if not url:
+        return jsonify({"ok": False, "error": "missing_url"}), 422
+
+    log.info(f"Brand Intelligence: {url}")
+
+    campaign_id = f"BI_{datetime.now().strftime('%Y%m%d_%H%M')}"
+
+    # Run async
+    threading.Thread(
+        target=_run_brand_intelligence,
+        args=(url, data.get("generate_images", False),
+              data.get("full_pipeline", False), campaign_id),
+        daemon=True
+    ).start()
+
+    return jsonify({
+        "ok": True,
+        "campaign_id": campaign_id,
+        "message": f"Brand Intelligence pipeline gestart voor {url}",
+        "ts": datetime.utcnow().isoformat() + "Z"
+    }), 200
+
+
+def _run_brand_intelligence(url: str, generate_images: bool,
+                            full_pipeline: bool, campaign_id: str):
+    """Async brand intelligence pipeline."""
+    try:
+        env = {
+            **dict(os.environ),
+            "ANTHROPIC_API_KEY": ANTHROPIC_KEY,
+        }
+
+        cmd = [
+            "python3", str(SCRIPTS_DIR / "brand_intelligence.py"),
+            "--url", url,
+        ]
+        if generate_images:
+            cmd.append("--generate-images")
+        if full_pipeline:
+            cmd.append("--full-pipeline")
+
+        proc = subprocess.run(cmd, capture_output=True, text=True,
+                              timeout=600, env=env)
+
+        if proc.returncode == 0:
+            _slack(f"Brand Intelligence complete: {url}\n"
+                   f"Campaign: {campaign_id}\n"
+                   f"Output in /tmp/recruitin-local/brand-intelligence/")
+            log.info(f"[{campaign_id}] Brand Intelligence voltooid")
+        else:
+            _slack(f"Brand Intelligence FAILED: {url}\n"
+                   f"Error: {proc.stderr[-300:] if proc.stderr else 'unknown'}")
+            log.error(f"[{campaign_id}] Brand Intelligence fout: {proc.stderr[-300:]}")
+
+    except subprocess.TimeoutExpired:
+        log.error(f"[{campaign_id}] Brand Intelligence timeout (>600s)")
+        _slack(f"Brand Intelligence TIMEOUT: {url}")
+    except Exception as e:
+        log.error(f"[{campaign_id}] Brand Intelligence fout: {e}")
+
+
 # ── MAIN ─────────────────────────────────────────────────
 if __name__ == "__main__":
     log.info(f"🚀 Vacaturekanon Webhook Handler v3.0 — poort {PORT}")
