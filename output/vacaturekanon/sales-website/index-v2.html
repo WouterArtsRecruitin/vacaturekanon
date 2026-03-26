@@ -6,10 +6,54 @@
     <title>Vacaturekanon — Recruit. Automate. Dominate.</title>
     <meta name="description" content="Vacaturekanon schiet technische vacatures raak met AI-gedreven campagnes. Geen headhunters. Gewoon resultaat.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://eu.jotform.com" crossorigin>
+    <link rel="dns-prefetch" href="https://eu.jotform.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- GA4 Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3BDEP838GM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3BDEP838GM');
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1430141541402009');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1430141541402009&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <script src="https://eu.jotform.com/static/feedback2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var JFL_260757174181359 = new JotformFeedback({
+        formId: '260757174181359',
+        base: 'https://eu.jotform.com/',
+        windowTitle: 'Vacaturekanon Automation',
+        background: '#07050f',
+        fontColor: '#ffffff',
+        type: '1',
+        height: 750,
+        width: 750,
+        openOnLoad: false
+      });
+    </script>
     <style>
         :root {
             --bg: #07050f;
@@ -30,7 +74,7 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
@@ -45,7 +89,7 @@
             opacity: 0.03; pointer-events: none; z-index: 9999;
         }
 
-        h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; font-weight: 800; }
+        h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; font-weight: 800; }
 
         /* ════════════════════════
            NAV
@@ -69,7 +113,7 @@
 
         .nav-logo {
             display: flex; align-items: center; gap: 10px;
-            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px;
+            font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 16px;
             color: #fff; text-decoration: none; letter-spacing: -0.02em;
         }
         .logo-accent { 
@@ -281,7 +325,6 @@
             margin-left: -80px; /* Overflows links uit — Opticore slide 2 stijl */
         }
 
-        .about-content {}
         .section-eyebrow {
             font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
             color: var(--orange); font-weight: 600; margin-bottom: 18px; display: block;
@@ -336,51 +379,39 @@
             gap: 20px; position: relative; z-index: 2;
         }
 
-        .svc-card {
-            background: rgba(255,255,255,0.025);
-            border: 1px solid var(--border); border-radius: 20px;
-            padding: 30px 26px 26px;
-            position: relative; overflow: hidden;
-            transition: transform 0.4s var(--ease), border-color 0.4s, background 0.4s;
+        .p-step {
+            display: flex; align-items: center; justify-content: space-between; gap: 6vw;
+            margin-top: 120px;
         }
-        .svc-card::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(123,61,255,0.1) 0%, transparent 65%);
-            opacity: 0; transition: opacity 0.4s;
+        .p-step:nth-child(even) { flex-direction: row-reverse; }
+        .p-step-text { width: 45%; }
+        .p-step-text .num { font-size: 0.9rem; letter-spacing: 3px; color: var(--orange); margin-bottom: 20px; display: block; font-weight: 600; }
+        .p-step-text h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 20px; line-height: 1.2; color: #fff; }
+        .p-step-text p { font-size: 1.1rem; color: var(--muted); line-height: 1.7; }
+        .p-step-media { width: 45%; position: relative; }
+        .p-step-media img {
+            width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid var(--border); transition: transform 0.6s var(--ease), filter 0.6s, border-color 0.6s;
+            filter: grayscale(80%) sepia(30%) hue-rotate(270deg) brightness(0.85);
         }
-        .svc-card:hover { transform: translateY(-10px); border-color: rgba(123,61,255,0.35); }
-        .svc-card:hover::before { opacity: 1; }
-
-        .svc-icon {
-            width: 50px; height: 50px; border-radius: 12px;
-            background: rgba(123,61,255,0.12); border: 1px solid rgba(123,61,255,0.2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; margin-bottom: 22px;
+        .p-step-media::before {
+            content: ''; position: absolute; inset: -20px; z-index: -1;
+            background: radial-gradient(circle, rgba(255,85,0,0.08) 0%, transparent 70%);
+            transition: background 0.6s;
         }
-        .svc-card h3 { font-size: 1.05rem; color: #fff; margin-bottom: 12px; }
-        .svc-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
-        .svc-discover {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 12px; font-weight: 600; color: var(--muted);
-            text-decoration: none;
-            border: 1px solid var(--border); border-radius: 100px;
-            padding: 7px 14px;
-            transition: border-color 0.3s, color 0.3s;
+        .p-step:nth-child(even) .p-step-media::before {
+            background: radial-gradient(circle, rgba(123,61,255,0.08) 0%, transparent 70%);
         }
-        .svc-discover:hover { border-color: var(--orange); color: var(--orange); }
-
-        .view-all-row {
-            max-width: 1260px; margin: 40px auto 0;
-            display: flex; justify-content: center;
+        .p-step:hover .p-step-media img {
+            transform: scale(1.05) translateY(-5px); filter: grayscale(10%) sepia(20%) hue-rotate(290deg) brightness(1.1);
+            border-color: rgba(255,255,255,0.25);
         }
-        .btn-view-all {
-            display: inline-flex; align-items: center; gap: 10px;
-            border: 1px solid var(--border); color: var(--muted);
-            padding: 13px 28px; border-radius: 100px;
-            font-size: 13px; font-weight: 600; text-decoration: none;
-            transition: border-color 0.3s, color 0.3s;
+        .p-step:hover .p-step-media::before {
+            background: radial-gradient(circle, rgba(255,85,0,0.2) 0%, transparent 70%);
         }
-        .btn-view-all:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+        .p-step:nth-child(even):hover .p-step-media::before {
+            background: radial-gradient(circle, rgba(123,61,255,0.2) 0%, transparent 70%);
+        }
 
         /* ════════════════════════
            SECTION 4 — PROCESS  (A-01, B-02, C-03 style)
@@ -497,6 +528,26 @@
             width: 900px; height: 900px;
             background: radial-gradient(circle, rgba(255,85,0,0.1) 0%, transparent 68%);
             pointer-events: none;
+            z-index: 1;
+        }
+        .cta-stripes {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.015) 10px,
+                rgba(255, 255, 255, 0.015) 20px
+            );
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+            animation: moveStripes 40s linear infinite;
+        }
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 0; }
         }
         .cta-inner { position: relative; z-index: 2; }
         .cta-eyebrow {
@@ -560,6 +611,10 @@
         /* ════════════════════════
            RESPONSIVE
         ════════════════════════ */
+        @media (max-width: 900px) {
+            .p-step, .p-step:nth-child(even) { flex-direction: column; gap: 40px; margin-top: 80px; align-items: flex-start; }
+            .p-step-text, .p-step-media { width: 100%; text-align: left; }
+        }
         @media (max-width: 750px) {
             .hero-inner { grid-template-columns: 1fr; }
             .hero-visual { display: none; }
@@ -584,6 +639,31 @@
             .footer-center { display: none; }
             #cta h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
         }
+
+        /* ══ PRICING, HANDLEIDING & FAQ ══ */
+        #pricing { padding: 120px 5vw; background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); text-align: center; }
+        .pricing-card { max-width: 600px; margin: 50px auto 0; background: rgba(255,255,255,0.02); border: 1px solid #ff00cc; border-radius: 24px; padding: 50px; box-shadow: 0 20px 80px rgba(255,0,204,0.15); position: relative; overflow: hidden; text-align: left; }
+        .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--orange), #ff00cc); }
+        .pricing-header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 30px; }
+        .pricing-title { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+        .pricing-price { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: #fff; line-height: 1; }
+        .pricing-price span { font-size: 1.2rem; color: var(--muted); font-weight: 400; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .pricing-features { list-style: none; margin-bottom: 40px; }
+        .pricing-features li { display: flex; gap: 12px; margin-bottom: 16px; color: #d1c8eb; font-size: 1.05rem; }
+        .pricing-features li::before { content: '✓'; color: #ff00cc; font-weight: bold; }
+        
+        .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; text-align: left; }
+        .guide-card { background: rgba(255,255,255,0.02); padding: 30px; border-radius: 16px; border: 1px solid var(--border); transition: border-color 0.3s; }
+        .guide-card:hover { border-color: rgba(255,255,255,0.15); }
+        
+        #faq { padding: 80px 5vw 120px; max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border); margin-bottom: 20px; padding-bottom: 20px; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; color: #fff; cursor: pointer; user-select: none; }
+        .faq-question:hover { color: #ff00cc; }
+        .faq-icon { font-size: 1.5rem; transition: transform 0.3s; color: #ff00cc; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); color: var(--muted); font-size: 1rem; line-height: 1.7; }
+        .faq-answer p { padding-top: 16px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
     </style>
 </head>
 <body>
@@ -597,9 +677,10 @@
         <li><a href="#about">Over ons</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Proces</a></li>
-        <li><a href="#cta">Contact</a></li>
+        <li><a href="#pricing">Tarieven</a></li>
+        <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="#cta" class="nav-cta">Start een campagne →</a>
+    <a href="#pricing" class="nav-cta">Wachtlijst →</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -611,8 +692,8 @@
                 <span class="brand-name">VACATURE</span>
                 <span class="outline" style="-webkit-text-stroke: 1.5px #ff00cc; color:transparent; display:block;">KANON</span>
             </h1>
-            <p class="h-desc" style="max-width: 420px; font-size: 1.1rem; line-height: 1.6; color: var(--muted);">
-                Geautomatiseerde, data-gedreven wervingscampagnes voor de technische sector.
+            <p class="h-desc" style="max-width: 440px; font-size: 1.15rem; line-height: 1.6; color: var(--muted);">
+                Wij automatiseren doelgerichte wervingscampagnes in de technische sector. Vakspecialisten direct en exclusief afgeleverd in jouw inbox.
             </p>
         </div>
 
@@ -639,11 +720,11 @@
         <div class="about-content reveal-right">
             <span class="section-eyebrow">Wat wij zijn</span>
             <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 30px; line-height: 1.1;">De Recruitment AI Engine voor de technische sector.</h2>
-            <p style="font-size: 1.15rem; color: var(--muted); margin-bottom: 24px;">
-                Vacaturekanon is een nieuw model recruitment systeem speciaal gebouwd voor productie, constructie, oil & gas en maintenance.
+            <p style="font-size: 1.15rem; color: #d1c8eb; margin-bottom: 24px;">
+                Vacaturekanon is dé nieuwe Recruitment AI Engine, speciaal ontworpen voor bedrijven in de hoogwaardige techniek, industrie en installatietechniek.
             </p>
-            <p style="color: var(--muted); margin-bottom: 40px;">
-                Geen dure headhunters meer. Wij vervangen ze met geautomatiseerde AI video-advertenties, intelligente meta-campagnes en naadloze ATS-distributie. Direct naar jouw inbox.
+            <p style="color: var(--muted); margin-bottom: 40px; line-height: 1.6;">
+                Maak definitief een einde aan de afhankelijkheid van peperdure headhunters en trage werving- en selectiebureaus. Ons algoritme combineert messcherpe AI-videomarketing met hypergepersonaliseerde social mediacampagnes om latent zoekend toptalent overtuigend en exclusief aan jouw bedrijf te koppelen.
             </p>
             <div class="about-metrics">
                 <div class="am-item reveal">
@@ -684,35 +765,52 @@
         </div>
     </div>
 
-    <div class="services-cards" style="position: relative; z-index: 2;">
-        <div class="svc-card reveal">
-            <div class="svc-icon" style="font-size: 0.8rem; letter-spacing: 2px; color: var(--muted);">01 /</div>
-            <h3>Vacature Intake</h3>
-            <p>Jij levert de functie-eisen. Onze AI bouwt direct een complete landingspagina op maat — geoptimaliseerd voor conversie.</p>
-            <a href="#cta" class="svc-discover">Ontdek meer →</a>
+    <div class="process-steps" style="position: relative; z-index: 2; margin-top: 50px;">
+        
+        <div class="p-step reveal">
+            <div class="p-step-text">
+                <span class="num">01 / INTAKE & CREATIE</span>
+                <h3>Jij levert de functie-eisen en wij doen de rest. Ons systeem bouwt direct een onweerstaanbare vacature landingspagina op maat.</h3>
+                <p>Volledig geoptimaliseerd voor maximale conversie. Geen oppervlakkige onzin, maar harde feiten en de juiste technische specificaties om de echte vakspecialisten feilloos te overtuigen.</p>
+            </div>
+            <div class="p-step-media">
+                <img src="assets/ui/feature-1.png" alt="Vacature Dashboard">
+            </div>
         </div>
-        <div class="svc-card reveal">
-            <div class="svc-icon" style="font-size: 0.8rem; letter-spacing: 2px; color: var(--muted);">02 /</div>
-            <h3>AI Video Advertising</h3>
-            <p>Premium videobeelden via Kling AI die jouw werkveld authentiek tonen. Stopping thumbs op Meta in minder dan 3 seconden.</p>
-            <a href="#cta" class="svc-discover">Ontdek meer →</a>
-        </div>
-        <div class="svc-card reveal">
-            <div class="svc-icon" style="font-size: 0.8rem; letter-spacing: 2px; color: var(--muted);">03 /</div>
-            <h3>Algoritmisch Beheer</h3>
-            <p>Intelligente optimalisatielussen bewaken je budget 24/7. Slechte advertenties worden gepauzeerd, winnaars worden opgeschaald.</p>
-            <a href="#cta" class="svc-discover">Ontdek meer →</a>
-        </div>
-        <div class="svc-card reveal">
-            <div class="svc-icon" style="font-size: 0.8rem; letter-spacing: 2px; color: var(--muted);">04 /</div>
-            <h3>Directe Lead Delivery</h3>
-            <p>Zodra iemand solliciteert vliegen de gegevens direct naar jouw mailbox en CRM. Sneller dan elk traditioneel bureau mogelijk maakt.</p>
-            <a href="#cta" class="svc-discover">Ontdek meer →</a>
-        </div>
-    </div>
 
-    <div class="view-all-row reveal">
-        <a href="#cta" class="btn-view-all">Bekijk alle diensten →</a>
+        <div class="p-step reveal">
+            <div class="p-step-text">
+                <span class="num" style="color: var(--pink);">02 / VIDEO & SOCIAL ADS</span>
+                <h3>Ontdek de kracht van premium AI-video, waarmee we jouw werkveld dynamisch op de tijdlijn projecteren.</h3>
+                <p>In plaats van een saaie lap tekst op een generieke job-site, genereren we indrukwekkende AI visuele shots die onmiddellijk de absolute essentie en uitdaging van de functie in minder dan drie seconden overbrengen.</p>
+            </div>
+            <div class="p-step-media">
+                <img src="assets/ui/feature-2.png" alt="Video Generation">
+            </div>
+        </div>
+
+        <div class="p-step reveal">
+            <div class="p-step-text">
+                <span class="num">03 / ALGORITMISCH BEHEER</span>
+                <h3>Geniet van razendsnelle en robuuste algoritme-optimalisatie voor de allerlaagste kosten per sollicitatie.</h3>
+                <p>Terwijl de traditionele bureaus offline zijn, optimaliseert ons systeem jouw budget volautomatisch. Minder effectieve advertenties worden afgeslacht, terwijl de winnende varianten super-agressief worden opgeschaald.</p>
+            </div>
+            <div class="p-step-media">
+                <img src="assets/ui/feature-3.png" alt="Analytics AI">
+            </div>
+        </div>
+
+        <div class="p-step reveal">
+            <div class="p-step-text">
+                <span class="num" style="color: var(--pink);">04 / DIRECTE DELIVERY</span>
+                <h3>Voltooide leadgegevens en sollicitaties vliegen direct en uitsluitend jouw eigen mailbox binnen.</h3>
+                <p>Zodra een gemotiveerde kandidaat solliciteert, heb jij zijn of haar adres direct in handen. Je belt en spreekt de engineer vóórdat de concurrentie ook maar de kans krijgt om een offerte op te stellen.</p>
+            </div>
+            <div class="p-step-media">
+                <img src="assets/ui/feature-4.png" alt="Lead Status Interface">
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -767,8 +865,82 @@
     </div>
 </section>
 
+<!-- ═══ INTAKE GUIDE ═══ -->
+<section id="intake-guide" style="padding: 80px 5vw 40px; text-align: center; border-bottom: 1px solid var(--border);">
+    <div class="reveal">
+        <span class="eyebrow" style="color: var(--orange); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">JotForm Handleiding</span>
+        <h2 style="font-size: clamp(2.2rem, 3.5vw, 3rem); margin-bottom: 16px;">Geef de AI de juiste brandstof.</h2>
+        <p style="color: var(--muted); max-width: 600px; margin: 0 auto 50px; line-height: 1.7;">
+            De magie van Vacaturekanon zit in jouw input. Wat jij in ons systeem plaatst, bouwt de landingspagina en vormt de AI video prompt (`intake_schema.json`). Vul de feiten in, wij automatiseren the storytelling.
+        </p>
+    </div>
+    <div class="guide-grid reveal">
+        <div class="guide-card">
+            <div style="color: #ff00cc; font-size: 1.4rem; font-family: 'Outfit'; margin-bottom: 12px; font-weight: 800;">1. Herkenbare Titel</div>
+            <p style="color: var(--muted); font-size: 0.95rem;">Maak het concreet ("Allround Monteur" ipv "Tech. Mw. 2"). De algoritmes mappen de advertenties op basis van deze exacte functieterm in the markt.</p>
+        </div>
+        <div class="guide-card">
+            <div style="color: var(--orange); font-size: 1.4rem; font-family: 'Outfit'; margin-bottom: 12px; font-weight: 800;">2. Harde Sfeerschets</div>
+            <p style="color: var(--muted); font-size: 0.95rem;">Geen 'informele werksfeer'. Noem het bij de naam ("Smerige handen, strakke deadlines, rockradio"). Dit is essentieel voor correcte AI video shots en belichting.</p>
+        </div>
+        <div class="guide-card">
+            <div style="color: #00d2ff; font-size: 1.4rem; font-family: 'Outfit'; margin-bottom: 12px; font-weight: 800;">3. Rauwe Voorwaarden</div>
+            <p style="color: var(--muted); font-size: 0.95rem;">Technici slaan aan op feiten (Salarisrange €2.800 - €3.500, type busje, gereedschapsmerk). Hoe strakker jouw opsomming in de JotForm, hoe hoger je conversies.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+    <div class="reveal">
+        <span class="eyebrow" style="color: #ff00cc; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Vroege Toegang</span>
+        <h2 style="font-size: clamp(2.4rem, 4vw, 3.5rem); margin-top: 10px;">De exclusieve wachtlijst.</h2>
+        <p style="color: var(--muted); max-width: 480px; margin: 16px auto 0;">Schrijf je direct in voor onze exclusieve wachtlijst. Krijg als állereerste toegang tot de V2-acquisitiemachine en profiteer van <strong>geen opstartkosten</strong> (geldt uitsluitend voor de eerste 20 aanmeldingen).</p>
+    </div>
+    <div class="pricing-card reveal">
+        <div class="pricing-header">
+            <h3 class="pricing-title">Vacaturekanon 'V2 Waitlist'</h3>
+            <div class="pricing-price">Exclusief <span>/ 100% no-cure no-pay start</span></div>
+        </div>
+        <ul class="pricing-features">
+            <li style="color: #fff; font-weight: bold;">Geen opstartkosten voor 1e 20 aanmeldingen</li>
+            <li>Voorrang bij ontsluiting van nieuwe capaciteit</li>
+            <li>Geautomatiseerde setup & AI Video Generatie</li>
+            <li>Meta Ads Setup & Algoritmische Optimalisatie</li>
+            <li>Exclusieve levering van vacature-leads</li>
+        </ul>
+        <a href="mailto:info@recruitin.nl?subject=Waitlist%20Aanmelding%20Vacaturekanon%20V2" class="btn-orange" style="width: 100%; justify-content: center; background: #ff00cc; border:none; box-shadow: 0 0 40px rgba(255,0,204,0.4);">
+            Schiet mij op de Wachtlijst →
+        </a>
+        <div style="font-size: 11px; color: var(--muted); margin-top: 14px; text-align: center;">Je ontvangt een bevestiging zodra we weer ruimte hebben. Geen kosten vooraf.</div>
+    </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq">
+    <div class="faq-header reveal" style="text-align: center; margin-bottom: 50px;">
+        <span class="eyebrow" style="color: var(--orange); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Voordat je start</span>
+        <h2 style="font-size: clamp(2.4rem, 4vw, 3.5rem);">Veelgestelde Vragen</h2>
+    </div>
+    <div class="faq-list reveal">
+        <div class="faq-item">
+            <div class="faq-question">Wat gebeurt er direct na de betaling? <span class="faq-icon">+</span></div>
+            <div class="faq-answer"><p>Je vult direct na betaling onze geoptimaliseerde JotForm intake in via je eigen dashboard. Wij ontvangen je JSON data, de AI bots renderen the media (landing page + video ads), en binnen 48 uur staat the campagne live.</p></div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Waarom is de intake JotForm zo belangrijk? <span class="faq-icon">+</span></div>
+            <div class="faq-answer"><p>De prompt engine van the Vacaturekanon is gebouwd rondom jouw JotForm data (`vacature_input_schema.json`). Onze algoritmes mappen jouw input letterlijk door de hele stack heen, van advertentietekst tot de belichting in de AI-video's. Shit-in is shit-out, dus vul hem messcherp in.</p></div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Hoe zit het met het Meta Ads mediabudget? <span class="faq-icon">+</span></div>
+            <div class="faq-answer"><p>Het mediabudget voor the advertenties op Facebook & Instagram zit niet in onze pakketprijs en reken je rechtstreeks af met Meta. Wij verzorgen de **volledige campagne setup, AI content creatie en doorlopende optimalisatie**. Je bepaalt zelf je dagbudget; wij adviseren een minimum van €15,- tot €25,- per dag om the algoritmes goed te kunnen trainen.</p></div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══ CTA ═══ -->
 <section id="cta">
+    <div class="cta-stripes"></div>
     <div class="cta-inner">
         <span class="cta-eyebrow">Klaar voor resultaat?</span>
         <h2>
@@ -778,8 +950,8 @@
         </h2>
         <p>Plan een gratis strategie-sessie. Wij analyseren jouw doelgroep en demonstreren wat een AI-campagne oplevert — zonder verplichtingen.</p>
         <div class="cta-buttons">
-            <a href="mailto:info@recruitin.nl" class="btn-white-solid">Gratis Demo Aanvragen →</a>
-            <a href="tel:+31000000000" class="btn-ghost-border">📞 Bel Direct</a>
+            <a href="#pricing" class="btn-white-solid">🚀 Plaats op de Wachtlijst →</a>
+            <a href="mailto:info@recruitin.nl" class="btn-ghost-border">info@recruitin.nl</a>
         </div>
     </div>
 </section>
@@ -1055,6 +1227,24 @@
         gsap.to(el, {
             y: -60,
             scrollTrigger: { trigger: el.closest('section'), scrub: 1.5 }
+        });
+    });
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentNode;
+            const answer = item.querySelector('.faq-answer');
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.faq-answer').style.maxHeight = null;
+            });
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
         });
     });
 </script>
