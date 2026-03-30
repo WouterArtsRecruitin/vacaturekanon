@@ -48,6 +48,11 @@ REQUIRED_FIELDS = ["functie", "bedrijf", "sector", "regio", "email", "naam"]
 
 
 # ── HEALTH CHECK ─────────────────────────────────────────
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({"status": "ok", "service": "vacaturekanon-webhook"}), 200
+
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({
