@@ -1,0 +1,17 @@
+{
+  "total_found": 0,
+  "total_unique": 0,
+  "errors": 5,
+  "by_term": {},
+  "timestamp": "20260318_213347",
+  "location": "Arnhem",
+  "radius": "30",
+  "search_terms": [
+    "projectleider",
+    "werkvoorbereider",
+    "monteur",
+    "engineer technisch",
+    "calculator"
+  ],
+  "export_time": "2026-03-18T21:33:48.719541"
+}

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacaturekanon | Motion Graphics Showcase</title>
+    <!-- Fonts -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400&f[]=inter@400,500,600,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #09090b;
+            --orange: #ff5e00;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f4f4f5;
+            --text-mute: #a1a1aa;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100vw; height: 100vh;
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255,94,0,0.15) 0%, transparent 60%),
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* No scroll, pure cinema */
+            perspective: 1200px;
+        }
+
+        #camera {
+            width: 100%; height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        /* Particles Container */
+        #particles {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform-style: preserve-3d;
+            z-index: 99;
+        }
+
+        .data-shard {
+            position: absolute;
+            width: 8px; height: 8px;
+            background: var(--orange);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--orange), 0 0 20px var(--orange);
+            opacity: 0;
+        }
+        
+        .data-line {
+            position: absolute;
+            width: 40px; height: 2px;
+            background: #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
+            opacity: 0;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* SCENE 1: De Formulier Intake */
+        #scene-1 {
+            width: 400px;
+            padding: 30px;
+            transform-style: preserve-3d;
+            position: absolute;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        .label { font-size: 0.8rem; color: var(--text-mute); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .input-box {
+            width: 100%; height: 48px; background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border); border-radius: 8px;
+            color: white; font-family: 'Inter'; font-size: 1rem;
+            padding: 0 15px; box-sizing: border-box;
+            line-height: 48px;
+        }
+
+        .type-text {
+            color: var(--orange); font-weight: 600; text-shadow: 0 0 10px rgba(255,94,0,0.5);
+        }
+
+        .launch-btn {
+            width: 100%; height: 50px;
+            background: linear-gradient(90deg, #ff5e00, #ff8c00);
+            border: none; border-radius: 8px;
+            color: white; font-weight: 700; font-size: 1rem;
+            cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255,94,0,0.3);
+            text-transform: uppercase; letter-spacing: 2px;
+            transition: transform 0.2s;
+        }
+        .launch-btn:hover { transform: scale(1.05); }
+
+        /* SCENE 2: De gegenereerde Landing Page (Bento Grid) */
+        #scene-2 {
+            width: 900px; height: 600px;
+            position: absolute;
+            display: grid;
+            grid-template-columns: 250px 1fr 200px;
+            grid-template-rows: 80px 1fr 150px;
+            gap: 20px;
+            pointer-events: none;
+            opacity: 0;
+            transform-style: preserve-3d;
+        }
+
+        .bento-block {
+            display: flex; flex-direction: column;
+            padding: 20px; box-sizing: border-box;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Dashboard blocks mapping */
+        .b-header { grid-column: 1 / 4; grid-row: 1; align-items: center; flex-direction: row; justify-content: space-between; }
+        .b-sidebar { grid-column: 1; grid-row: 2 / 4; }
+        .b-main-flow { grid-column: 2; grid-row: 2; display: flex; justify-content: center; align-items: center; }
+        .b-candidates { grid-column: 3; grid-row: 2; }
+        .b-metrics { grid-column: 2 / 4; grid-row: 3; display: flex; flex-direction: row; justify-content: space-around;}
+
+        .b-header h2 { margin: 0; font-size: 24px; color: #fff; }
+        .metric { font-size: 32px; font-weight: 800; color: var(--orange); line-height: 1; }
+        .desc { font-size: 12px; color: var(--muted); }
+
+        /* Process Flow Dashboard Visual */
+        .flow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .flow-path {
+            position: absolute;
+            top: 40px; left: 40px; right: 40px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+
+        .flow-pulse {
+            position: absolute;
+            top: -2px; left: 0;
+            width: 30px; height: 6px;
+            background: #00e5ff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00e5ff;
+            animation: flowEngine 3s infinite ease-in-out;
+        }
+
+        @keyframes flowEngine {
+            0% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        .flow-nodes {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .flow-node {
+            display: flex; flex-direction: column; align-items: center;
+            width: 80px; text-align: center;
+        }
+
+        .node-icon {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 15px;
+            animation: nodePulse 3s infinite;
+        }
+        
+        .flow-node span {
+            font-size: 10px;
+            color: #a1a1aa;
+            font-weight: 600;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .flow-node:nth-child(1) .node-icon { animation-delay: 0s; }
+        .flow-node:nth-child(2) .node-icon { animation-delay: 0.8s; }
+        .flow-node:nth-child(3) .node-icon { animation-delay: 1.6s; }
+        .flow-node:nth-child(4) .node-icon { animation-delay: 2.4s; }
+
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 transparent; }
+            5% { transform: scale(1.2); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+            15% { transform: scale(1); box-shadow: 0 0 0 transparent; }
+        }
+
+        .profile-line {
+            width: 100%; height: 30px; background: rgba(255,255,255,0.05); border-radius: 6px; margin-bottom: 10px;
+            display: flex; align-items: center; padding: 0 10px; box-sizing: border-box;
+            border-left: 3px solid #00e5ff;
+        }
+        .avatar { width: 16px; height: 16px; border-radius: 50%; background: white; margin-right: 10px; }
+        .line-txt { width: 60%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        /* Replay logic */
+        #replay-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: transparent; border: 1px solid var(--border); color: var(--text-mute);
+            padding: 10px 20px; border-radius: 6px; cursor: pointer; z-index: 1000; opacity: 0;
+        }
+        #replay-btn:hover { color: white; border-color: rgba(255,94,0,0.5); }
+    </style>
+</head>
+<body>
+
+    <button id="replay-btn">Replay Animatie</button>
+
+    <div id="camera">
+        <!-- Deeltjes engine in 3D -->
+        <div id="particles"></div>
+
+        <!-- SCENE 1: Formulier -->
+        <div id="scene-1" class="glass-panel">
+            <h2 style="margin-bottom: 30px;">Start Vacature Engine</h2>
+            
+            <div class="input-group">
+                <span class="label">Functietitel</span>
+                <div class="input-box"><span class="type-text" id="target-typing"></span></div>
+            </div>
+            
+            <div class="input-group">
+                <span class="label">Regio & Straal</span>
+                <div class="input-box" style="color: #a1a1aa;">Breda + 30km</div>
+            </div>
+
+            <div class="input-group">
+                <span class="label">Budget Setup</span>
+                <div class="input-box" style="color: #a1a1aa;">€1500 / Meta Ads</div>
+            </div>
+
+            <button class="launch-btn" id="btn-launch" style="margin-top: 15px;">
+                VRAAG COMPILATIE AAN
+            </button>
+        </div>
+
+        <!-- SCENE 2: Gegenereerde Landingpage Dashboard -->
+        <div id="scene-2">
+            <div class="bento-block glass-panel b-header">
+                <h2>Onderhoudsmonteur WTB <span style="font-weight: 400; color: #a1a1aa;">| Breda</span></h2>
+                <div style="padding: 6px 12px; background: rgba(0, 229, 255, 0.1); border: 1px solid #00e5ff; border-radius: 20px; color: #00e5ff; font-size: 12px; font-weight: 600;">ACTIVE</div>
+            </div>
+
+            <div class="bento-block glass-panel b-sidebar">
+                <span class="label">Kandidaten Pijplijn</span><br>
+                <div class="profile-line"><div class="avatar"></div><div class="line-txt"></div></div>
+                <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 40%"></div></div>
+                <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 70%"></div></div>
+                <div class="profile-line" style="border-left-color: var(--orange);"><div class="avatar"></div><div class="line-txt" style="width: 50%"></div></div>
+                <div class="profile-line"><div class="avatar"></div><div class="line-txt" style="width: 30%"></div></div>
+            </div>
+
+            <div class="bento-block glass-panel b-main-flow" style="padding: 25px; overflow: hidden; display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="color: white; margin: 0 0 25px 0; font-size: 16px; text-align: center; text-transform: uppercase; letter-spacing: 2px;">Data Pipeline Engine</h3>
+                
+                <div class="flow-wrapper">
+                    <!-- Connecting line -->
+                    <div class="flow-path">
+                        <div class="flow-pulse"></div>
+                    </div>
+                    
+                    <div class="flow-nodes">
+                        <div class="flow-node">
+                            <div class="node-icon">💼</div>
+                            <span>Vacature Input</span>
+                        </div>
+                        <div class="flow-node">
+                            <div class="node-icon" style="background: rgba(255,94,0,0.2); color: var(--orange); border-color: var(--orange);">🧠</div>
+                            <span>AI Engine</span>
+                        </div>
+                        <div class="flow-node">
+                            <div class="node-icon">🎯</div>
+                            <span>Targeting</span>
+                        </div>
+                        <div class="flow-node">
+                            <div class="node-icon" style="background: rgba(0,229,255,0.2); border-color: #00e5ff;">✅</div>
+                            <span style="color:#00e5ff; font-weight:800;">54 Leads</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-block glass-panel b-candidates">
+                <span class="label">Job Match AI</span><br>
+                <div style="position: relative; width: 100px; height: 100px; border: 8px solid rgba(255,94,0,0.2); border-top-color: var(--orange); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 24px; font-weight: 800; color: white;">94%</span>
+                </div>
+            </div>
+
+            <div class="bento-block glass-panel b-metrics">
+                <div><span class="metric" id="count-impressions">0</span><br><span class="desc">Meta Weergaves</span></div>
+                <div><span class="metric" id="count-clicks">0</span><br><span class="desc">Kliks</span></div>
+                <div><span class="metric" id="count-leads">0</span><br><span class="desc">Nieuwe Leads</span></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Initialiseer elementen en muisbeweging perspectief (Framer effect)
+        const camera = document.getElementById('camera');
+        let rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            gsap.to(camera, { rotationY: x, rotationX: -y, duration: 0.8, ease: "power2.out" });
+        });
+
+        // 2. Type-animatie startup
+        const typeTarget = document.getElementById('target-typing');
+        const textToType = "Onderhoudsmonteur WTB";
+        
+        function typeEffect() {
+            typeTarget.innerHTML = "";
+            let i = 0;
+            const interval = setInterval(() => {
+                typeTarget.innerHTML += textToType.charAt(i);
+                i++;
+                if (i === textToType.length) clearInterval(interval);
+            }, 80);
+        }
+
+        // Auto-type na 1 sec
+        setTimeout(typeEffect, 500);
+
+        // 3. De Data Explosie (De Kern van de Motion Graphic)
+        const btn = document.getElementById('btn-launch');
+        const particlesContainer = document.getElementById('particles');
+        let isAnimated = false;
+
+        btn.addEventListener('click', runExplosion);
+        document.getElementById('replay-btn').addEventListener('click', resetScene);
+
+        function runExplosion() {
+            if(isAnimated) return;
+            isAnimated = true;
+
+            // Druk knop in
+            gsap.to(btn, { scale: 0.9, duration: 0.1 });
+            
+            const tl = gsap.timeline();
+
+            // A: Formulier schiet naar achter, en verdwijnt (Motion Blur achtige exit)
+            tl.to('#scene-1', {
+                z: -500,
+                opacity: 0,
+                rotateX: 10,
+                filter: "blur(20px)",
+                duration: 0.8,
+                ease: "power4.in"
+            }, "+=0.1");
+
+            // B: Fysische deeltjes genereren en afvuren
+            tl.add(() => {
+                particlesContainer.innerHTML = ""; // clean
+                
+                // Genereer 150 shards en 50 strepen
+                for(let i = 0; i < 200; i++) {
+                    const isLine = i > 150;
+                    const p = document.createElement('div');
+                    p.className = isLine ? 'data-line' : 'data-shard';
+                    particlesContainer.appendChild(p);
+
+                    // GSAP physics
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = Math.random() * 800 + 100;
+                    
+                    const endX = Math.cos(angle) * radius;
+                    const endY = Math.sin(angle) * radius;
+                    const endZ = Math.random() * 1000 + 400; // Schieten naar de camera toe!
+
+                    gsap.fromTo(p, 
+                        { x: 0, y: 0, z: -100, scale: 0, rotationX: 0, rotationY: 0, rotationZ: 0, opacity: 1 },
+                        {
+                            x: endX, y: endY, z: endZ,
+                            scale: Math.random() * 1.5 + 0.5,
+                            rotationX: Math.random() * 720,
+                            rotationY: Math.random() * 720,
+                            rotationZ: isLine ? Math.atan2(endY, endX) * (180/Math.PI) : Math.random() * 360,
+                            opacity: 0,
+                            duration: Math.random() * 1.5 + 0.8,
+                            ease: "power4.out"
+                        }
+                    );
+                }
+            }, "-=0.3");
+
+            // C: De Landing Page blokken springen in beeld (Component Assembly)
+            tl.set('#scene-2', { opacity: 1, pointerEvents: 'all' }, "-=0.2");
+            
+            const blocks = document.querySelectorAll('.bento-block');
+            
+            // Random start posities in diepte en rotatie
+            gsap.fromTo(blocks, 
+                { z: -1200, opacity: 0, scale: 0.2, rotationX: () => Math.random() * 90 - 45, rotationY: () => Math.random() * 90 - 45, filter: "blur(20px)" },
+                {
+                    z: 0, opacity: 1, scale: 1, 
+                    rotationX: 0, rotationY: 0, filter: "blur(0px)",
+                    duration: 1.2,
+                    stagger: 0.08,
+                    ease: "back.out(1.4)"
+                }, "-=0.4"
+            );
+
+            // Nummer-teller physics animeren (Motion detail)
+            tl.to({val:0}, {val: 14208, roundProps:"val", duration: 2, onUpdate: function(){ document.getElementById('count-impressions').innerText = this.targets()[0].val.toLocaleString(); }}, "-=0.5");
+            tl.to({val:0}, {val: 846, roundProps:"val", duration: 2.2, onUpdate: function(){ document.getElementById('count-clicks').innerText = this.targets()[0].val; }}, "-=2");
+            tl.to({val:0}, {val: 14, roundProps:"val", duration: 2.5, onUpdate: function(){ document.getElementById('count-leads').innerText = this.targets()[0].val; }}, "-=2");
+
+            // Show Replay button
+            tl.to('#replay-btn', { opacity: 1, duration: 0.5 }, "+=1");
+        }
+
+        function resetScene() {
+            isAnimated = false;
+            // Verberg UI, toon scene 1
+            gsap.set('#replay-btn', {opacity: 0});
+            gsap.set('#scene-2', { opacity: 0, pointerEvents: 'none' });
+            gsap.set('#scene-1', { z: 500, opacity: 0, filter: "blur(20px)", scale: 1.5, rotateX: -20 });
+            
+            // Vlieg de intake formulier weer naar binnen
+            gsap.to('#scene-1', { z: 0, opacity: 1, filter: "blur(0px)", scale: 1, rotateX: 0, duration: 1, ease: "power4.out" });
+            
+            // Reset types
+            typeTarget.innerHTML = "";
+            document.getElementById('count-impressions').innerText = "0";
+            document.getElementById('count-clicks').innerText = "0";
+            document.getElementById('count-leads').innerText = "0";
+            setTimeout(typeEffect, 1000);
+        }
+    </script>
+
+</body>
+</html>

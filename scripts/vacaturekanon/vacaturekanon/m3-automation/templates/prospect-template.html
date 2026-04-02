@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{bedrijfsnaam}} Recruitment Campagne | Vacaturekanon</title>
+  <meta name="description" content="Dedicated recruitment campagne voor {{doelgroep_functietitels}} bij {{bedrijfsnaam}}. Eerste kandidaten binnen 3 weken.">
+  <meta property="og:title" content="{{bedrijfsnaam}} Recruitment Campagne | Vacaturekanon">
+  <meta property="og:description" content="Dedicated recruitment campagne voor {{doelgroep_functietitels}} bij {{bedrijfsnaam}}. Eerste kandidaten binnen 3 weken.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vacaturekanon.nl">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Vacaturekanon Recruitment Marketing","provider":{"@type":"Organization","name":"Recruitin B.V."},"description":"Dedicated recruitment marketing campagnes voor technische vacatures","areaServed":"Nederland"}</script>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','{{PIXEL_ID}}');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{PIXEL_ID}}&ev=PageView&noscript=1"/></noscript>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{GA4_ID}}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{GA4_ID}}');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --orange:      #E85D04;
+      --orange-dark: #C44B02;
+      --black:       #0A0A0A;
+      --dark:        #111827;
+      --mid:         #374151;
+      --gray:        #6B7280;
+      --light:       #F9FAFB;
+      --white:       #FFFFFF;
+      --border:      #E5E7EB;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',Arial,sans-serif;font-size:16px;line-height:1.6;color:var(--dark);background:var(--white);}
+    h1,h2,h3,h4{font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-0.02em;}
+    a{text-decoration:none;color:inherit;}
+
+    /* Urgency strip */
+    .urgency-strip{background:var(--orange);color:var(--white);text-align:center;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:.02em;}
+    .urgency-strip.red{background:#DC2626;}
+
+    /* Nav */
+    .nav{position:sticky;top:0;z-index:100;background:var(--dark);border-bottom:1px solid rgba(255,255,255,.08);padding:0 24px;transition:box-shadow .2s;}
+    .nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.4);}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+    .nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;color:var(--white);letter-spacing:.05em;text-transform:uppercase;}
+    .nav-logo span{color:var(--orange);}
+
+    /* Buttons */
+    .btn{display:inline-block;padding:10px 22px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background .15s,transform .1s;border:2px solid transparent;white-space:nowrap;}
+    .btn:active{transform:scale(.98);}
+    .btn-primary{background:var(--orange);color:var(--white);border-color:var(--orange);}
+    .btn-primary:hover{background:var(--orange-dark);border-color:var(--orange-dark);}
+    .btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.3);}
+    .btn-ghost:hover{border-color:var(--white);}
+    .btn-white{background:var(--white);color:var(--orange);border-color:var(--white);}
+    .btn-white:hover{background:var(--light);}
+    .btn-lg{padding:14px 32px;font-size:16px;}
+
+    /* Hero */
+    .hero{background:var(--dark);background-image:radial-gradient(ellipse at 60% 50%,rgba(232,93,4,.12) 0%,transparent 60%);color:var(--white);padding:80px 24px 100px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+    .hero-inner{max-width:800px;margin:0 auto;position:relative;}
+    .hero-tag{display:inline-block;background:rgba(232,93,4,.2);color:var(--orange);border:1px solid rgba(232,93,4,.4);padding:5px 14px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;font-family:'Inter',sans-serif;}
+    .hero h1{font-size:clamp(38px,8vw,68px);font-weight:900;margin-bottom:24px;text-transform:uppercase;}
+    .hero h1 em{color:var(--orange);font-style:normal;}
+    .hero-subtitle{font-size:18px;color:rgba(255,255,255,.75);max-width:600px;margin:0 auto 36px;line-height:1.6;}
+    .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+    .hero-fine{font-size:13px;color:rgba(255,255,255,.45);}
+
+    /* Trust bar */
+    .trust-bar{background:var(--light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px;}
+    .trust-bar-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;}
+    .stat-value{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:4px;}
+    .stat-label{font-size:13px;color:var(--gray);font-weight:500;text-transform:uppercase;letter-spacing:.05em;}
+
+    /* Sections */
+    section{padding:80px 24px;}
+    .section-inner{max-width:1100px;margin:0 auto;}
+    .section-tag{font-size:12px;font-weight:700;color:var(--orange);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;font-family:'Inter',sans-serif;}
+    .section-title{font-size:clamp(30px,5vw,50px);font-weight:900;color:var(--dark);text-transform:uppercase;margin-bottom:48px;}
+    .section-title span{color:var(--orange);}
+
+    /* Probleem */
+    .probleem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px;}
+    .probleem-card{background:var(--light);border:1px solid var(--border);border-radius:10px;padding:28px;}
+    .card-icon{font-size:32px;margin-bottom:16px;}
+    .probleem-card h3{font-size:20px;font-weight:800;color:var(--dark);margin-bottom:8px;text-transform:uppercase;}
+    .probleem-card p{font-size:14px;color:var(--gray);line-height:1.6;}
+    .quote-block{background:var(--dark);color:var(--white);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:24px 28px;font-size:17px;font-style:italic;line-height:1.6;}
+
+    /* Stappen */
+    .oplossing{background:var(--light);}
+    .stappen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+    .stap{padding:32px;position:relative;}
+    .stap:not(:last-child)::after{content:'→';position:absolute;right:-16px;top:50%;transform:translateY(-50%);font-size:28px;color:var(--orange);font-weight:900;}
+    .stap-num{width:48px;height:48px;background:var(--orange);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;margin-bottom:20px;}
+    .stap h3{font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:8px;color:var(--dark);}
+    .stap p{font-size:14px;color:var(--gray);line-height:1.6;}
+
+    /* Features */
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .feature-card{border:1px solid var(--border);border-radius:10px;padding:24px;display:flex;gap:14px;align-items:flex-start;}
+    .feat-check{width:24px;height:24px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;color:white;font-weight:700;margin-top:2px;}
+    .feature-card h4{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px;font-family:'Inter',sans-serif;}
+    .feature-card p{font-size:13px;color:var(--gray);}
+
+    /* USPs */
+    .usps{background:var(--dark);color:var(--white);}
+    .usps .section-title{color:var(--white);}
+    .usps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .usp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:28px;}
+    .usp-card-icon{font-size:28px;margin-bottom:14px;}
+    .usp-card p{font-size:15px;color:rgba(255,255,255,.8);line-height:1.5;}
+
+    /* Social proof */
+    .social-proof{background:var(--light);}
+    .results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .result-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px;}
+    .result-days{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:8px;}
+    .result-days small{font-size:20px;color:var(--gray);font-weight:600;}
+    .result-card h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px;font-family:'Inter',sans-serif;}
+    .result-card p{font-size:13px;color:var(--gray);}
+
+    /* CTA */
+    .cta-section{background:var(--orange);color:var(--white);text-align:center;padding:80px 24px;}
+    .cta-section .section-title{color:var(--white);margin-bottom:16px;}
+    .cta-subtitle{font-size:18px;opacity:.9;margin-bottom:36px;}
+    .cta-phone{margin-top:16px;font-size:14px;opacity:.85;}
+
+    /* Footer */
+    footer{background:var(--black);color:rgba(255,255,255,.5);padding:40px 24px;text-align:center;}
+    .footer-inner{max-width:800px;margin:0 auto;}
+    .footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:var(--white);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;}
+    .footer-logo span{color:var(--orange);}
+    footer p{font-size:13px;margin-bottom:8px;line-height:1.6;}
+    .footer-links{display:flex;gap:20px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+    .footer-links a{font-size:13px;color:rgba(255,255,255,.4);transition:color .15s;}
+    .footer-links a:hover{color:var(--white);}
+
+    /* Cookie banner */
+    .cookie-banner{position:fixed;bottom:0;left:0;right:0;background:var(--dark);color:var(--white);padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;z-index:1000;border-top:1px solid rgba(255,255,255,.1);font-size:14px;}
+    .cookie-banner.hidden{display:none;}
+    .cookie-banner p{margin:0;}
+    .cookie-btn{padding:8px 20px;border-radius:5px;font-weight:600;font-size:13px;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
+    .cookie-accept{background:var(--orange);color:white;}
+    .cookie-reject{background:rgba(255,255,255,.1);color:white;}
+
+    /* Responsive */
+    @media(max-width:1024px){.features-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){
+      section{padding:56px 20px;}
+      .trust-bar-inner{grid-template-columns:repeat(2,1fr);gap:24px;}
+      .probleem-grid,.stappen-grid,.features-grid,.usps-grid,.results-grid{grid-template-columns:1fr;}
+      .stap:not(:last-child)::after{display:none;}
+      .hero{padding:60px 20px 80px;}
+      .hero-ctas{flex-direction:column;align-items:center;}
+    }
+    @media(max-width:480px){
+      .trust-bar-inner{grid-template-columns:repeat(2,1fr);}
+      .btn{padding:10px 18px;font-size:13px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Urgency Strip -->
+  <div class="urgency-strip" id="urgencyStrip">
+    &#9889; <strong id="stripBedrijf">{{bedrijfsnaam}}</strong> &mdash; De vacature voor <strong>{{doelgroep_functietitels}}</strong> staat open.
+    Gemiddeld duurt zoeken <strong>{{avg_time_to_hire}} dagen</strong> &mdash; wij vullen het in <strong>3 weken</strong>.
+  </div>
+
+  <!-- Sticky Nav -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <div class="nav-logo">VACATURE<span>KANON</span></div>
+      <a href="{{JOTFORM_URL}}" class="btn btn-primary cta-trigger">Plan Gratis Intake &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">{{sector}} Recruitment</div>
+      <h1>{{bedrijfsnaam}}<br>Zoekt <em>{{doelgroep_functietitels}}</em></h1>
+      <p class="hero-subtitle">
+        Wij bouwen een dedicated recruitment campagne die in 3 weken de eerste gekwalificeerde kandidaten oplevert.
+        Vaste prijs. Geen verrassingen.
+      </p>
+      <div class="hero-ctas">
+        <a href="{{CALENDLY_URL}}" class="btn btn-primary btn-lg cta-trigger">Plan Strategiegesprek &rarr;</a>
+        <a href="#hoe-het-werkt" class="btn btn-ghost btn-lg">Bekijk Hoe Het Werkt &darr;</a>
+      </div>
+      <p class="hero-fine">Geen verplichtingen &middot; Resultaat binnen 3 weken &middot; Vaste maandprijs</p>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div><div class="stat-value">&lt;3 wkn</div><div class="stat-label">Time-to-hire</div></div>
+      <div><div class="stat-value">94%</div><div class="stat-label">Retentie</div></div>
+      <div><div class="stat-value">47+</div><div class="stat-label">Plaatsingen</div></div>
+      <div><div class="stat-value">6</div><div class="stat-label">Sectoren</div></div>
+    </div>
+  </div>
+
+  <!-- Probleem -->
+  <section class="probleem">
+    <div class="section-inner">
+      <div class="section-tag">Het Probleem</div>
+      <h2 class="section-title">Een Lege Stoel Kost <span>Meer Dan Je Denkt</span></h2>
+      <div class="probleem-grid">
+        <div class="probleem-card">
+          <div class="card-icon">&#128184;</div>
+          <h3>Productiviteitsverlies</h3>
+          <p>Een openstaande technische vacature kost gemiddeld &euro;5.000&ndash;&euro;15.000 per maand aan gemiste productiviteit en projectvertragingen.</p>
+        </div>
+        <div class="probleem-card">
+          <div class="card-icon">&#128534;</div>
+          <h3>Teamoverbelasting</h3>
+          <p>Collega&rsquo;s nemen extra taken over. Dit leidt tot werkdruk, uitval en &mdash; als je niet oppast &mdash; nog meer verloop.</p>
+        </div>
+        <div class="probleem-card">
+          <div class="card-icon">&#128202;</div>
+          <h3>Opportunity Cost</h3>
+          <p>Projecten lopen vertraging op. Nieuwe opdrachten kunnen niet worden aangenomen. Klanten kiezen voor de concurrent.</p>
+        </div>
+      </div>
+      <div class="quote-block">
+        &ldquo;Technische vacatures in de <strong>{{sector}}</strong> staan gemiddeld
+        <strong>{{avg_time_to_hire}} dagen</strong> open.
+        Dat zijn {{avg_time_to_hire}} dagen omzetverlies die voorkomen hadden kunnen worden.&rdquo;
+      </div>
+    </div>
+  </section>
+
+  <!-- Hoe het werkt -->
+  <section class="oplossing" id="hoe-het-werkt">
+    <div class="section-inner">
+      <div class="section-tag">De Oplossing</div>
+      <h2 class="section-title">Vacaturekanon In <span>3 Stappen</span></h2>
+      <div class="stappen-grid">
+        <div class="stap">
+          <div class="stap-num">1</div>
+          <h3>Intake &amp; Strategie</h3>
+          <p>Wij analyseren jullie vacature, doelgroep en de arbeidsmarkt in <strong>{{regio}}</strong>. Campagnestrategie staat binnen 2 werkdagen.</p>
+        </div>
+        <div class="stap">
+          <div class="stap-num">2</div>
+          <h3>Campagne Live</h3>
+          <p>Dedicated landingspagina + Meta advertenties + shortvideos &mdash; live in <strong>5 werkdagen</strong>. Wij beheren alles.</p>
+        </div>
+        <div class="stap">
+          <div class="stap-num">3</div>
+          <h3>Kandidaten Binnen</h3>
+          <p>Eerste <strong>gekwalificeerde sollicitaties</strong> binnen 2&ndash;3 weken. Jullie voeren de gesprekken, wij de aanvoer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wat je krijgt -->
+  <section class="features">
+    <div class="section-inner">
+      <div class="section-tag">Wat Je Krijgt</div>
+      <h2 class="section-title">Alles Inbegrepen. <span>Vaste Prijs.</span></h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>Dedicated Landingspagina</h4>
+            <p>Op maat gebouwde vacaturepagina geoptimaliseerd voor conversie en zoekmachines.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>Meta Advertentiecampagne</h4>
+            <p>Setup en beheer van Facebook &amp; Instagram campagnes gericht op jouw doelgroep in {{regio}}.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>3&ndash;5 Shortvideos</h4>
+            <p>Video content voor social media die aandacht trekt bij passieve kandidaten in {{sector}}.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>Email Nurture Sequence</h4>
+            <p>7-touch email reeks die leads warm houdt totdat ze klaar zijn te solliciteren.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>Pipedrive Tracking</h4>
+            <p>Alle leads automatisch in jullie CRM met scorings en maandrapportage.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-check">&#10003;</div>
+          <div>
+            <h4>Maandelijkse Strategie Call</h4>
+            <p>Vaste check-in: campagneresultaten, bijsturing en vooruitblik komende maand.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USPs werkgever -->
+  <section class="usps">
+    <div class="section-inner">
+      <div class="section-tag" style="color:rgba(232,93,4,.9);">Waarom {{bedrijfsnaam}}</div>
+      <h2 class="section-title">Jullie Troeven <span>Als Werkgever</span></h2>
+      <div class="usps-grid" id="uspsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="social-proof">
+    <div class="section-inner">
+      <div class="section-tag">Resultaten</div>
+      <h2 class="section-title">Bewezen <span>In De Praktijk</span></h2>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-days">18<small> dgn</small></div>
+          <h4>Automation Engineer</h4>
+          <p>Gelderland &mdash; 1 gerichte Meta campagne. Kandidaat geplaatst voor vaste dienst.</p>
+        </div>
+        <div class="result-card">
+          <div class="result-days">24<small> dgn</small></div>
+          <h4>3x Monteur Installatietechniek</h4>
+          <p>Overijssel &mdash; Drie vacatures gelijktijdig ingevuld via dedicated campagne.</p>
+        </div>
+        <div class="result-card">
+          <div class="result-days">22<small> dgn</small></div>
+          <h4>Process Engineer Oil &amp; Gas</h4>
+          <p>Noord-Brabant &mdash; Schaarse specialist gevonden via gerichte video- en displaycampagne.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner" style="text-align:center;max-width:640px;">
+      <h2 class="section-title">Klaar Om Te <span style="color:rgba(255,255,255,.85);">Starten?</span></h2>
+      <p class="cta-subtitle">Plan een vrijblijvend strategiegesprek van 30 minuten. Wij laten zien wat een campagne voor <strong>{{bedrijfsnaam}}</strong> kan opleveren.</p>
+      <a href="{{CALENDLY_URL}}" class="btn btn-white btn-lg cta-trigger">Plan Gratis Intake &rarr;</a>
+      <p class="cta-phone">Of bel direct: <a href="tel:+31612345678" style="color:white;font-weight:700;">06&ndash;12 34 56 78</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">VACATURE<span>KANON</span></div>
+      <p>Een dienst van <strong style="color:rgba(255,255,255,.7)">Recruitin B.V.</strong></p>
+      <p>Doesburg &middot; KvK: 12345678 &middot; <a href="mailto:info@recruitin.nl" style="color:rgba(255,255,255,.5)">info@recruitin.nl</a></p>
+      <div class="footer-links">
+        <a href="/privacy">Privacybeleid</a>
+        <a href="/voorwaarden">Algemene Voorwaarden</a>
+        <a href="{{JOTFORM_URL}}">Intake Formulier</a>
+      </div>
+      <p style="margin-top:20px;font-size:12px;">&copy; 2026 Vacaturekanon &mdash; Een dienst van Recruitin B.V.</p>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Wij gebruiken cookies voor analyse en advertenties.</p>
+    <button class="cookie-btn cookie-accept" id="btnAccept">Accepteren</button>
+    <button class="cookie-btn cookie-reject" id="btnReject">Weigeren</button>
+  </div>
+
+  <script>
+    // ── USP cards (safe DOM, no innerHTML with user data) ─────────────────────
+    (function renderUSPs() {
+      const raw = '{{usps_werkgever}}';
+      const icons = ['🚀','⭐','💡','🎯','🔧','📈'];
+      const lines = raw.split(/[\n\r]|•|–|-/).map(function(s){ return s.trim(); }).filter(Boolean);
+      const grid = document.getElementById('uspsGrid');
+      if (!grid) return;
+
+      var items = lines.length > 0 ? lines : [
+        'Uitstekende arbeidsvoorwaarden',
+        'Doorgroeimogelijkheden',
+        'Moderne werkomgeving'
+      ];
+      // Max 6 USPs
+      items.slice(0, 6).forEach(function(text, i) {
+        var card = document.createElement('div');
+        card.className = 'usp-card';
+
+        var iconEl = document.createElement('div');
+        iconEl.className = 'usp-card-icon';
+        iconEl.textContent = icons[i % icons.length];
+
+        var p = document.createElement('p');
+        p.textContent = text;
+
+        card.appendChild(iconEl);
+        card.appendChild(p);
+        grid.appendChild(card);
+      });
+    })();
+
+    // ── Urgency strip: red for "Zeer urgent" ──────────────────────────────────
+    (function urgencyColor() {
+      var urgentie = '{{urgentie}}';
+      if (urgentie === 'Zeer urgent (< 4 weken)') {
+        var strip = document.getElementById('urgencyStrip');
+        if (strip) strip.classList.add('red');
+      }
+    })();
+
+    // ── Sticky nav shadow ─────────────────────────────────────────────────────
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ── Scroll depth tracking ─────────────────────────────────────────────────
+    var depthTriggered = {};
+    window.addEventListener('scroll', function() {
+      var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(function(d) {
+        if (pct >= d && !depthTriggered[d]) {
+          depthTriggered[d] = true;
+          if (typeof gtag === 'function') gtag('event', 'scroll_depth', { depth: d });
+        }
+      });
+    }, { passive: true });
+
+    // ── ViewContent on section enter ──────────────────────────────────────────
+    if ('IntersectionObserver' in window) {
+      var sectionObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            if (typeof fbq === 'function') fbq('track', 'ViewContent');
+            sectionObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      document.querySelectorAll('section').forEach(function(s) { sectionObs.observe(s); });
+    }
+
+    // ── CTA click tracking ────────────────────────────────────────────────────
+    document.querySelectorAll('.cta-trigger').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (typeof fbq === 'function') fbq('track', 'Lead');
+        if (typeof gtag === 'function') gtag('event', 'generate_lead');
+      });
+    });
+
+    // ── Cookie consent (document.cookie, SameSite=Lax) ───────────────────────
+    var banner = document.getElementById('cookieBanner');
+
+    function disableTracking() {
+      window.fbq = function(){};
+      window.gtag = function(){};
+    }
+
+    function setCookie(name, value) {
+      document.cookie = name + '=' + value + '; max-age=31536000; path=/; SameSite=Lax';
+    }
+
+    function getCookie(name) {
+      var match = document.cookie.split('; ').find(function(c) { return c.startsWith(name + '='); });
+      return match ? match.split('=')[1] : null;
+    }
+
+    document.getElementById('btnAccept').addEventListener('click', function() {
+      setCookie('vk_consent', 'accepted');
+      banner.classList.add('hidden');
+    });
+
+    document.getElementById('btnReject').addEventListener('click', function() {
+      setCookie('vk_consent', 'rejected');
+      banner.classList.add('hidden');
+      disableTracking();
+    });
+
+    (function initConsent() {
+      var pref = getCookie('vk_consent');
+      if (pref) {
+        banner.classList.add('hidden');
+        if (pref === 'rejected') disableTracking();
+      }
+    })();
+  </script>
+
+</body>
+</html>

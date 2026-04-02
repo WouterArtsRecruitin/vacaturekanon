@@ -11,6 +11,12 @@ Gebruik:
     --sector "oil & gas" --functie "Procesoperator" \
     --regio "Gelderland" --campagne KT_OilGas_202603 \
     --landing-url https://oil-gas.vacaturekanon.nl
+
+Of B2B Sales LeadGen:
+  python3 meta_campaign_builder.py \
+    --campaign-type sales-b2b \
+    --campagne VK_B2B_SALES_2026 \
+    --landing-url https://vacaturekanon.nl/strategie
 """
 
 import os, sys, json, requests, argparse
@@ -33,7 +39,7 @@ BASE         = "https://graph.facebook.com/v21.0"
 TOKEN        = os.getenv("META_ACCESS_TOKEN")
 ACCOUNT      = os.getenv("META_ACCOUNT_ID", "act_1236576254450117")
 PAGE_ID      = os.getenv("META_PAGE_ID", "660118697194302")
-PIXEL        = os.getenv("META_PIXEL_ID", "238226887541404")
+PIXEL        = os.getenv("META_PIXEL_ID", "1430141541402009")
 DAILY_BUDGET = int(os.getenv("META_DAILY_BUDGET", "1700"))   # cent, = €17
 SLACK_URL    = os.getenv("SLACK_WEBHOOK_URL", "")
 
@@ -136,6 +142,46 @@ def build_ad_copies(sector: str, functie: str, regio: str,
     ]
 
 
+def build_sales_b2b_copies(landing_url: str, campagne_naam: str) -> list[dict]:
+    """Genereert de specifieke B2B Sales Leadgen copies (Neon Pink & €2.495 All-In)."""
+    return [
+        {
+            "visual": "nano_cinematic_tunnel.png",
+            "headline": "Vacatures al maanden open? Tijd voor een kanon. 🚀",
+            "body": (
+                "De traditionele vacaturebank is dood. De beste technische vakmensen zitten al prima op hun plek bij de concurrent.\n\n"
+                "Hoe bereik je ze wel? Met proactieve, algoritmische videomarketing.\n"
+                "Vacaturekanon bouwt jouw AI-recruitmentmachine voor één heldere, vaste all-in prijs (€2.495,-).\n"
+                "Zonder wurgcontracten of €8.000,- headhunter fees.\n\n"
+                "Klik hieronder en plan direct een gratis 15-minuten strategie-sessie."
+            ),
+            "cta": "LEARN_MORE",
+        },
+        {
+            "visual": "nano_dashboard_ui.png",
+            "headline": "Stop met het subsidiëren van dure headhunters.",
+            "body": (
+                "Waarom betaal je nog 20% van een jaarsalaris om een engineer te vinden?\n\n"
+                "Met Vacaturekanon bouw je voor één eenmalige investering (€2.495,-) een volautomatische AI wervingscampagne die 24/7 draait.\n"
+                "Wij hanteren géén verborgen percentages en géén langlopende contracten. Jij bezit de data en de leads.\n\n"
+                "Vraag vandaag nog ons rekenmodel en een korte demonstratie aan."
+            ),
+            "cta": "LEARN_MORE",
+        },
+        {
+            "visual": "nano_data_bars.png",
+            "headline": "Van lege werkplek naar aanname in 14 dagen.",
+            "body": (
+                "Elke dag dat die productiemachine leeg blijft, kost omzet.\n"
+                "Vacaturekanon gaat binnen 48 uur na de intake live met hyper-gerichte AI video-advertenties die latent zoekenden over de streep trekken.\n"
+                "Exclusieve leads, direct naar jou.\n\n"
+                "Plan een vrijblijvende strategiesessie in via de knop."
+            ),
+            "cta": "LEARN_MORE",
+        },
+    ]
+
+
 def upload_image(img_path: Path) -> str | None:
     """Upload image naar Meta Ads account. Retourneert image hash."""
     if not img_path.exists():
@@ -160,11 +206,13 @@ def upload_image(img_path: Path) -> str | None:
 # ── Hoofd workflow ─────────────────────────────────────────────────────────────
 
 def maak_campagne(sector: str, functie: str, regio: str,
-                  landing_url: str, campagne_naam: str) -> dict:
+                  landing_url: str, campagne_naam: str, campaign_type: str = "standaard") -> dict:
 
     print(f"\n── TAAK 3: Meta Campagne ─────────────────")
+    print(f"   Type:     {campaign_type}")
     print(f"   Campagne: {campagne_naam}")
-    print(f"   Sector:   {sector} | Functie: {functie} | Regio: {regio}")
+    if campaign_type == "standaard":
+        print(f"   Sector:   {sector} | Functie: {functie} | Regio: {regio}")
     print(f"   URL:      {landing_url}")
     print(f"   Account:  {ACCOUNT}")
     print()
@@ -195,27 +243,10 @@ def maak_campagne(sector: str, functie: str, regio: str,
             "name":    f"{campagne_naam}_Prospecting",
             "budgetpct": 60,
             "targeting": {
-                "geo_locations": {
-                    "countries": ["NL"],
-                    "regions": [
-                        {"key": "513"},   # Gelderland
-                        {"key": "514"},   # Overijssel
-                        {"key": "523"},   # Noord-Brabant
-                        {"key": "521"},   # Noord-Holland
-                        {"key": "522"},   # Zuid-Holland
-                    ],
-                },
-                "age_min": 28,
-                "age_max": 62,
-                "flexible_spec": [{
-                    "job_title": [
-                        {"id": "103285036402772", "name": "HR Manager"},
-                        {"id": "105763682788297", "name": "HR Director"},
-                        {"id": "102374656463855", "name": "Chief Executive Officer"},
-                        {"id": "108136692547642", "name": "Operations Manager"},
-                        {"id": "132356540153",    "name": "General Manager"},
-                    ],
-                }],
+                "geo_locations": {"countries": ["NL"]},
+                "age_min": 25,
+                "age_max": 65,
+                "targeting_automation": {"advantage_audience": 1},
             },
         },
         {
@@ -225,6 +256,7 @@ def maak_campagne(sector: str, functie: str, regio: str,
                 "geo_locations": {"countries": ["NL"]},
                 "age_min": 25,
                 "age_max": 65,
+                "targeting_automation": {"advantage_audience": 1},
             },
         },
         {
@@ -255,8 +287,8 @@ def maak_campagne(sector: str, functie: str, regio: str,
             "campaign_id":       campaign_id,
             "daily_budget":      str(budget),
             "billing_event":     "IMPRESSIONS",
-            "optimization_goal": "LEAD_GENERATION",
-            "destination_type":  "WEBSITE",
+            "optimization_goal": "OFFSITE_CONVERSIONS",
+            "bid_strategy":      "LOWEST_COST_WITHOUT_CAP",
             "promoted_object":   json.dumps({
                 "pixel_id":          PIXEL,
                 "custom_event_type": "LEAD",
@@ -276,9 +308,13 @@ def maak_campagne(sector: str, functie: str, regio: str,
         print("❌ Geen ad sets aangemaakt")
         return {"campaign_id": campaign_id}
 
-    # ── 3. Ads aanmaken (4 varianten) ────────────────────────────────────
-    print("\n3️⃣  Ads aanmaken (4 varianten)...")
-    copies = build_ad_copies(sector, functie, regio, landing_url, campagne_naam)
+    # ── 3. Ads aanmaken (variërend per type) ─────────────────────────────
+    print("\n3️⃣  Ads aanmaken...")
+    if campaign_type == "sales-b2b":
+        copies = build_sales_b2b_copies(landing_url, campagne_naam)
+    else:
+        copies = build_ad_copies(sector, functie, regio, landing_url, campagne_naam)
+        
     assets_dir = ASSETS_BASE / campagne_naam
     ad_ids = []
 
@@ -288,11 +324,11 @@ def maak_campagne(sector: str, functie: str, regio: str,
         # V2 eis: Fallback voor images en /tmp map voor opslag
         # Image pad constructie gebaseerd op de v2 master prompt workflow paden
         # (Als we geen images pre-genereren, pakken we de placeholder / skip errors)
-        img_path = Path.home() / "recruitin-local" / "meta-campaigns" / "assets" / campagne_naam / copy.get("visual", "visual-1.png")
+        img_path = Path("/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/assets") / campagne_naam / copy.get("visual", "visual-1.png")
         if not img_path.exists():
             print(f"   ⚠️  Image niet gevonden in {img_path} — we slaan deze image nu over of gebruiken een test pad")
             # Om fouten te mocken voor de Zapier triggers: we gebruiken de "character.png" fallback indien aanwezig
-            fallback_img = Path.home() / "recruitin-local" / "meta-campaigns" / "assets" / campagne_naam / "character.png"
+            fallback_img = Path("/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/assets") / campagne_naam / "character.png"
             if fallback_img.exists():
                  img_path = fallback_img
                  print(f"   ✅ Gebruik makend van fallback image: {fallback_img}")
@@ -378,18 +414,34 @@ def maak_campagne(sector: str, functie: str, regio: str,
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
+# ── CLI ───────────────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) < 6:
-        print("Usage: python3 meta_campaign_builder.py <SECTOR> <FUNCTIE> <REGIO> <LANDING_URL> <CAMPAGNE_NAAM>")
-        sys.exit(1)
-        
+    parser = argparse.ArgumentParser(description="Recruitin B.V. Meta Campaign Builder")
+    parser.add_argument("--campaign-type", default="standaard", choices=["standaard", "sales-b2b"], help="Type campagne (bepaalt ad copy en funnels)")
+    parser.add_argument("--sector", default="", help="Sector (bijv 'oil & gas')")
+    parser.add_argument("--functie", default="", help="Functie (bijv 'Procesoperator')")
+    parser.add_argument("--regio", default="", help="Regio (bijv 'Gelderland')")
+    parser.add_argument("--landing-url", required=True, help="Bestemmings URL")
+    parser.add_argument("--campagne", required=True, help="Naam van de Meta campagne (bijv VK_B2B_SALES)")
+    
+    args = parser.parse_args()
+    
+    # Fallback to sys.argv positional for legacy compatibility if no flags used
+    if len(sys.argv) == 6 and not any(arg.startswith("--") for arg in sys.argv):
+        args.sector = sys.argv[1]
+        args.functie = sys.argv[2]
+        args.regio = sys.argv[3]
+        args.landing_url = sys.argv[4]
+        args.campagne = sys.argv[5]
+
     result = maak_campagne(
-        sector       = sys.argv[1],
-        functie      = sys.argv[2],
-        regio        = sys.argv[3],
-        landing_url  = sys.argv[4],
-        campagne_naam= sys.argv[5],
+        sector       = args.sector,
+        functie      = args.functie,
+        regio        = args.regio,
+        landing_url  = args.landing_url,
+        campagne_naam= args.campagne,
+        campaign_type= args.campaign_type
     )
     if result.get("campaign_id"):
-        print(f"\\n📋 campaign-ids.json opgeslagen")
+        print(f"\n📋 campaign-ids.json opgeslagen")

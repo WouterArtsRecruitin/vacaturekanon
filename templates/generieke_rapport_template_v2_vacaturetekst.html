@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacature: {{functie_titel}} bij {{bedrijf_naam}} | {{locatie}}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; padding: 20px; min-height: 100vh; color: #1F2937; line-height: 1.7; font-size: 15px; }
+        .container { max-width: 900px; margin: 0 auto; background: #FFFFFF; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); padding: 50px 40px; color: white; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius: 50%; }
+        .header-content { position: relative; z-index: 1; }
+        .header h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        .header-subtitle { font-size: 16px; color: #CBD5E1; margin-bottom: 20px; }
+        .vacancy-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+        .meta-badge { background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); }
+        .content { padding: 50px 60px; }
+        .story-section { margin-bottom: 40px; }
+        .story-title { font-size: 24px; font-weight: 700; color: #0F172A; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid #FF6B35; }
+        .story-content { color: #374151; font-size: 16px; line-height: 1.8; }
+        .story-content p { margin-bottom: 20px; }
+        .story-content strong { color: #0F172A; font-weight: 700; }
+        ul.story-list { margin-bottom: 24px; padding-left: 0; list-style: none; }
+        ul.story-list li { position: relative; padding-left: 24px; margin-bottom: 12px; color: #374151; }
+        ul.story-list li::before { content: "•"; position: absolute; left: 0; color: #FF6B35; font-weight: bold; font-size: 20px; line-height: 1; }
+        blockquote { background: #F8FAFC; border-left: 4px solid #0369A1; padding: 24px; margin: 24px 0; font-size: 16px; color: #0C4A6E; font-style: italic; border-radius: 0 8px 8px 0; }
+        .cta-section { text-align: center; padding-top: 50px; margin-top: 20px; border-top: 1px solid #E2E8F0; }
+        .cta-text { font-size: 18px; font-weight: 600; color: #0F172A; margin-bottom: 24px; }
+        .cta-button { display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #FF6B35 0%, #F94E20 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 15px -3px rgba(255,107,53,0.3); margin-right: 12px; margin-bottom: 12px; }
+        .cta-button.secondary { background: white; color: #FF6B35; border: 2px solid #FF6B35; box-shadow: none; }
+        .footer { background: #F8FAFC; padding: 30px 40px; text-align: center; border-top: 1px solid #E2E8F0; font-size: 13px; color: #64748B; }
+        .footer-contact { margin-top: 16px; padding-top: 16px; border-top: 1px solid #E2E8F0; }
+        .footer strong { color: #0F172A; }
+        @media (max-width: 768px) { .content { padding: 30px 20px; } .header { padding: 30px 20px; } .header h1 { font-size: 28px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>{{functie_titel}} bij {{bedrijf_naam}}</h1>
+                <p class="header-subtitle">Verbeterde Vacaturetekst (Verhalend)</p>
+                <div class="vacancy-meta">
+                    <div class="meta-badge">📍 {{locatie}}, {{regio}}</div>
+                    <div class="meta-badge">💼 {{functie_niveau}}</div>
+                    <div class="meta-badge">💰 €{{salaris_min}}-€{{salaris_max}}/jaar</div>
+                    <div class="meta-badge">🏢 {{sector}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="story-section">
+                <div class="story-content">
+                    <p><strong>{{opening_hook_line_1}}</strong> {{opening_hook_line_2}}</p>
+                    <p>{{challenge_intro_paragraph}}</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">De Uitdaging</div>
+                <div class="story-content">
+                    <p>{{job_responsibilities_paragraph}}</p>
+                    <blockquote>{{team_collaboration_highlight}}</blockquote>
+                    <p>{{job_uniqueness_paragraph}}</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">Voor Wie Dit Is</div>
+                <div class="story-content">
+                    <p>{{experience_intro_paragraph}}</p>
+                    <p>{{character_description_paragraph}} {{nice_to_have_paragraph}}</p>
+                    <p>Concreet betekent dit voor jou:</p>
+                    <ul class="story-list">
+                        {{technical_requirements_list}}
+                        {{mindset_requirements_list}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">Wat Wij Investeren In Jou</div>
+                <div class="story-content">
+                    <p><strong>{{salary_range_text}}</strong> {{salary_transparency_message}}</p>
+                    <p>{{benefits_intro_text}}</p>
+                    <ul class="story-list">{{benefits_list_items}}</ul>
+                    <p>{{total_package_intro_text}} {{company_culture_paragraph}}</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">Het Groeipad</div>
+                <div class="story-content">
+                    <p>{{growth_path_intro_text}}</p>
+                    <p><strong>{{pathway_year_1_title}}:</strong> {{pathway_year_1_description}} (Verwachting: {{pathway_year_1_outcome}})</p>
+                    <p><strong>{{pathway_year_2_title}}:</strong> {{pathway_year_2_description}} (Verwachting: {{pathway_year_2_outcome}})</p>
+                    <p><strong>{{pathway_year_3_title}}:</strong> {{pathway_year_3_description}} (Verwachting: {{pathway_year_3_outcome}})</p>
+                    <p>{{training_budget_paragraph}}</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">Waarom {{bedrijf_naam}}?</div>
+                <div class="story-content">
+                    <p>{{company_why_intro_text}} {{company_unique_value_proposition}}</p>
+                    <p>{{company_impact_intro_text}}</p>
+                    {{company_impact_examples}}
+                    <p>{{company_impact_closing_paragraph}}</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <div class="story-title">Solliciteren</div>
+                <div class="story-content">
+                    <p>{{apply_interest_text}} {{application_process_text}} {{background_check_text}}</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <p class="cta-text">{{cta_banner_subheading}} Heb je vragen? {{contact_info_paragraph}}</p>
+                <a href="{{sollicitatie_link}}" class="cta-button">{{cta_button_apply_text}}</a>
+                <a href="{{contact_link}}" class="cta-button secondary">{{cta_button_info_text}}</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>Gegenereerd door:</strong> Kandidatentekort.nl &bull; B2B Recruitment Automation<br>
+            <strong>Powered by:</strong> Recruitin B.V. | {{analyse_datum}}<br>
+            <div class="footer-contact">
+                <strong>📧 Vragen?</strong><br>
+                {{contact_naam}} (Wervingsmedewerker)<br>
+                📞 {{contact_phone}} | 🏢 {{bedrijf_naam}}, {{locatie}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

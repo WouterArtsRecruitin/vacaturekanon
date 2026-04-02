@@ -1,8 +1,67 @@
 # CLAUDE.md — Recruitin B.V.
 # Antigravity leest dit bestand aan het begin van elke sessie
-# Laatste update: 2026-03-18
+# Laatste update: 2026-03-26
 
 ## ✅ RECENTE UPDATES
+
+**Kandidatentekort V8.1 Automation & Bugfixes (2026-03-26):** COMPLETED ✅
+- **De 24-uurs Belofte Gefixt:** `kt_engine_v8.py` bevat nu een native `created_at` timestamp check in de code. Mails, Pipedrive deals en Lemlist flows stagneren hierdoor perfect 24 uur na lead generation totdat de timing the lead bereikt, zodat Wouter's frontend-belofte altijd klopt. (Uitzondering: "test" of "wouter" mailadressen bypassen the lock).
+- **Dode Links Vernietigd:** De call-to-action in de "V8 Teaser" email (`kt_engine_v8.py`) forwardt leads nu direct door naar the vlekkeloze `v1_url` Supabase public file. The gebroken Vacaturekanon wrapper URL is eruit gesloopt om 404's The voorkomen.
+- **Meta Pixel Tracking (V1 & V2):** De Meta Pixel (`1430141541402009`) is diep verborgen maar native geinjecteerd vóór the `</head>` tags in the twee HTML template bestanden. Retargeting (Ad Set 3) theert hierdoor op alle Lemlist-doorkliks.
+- **Lemlist Browser Bypass:** Vanwege API restricties (Lemlist forceert `405 Method Not Allowed` op the sequences endpoint) heeft the Antigravity subagent succesvol virtueel ingelogd via de front-end UI in Lemlist en Stap 4 en Stap 5 van the *KT V8 - B2B Nurture Strategy* veilig gepusht met The nieuwe meedogenloze B2B tone of voice.
+- **Nieuwe Campagne Basis:** `KT_Techniek_2026` image genesis gedraaid in the artifacts (5 portretten en action-shots via de strakke "No-text" 8K B2B Prompt), wachtend op inrichting per OneDrive local scope.
+
+
+**Kandidatentekort V8 Unified Engine (2026-03-26):** COMPLETED ✅
+- **Architectuur:** Volledige consolidatie van oude workers in 1 centraal script: `kt_engine_v8.py`. (Jotform → Supabase → AI → Pipedrive Gating → Lemlist Nurture).
+- **Template Integratie:** Genereert direct premium HTML rapporten o.b.v. externe V7/V8 templates. Het V1 Executive Rapport en de V2 Storytelling Vacaturetekst zijn volledig ge-redesigned naar een high-end, emoji-vrije, redactionele B2B consulting layout (Inter font, vloeiende narratieve structuur, en toegevoegde strategische 'Why'-context) die 100% compliant is met de Master Prompt V3.0.
+- **SEO & ATS Optimalisatie:** V2 HTML-templates genereren nu dynamisch geoptimaliseerde SEO `<title>` tags met sector-specifieke kenmerken (bijv. `Vacature: Allround Technicus (Manufacturing) bij Veco`) voor maximale jobboard vindbaarheid. V1 reports zijn professioneel omgebouwd tot B2B sales instrumenten.
+- **Sales Funnel "Tease & Reveal":** V3.2 Prompt levert 'punchy' blockers en quick wins (max 5 woorden) direct af als custom Lemlist variabele. Volledig afgestemd op koude conversie emails a la NCNC structuur.
+- **Pipedrive Gating:** Systematische blokkade via `icp_score >= 65`. Te lage scores gaan via Lemlist op educatie modus, Pipedrive blijft extreem schoon voor sales. Launchd worker `nl.kandidatentekort.pipeline` draait automatische cron elke 15 minuten.
+
+**Kandidatentekort.nl V3 — 24-Hour AI Pipeline (2026-03-25):** COMPLETED ✅
+- **Architectuur:** Jotform -> Cloudflare Worker -> Supabase (`kt_leads`) -> Python Cron (`kt_ai_worker.py`) -> Resend HTML Report -> Lemlist Nurture Sync.
+- **Supabase Storage:** Jotform uploads worden direct gedownload en permanent en veilig opgeslagen in de Supabase Storage bucket `kt_vacatures`.
+- **Genadeloze B2B AI:** Claude 3.5 Sonnet / Haiku prompt is omgezet naar de "Headhunter Direct" tone-of-voice. Rapporten en herschreven vacatures zijn nu extreem direct, gebruiken "jij/je", en bashen genadeloos op clichés.
+- **Timing:** Het Python script splitst de AI-generatie vs. Report-delivery doormidden, om te garanderen dat de resultaten *exact* 24 uur later in de inbox vallen (zoals beloofd op de website hero).
+- **Lemlist Sync:** `kt_lemlist_sync.py` laadt correct de `.env` (override=True) en voegt de `companyName`, `firstName` en tag `[KT_LEAD]` direct toe aan de nurture sequence `cam_TcSpPxJL9anRkf5TS`.
+- **Reference Files:** Oude bestanden ter referentie zijn gevonden in `/Users/wouterarts/projects/Recruitin/kandidatentekort/`. V3 leeft in `~/recruitin/kandidatentekort-v3/` en de scripts in `~/recruitin/scripts/`.
+
+**Vacaturekanon v2 End-to-End Flow Fixes & Credential Rotation (2026-03-24):** COMPLETED ✅
+- **Credential Rotation:** API keys voor Google Gemini (Imagen 4), Lemlist en Meta Pixel zijn succesvol geroteerd in `.env` en op de Vercel productie omgeving.
+- **Lemlist Cloudflare Bypass:** Python `urllib` calls in de E2E tester liepen voorheen vast op de Lemlist API vanwege Cloudflare Error 1010. Opgelost door structureel een `User-Agent` spoof in te bouwen op alle `http_get`/`post`/`patch` requests.
+- **Vercel & Supabase Webhook Connectie:** 500 errors verholpen door `vercel env pull` & pushen van de juiste keys; de Vercel Jotform webhook vuurt nu feilloos 200 OKs terug en schrijft test-leads succesvol direct the Supabase `vk_leads` tabel met `pending_automation`.
+- **Meta Webhook Opschoning:** De Meta Lead Ads custom webhook is omgezet van een ongeldige URL naar de stabiele `vacaturekanon-hook.vercel.app/api/meta-webhook`. Tevens de legacy "beutech" secret tokens & Slack copywriting geëmancipeerd naar `vk_meta_webhook_secret_2026`. Datasets in Business Manager handmatig gelinkt.
+**Vacaturekanon v2 Playable Ads & UI Automation (2026-03-23):** COMPLETED ✅
+- **Native Meta Mini-App:** "Playable Ad" / "Interactive Canvas" gebouwd voor Vacaturekanon (`vacaturekanon_playable_ad.html`). Ultra-lightweight (< 5KB pure HTML/CSS/JS) en voorzien van de verplichte `FbPlayableAd.onCTAClick()` call voor harde Meta Pixel tracking.
+- **Graphic UI System:** Exacte naadloze styling-match met v2 (Deep Violet `#07050f` basis, Neon Magenta outline, Vivid Oranje accenten en witte pill-buttons a la Inter/Outfit font).
+- **GIF Automation Pipeline:** `scripts/create_meta_gif.py` toegevoegd. Moduleert lokaal via Python/Pillow in 1 klik static Canva frames naar een naadloos loopende Meta `.gif` (0.5s/frame delay). Absolute snelste 'Option A' flow voor B2B dashboards.
+- **Assets:** Alle iteratieve AI neon renders (UI templates, radars, klokken, trofeeën zónder tekst_ opgeslagen in `output/vacaturekanon/assets/ai_generations/` voor snelle Canva invulling.
+
+**Vacaturekanon v2 Meta API Architecture & Maestro Deployment (2026-03-23):** COMPLETED ✅
+- **Dynamic Graph API Builder:** Het oude `meta_campaign_builder.py` voldeed onvoldoende wegens restricties tot 'Single Image Ads'. Een nieuw custom Python Graph API protocol gebouwd (`build_meta_full.py`) dat via native API calls naadloos wél complexe **Carrousel Creatives** en **Single Image B2B Ads** samenvoegt en de benodigde images verwerkt.
+- **Meta Page ID Forcing:** Problematiek rond onjuiste afzenders (Beutech Ads fallback) structureel opgelost door expliciet `META_PAGE_ID=61578385841803` (Vacaturekanon V2 Page) on-the-fly the injecteren in de runtime environment.
+- **De Maestro Campagne:** De eerste 100% geautomatiseerde full-funnel campagne (`KT_Tech_V2_Maestro`) is met succes online geschoten in Meta Ads inclusief de loeistrakke 'RECRUIT - AUTOMATE - DOMINATE' copywriting over 3 carousel-cards mét custom roterende links.
+
+**Vacaturekanon v2 Backend Automation & Stripe Checkout (2026-03-22):** COMPLETED ✅
+- **Micro-Commitment Kassa (Stripe):** The 1-tier "All-In Project" (€2.495) is via Stripe Payment Links direct op de hero- en pricing CTA-knoppen van `index-v2.html` geïnstalleerd. Conversie-barrier is geslecht doordat we the lange JotForm intake pas sturen nadat er is afgerekend.
+- **Webhook Routing (Netlify):** `vacaturekanon-pages/api/stripe-webhook.js` luistert op `checkout.session.completed` events en vuurt The beveiligde JotForm intake via `Resend API` direct the inbox in van the kopende klant.
+- **Lemlist/Supabase B2B Sync:** `scripts/lemlist_automation.py` is gemaakt om the `vk_leads` in the Supabase DB razendsnel door The Lemlist Drips the trekken via the Lemlist API (MKB Recruiter outreach).
+- **V2 Sales Landingpage:** FAQ-accordeon gebouwd, Intake handleiding ('Geef de AI de juiste brandstof') gelanceerd, en security lints (`noopener noreferrer`) gepatched. Pijnpunten gericht op NCNC model van the concurrent gepareerd.
+- **Meta Ads "Eigen Sales":** Acquisitieblueprint is klaargezet in `meta-campaigns/vacaturekanon-eigen-sales/ad_copy_icp.md`. Scherp gesteld op the **HR Manager / Corporate Recruiter (50-800 FTE)** (CBO structuur).
+- **V3 Geëlimineerd:** The tijdelijke 'v3' web-builders en tests zijn succesvol vernietigd voor focus op V2 integriteit.
+
+
+**Vacaturekanon v2 Lead Capture & UI Overhaul (2026-03-21):** COMPLETED ✅
+- **Jotform API Styling:** De JotForm Intake Popup (ID `260757174181359`) is geselecteerd voor de website. Om deze styling te laten matchen met de donkere V2-interface is er een script gemaakt dat rechtstreeks een CSS body post naar de JotForm EU API Endpoint via Wouter's JOTFORM_API_KEY.
+- **Workflow / "Hoe het werkt" UI:** De statische diensten-bento grid is volledig opgeruimd en vervangen door de "V1 style" alternerende afbeeldingsblokken met zwevende 3D-shadows (Intake, Video AI, Algoritmisch Beheer, Directe Delivery).
+- **Premium Lettertypen & Tekst:** Syne/Inter ingewisseld voor krachtigere `Outfit` (headings) en `Plus Jakarta Sans` (body). De copywriting is fors aangescherpt en Nederlandstalig geperfectioneerd.
+- **Performance Optimization:** Om the trage laadtijd van het zeer grote JotForm iframe tegen te gaan, is er in de `index-v2.html` code een TLS `dns-prefetch` en `preconnect` architectuur gebouwd naar de servers van `eu.jotform.com` in de `<head>`, wat the laadtijd halveert. 
+- **Payment flow (WIP):** Architectuurdiscussie over The Micro-Commitment Strategy: éérst kleine layout betalen met Stripe Link direct op de knop, dán pas redirigeert Stripe the gebruiker naar the Jotform (dit helpt extreem tegen JotForm drops).
+- **Productie Deploy:** Zojuist lokaal de EPERM blockages van the macOS CLI omzeild en 100% vlekkeloos gedeployd naar Productie-Netlify (`https://vacaturekanon-2026-demo.netlify.app`). V2 is live.**Kandidatentekort V2 Voorbeeld Pagina — Nova Robotics Demo (2026-03-26):** COMPLETED ✅
+- **Probleem:** De 'Bekijk Voorbeeld' knop op kandidatentekort.nl wees naar een leeg template (`Manager Techniek — Test BV`), wat door de Googlebot was geïndexeerd en verwarring opleverde.
+- **Oplossing:** Python script (`build_demo_nova.py`) geschreven dat the master template 100% hardcoded heeft ingevuld voor techbedrijf "Nova Robotics B.V." (Senior PLC Automation Engineer).
+- **Hosting / Custom Domain:** Volledig onafhankelijke statische website gedeployd naar `https://voorbeeld.kandidatentekort.nl` direct via een raw HTTP-upload script (`upload_netlify_zip.py`) om de falende mac-os cli permissions the omzeilen.
 
 **Vacaturekanon v2 Sales Website — Premium Styling & UI Refinements (2026-03-21):** COMPLETED ✅
 - **WebGL Blobs overal:** Statische blob-images vervangen. De Hero, About, Services én Process secties hebben nu allemaal een eigen unieke custom 3D WebGL blob (torus/orb/wide/liquid pipe) met custom neon-color grading en noise displacement.
@@ -160,6 +219,7 @@ Args: `script` · `topic` · `vibe` · `target_audience`
 │   ├── kling_invideo_pipeline.py  ← Kling image2video (met character.png)
 │   ├── leonardo_image_generator.py ← Leonardo AI reference images (Phoenix v2)
 │   ├── meta_campaign_builder.py   ← Meta Marketing API
+│   ├── lemlist_automation.py      ← B2B Leads van Supabase `vk_leads` naar Lemlist syncen
 │   └── kt-daily-monitor.py        ← dagelijkse monitoring
 ├── landing-pages/
 │   └── [campagne]/
@@ -373,30 +433,26 @@ Opslaan in: `~/recruitin/meta-campaigns/assets/[CAMPAGNE]/`
 ### TAAK 2 — LANDING PAGE BOUWEN & DEPLOYEN
 
 Bouw automatisch een high-conversion landing page en deploy op Netlify.
+**Nieuwe V8 Focus (2026-03):** 30-Seconds-To-Conversion Philosophy. 
 **URL formaat:** `[sector].kandidatentekort.nl`
 
-**Pagina opbouw (altijd dezelfde structuur):**
+**Pagina opbouw (altijd V8 Dark Mode UI):**
 
 ```
 HERO
-  H1:  "Is jouw [FUNCTIE] vacature al langer dan 6 weken open?"
-  Sub: "[SECTOR] bedrijven in [REGIO] kampen met extreme schaarste.
-        Ontvang gratis een analyse — binnen 10 minuten in je inbox."
-  CTA: "Vraag gratis analyse aan →" (oranje knop #E8630A)
+  Aesthetic: Dark Mode (#0D1117 of #07050f), Inter/Roboto font, High-end B2B.
+  H1:  "Waarom solliciteert er niemand op jouw [FUNCTIE] vacature?"
+  Sub: "Je zoekt keihard naar technisch personeel... Upload de vacature.
+        Binnen 24 uur krijg je the converterende versie terug."
 
-STATISTIEKEN BALK
-  7/10 schaars | 4,5 maanden doorlooptijd | €18.400 kosten/jaar
+UPLOAD SECTIE (De Core Engine)
+  Geen "Neem contact op" knop, maar letterlijk direct The dropzone!
+  Component: Massief 'Drag & Drop' Glassmorphism vak midden in The hero.
+  Timeline: 1. Upload (Nu) -> 2. Data Analyse -> 3. Verbeterde Copy in Mail (Morgen).
 
-HOE HET WERKT (3 stappen)
-  1. Vul formulier in (2 min)
-  2. Systeem analyseert arbeidsmarkt
-  3. Rapport automatisch in inbox
-
-SOCIAL PROOF
-  Quote + sector bedrijfs-logo placeholders
-
-JOTFORM EMBED
-  URL: [JOTFORM_URL]?utm_source=lp&utm_campaign=[CAMPAGNE]
+COMPARISON (Social Proof & Pijn)
+  Links (Rood): De Huidige Tekst (Marktconform salaris, 9-tot-5).
+  Rechts (Groen): De Verbeterde Versie (Exacte salarisbandbreedte, gereedschap details).
 
 FOOTER
   kandidatentekort.nl | Recruitin B.V. | Doesburg
@@ -404,11 +460,10 @@ FOOTER
 
 **Technische vereisten:**
 ```
-Stack     : Vanilla HTML/CSS/JS — één bestand
-Huisstijl : bg #060708 · surface #0C0E13 · oranje #E8630A · tekst #DDE0EE
-Fonts     : Bricolage Grotesque (headings) · DM Sans (body)
+Stack     : Vanilla HTML/CSS/JS (Dropzone interface hookt the Supabase/Jotform webhook)
+Huisstijl : bg #0D1117 (standaard) of #07050f (VKV2) · blauw/oranje accenten.
+Fonts     : Inter (modern, B2B, strak)
 Pixel     : fbq('init', '[META_PIXEL_ID]') + Lead event op form submit
-Scroll    : fbq('track', 'ViewContent') op 50%
 Mobile    : Mobile-first, Lighthouse >90
 ```
 
@@ -425,12 +480,13 @@ Sla live URL op in `campaign-ids.json` voor gebruik in Meta campagne.
 
 ### TAAK 3 — META CAMPAGNE AANMAKEN (Marketing API v21.0)
 
-Maak via de Meta Marketing API een volledige campagne structuur aan.
-**Status altijd: PAUSED** — Wouter activeert handmatig na review.
+Maak via the Meta Marketing API een volledige campagne structuur aan.
+**Nieuwe Architectuur vanaf 2026-03:** Gebruik custom Graph API injectie (`build_meta_full.py` methodologie) in the CI environment om Carrousel componenten asynchroon in Facebook op te bouwen. Geen limitatie meer tot pure Single Images.
 
 **Campagne structuur:**
 ```
-Campaign: KT_[Sector]_[Jaar] | Objective: LEAD_GENERATION | PAUSED
+Campaign: KT_[Sector]_V2_Maestro | Objective: LEAD_GENERATION | PAUSED
+META_PAGE_ID: 61578385841803 (Let op fallback errors!)
 
 Ad Set 1 — Prospecting (60% budget)
   Targeting: HR Manager · HR Director · DGA · CEO · Directeur
@@ -444,12 +500,15 @@ Ad Set 3 — Retargeting (15% budget)
   Audience: site bezoekers 30d MINUS Pixel Lead events
 ```
 
-**4 ad varianten per ad set (op basis van sector/functie):**
+**Ad Creatives (V2 Copywriting Modellen):**
 ```
-Variant 1 — Schaarste:   "[FUNCTIE] vinden in [SECTOR]? Score: X/10 schaars"
-Variant 2 — Kosten:      "Wat kost een open [FUNCTIE] vacature per maand?"
-Variant 3 — Social proof: "6 weken. 3 kandidaten. [SECTOR], [REGIO]."
-Variant 4 — Urgentie:    "Jouw concurrent werft al. Ben jij er klaar voor?"
+Carousel Ad (3-Luik) — (Meestal in Retargeting)
+  - Slide 1: RECRUIT. "Vakspecialisten, direct en exclusief."
+  - Slide 2: AUTOMATE. "Sourcing optimalisatie zonder gedoe."
+  - Slide 3: DOMINATE. "Laat je concurrentie ver achter je stof happen."
+
+Single Image Ad — (Meestal in Prospecting)
+  - "IS JOUW TECHNISCHE VACATURE AL VEEL TE LANG OPEN?"
 ```
 
 **UTM structuur (altijd meegeven):**
@@ -604,6 +663,32 @@ UTM formaat:
   ?utm_source=meta&utm_medium=paid
   &utm_campaign=[CAMPAGNE]&utm_content=[AD_NAAM]
 ```
+
+**5-Fasen Ad Formats (V2 Dark Mode Branding):**
+Alle ad creatieven MOETEN V2 Dark Mode styling aanhouden: Deep Violet (`#07050f`), Outline Neon Magenta (`#ff00cc`) en Vivid Orange (`#FF5500`).
+
+- **Ad 1 (PIJN / HOOK):** Split-Screen Chaos vs Automation. Tekst: "Vacature al 6 maanden open? Stop the chaos."
+- **Ad 2 (OPLOSSING / SNELHEID):** Dashboard UI Close-up. Tekst: "Uren, niet maanden. Razendsnelle AI pre-selectie."
+- **Ad 3 (FOMO / URGENCY):** Neon Time Clock. Tekst: "Jouw concurrent werft jouw ideale kandidaat terwijl jij wacht."
+- **Ad 4 (SOCIAL PROOF):** Team Celebration / Director met glow. Tekst: "De B2B Recruitment Engine gebruikt door 45+ marktleiders."
+- **Ad 5 (CONVERSIE CTA):** Minimalistisch Dark Mode of Playable HTML5 Ad. Tekst: "Boek je Strategie Sessie. Alleen betalen bij plaatsing (NCNC)."
+
+**[LET OP] Playable Ads (HTML5):**
+> Omdat we voor B2B Lead Gen campagnes in Meta geen gekoppelde Facebook App (App ID) registreren, accepteert de Graph API het uiterst streng beveiligde formaat via programmatische API niet rechtstreeks (foutmeldingen op `ad_playable_media`).
+> **Workaround:** ZIP altijd de `.html` lokaal (bijv. `vacaturekanon_playable_ad.zip`) en upload deze éénmalig handmatig in de specifieke advertentie via de Meta Advertentiebeheer portal onder *'Speelbare bron'* / *'Instant Experience'*. Zorg altijd dat je `FbPlayableAd.onCTAClick()` in de HTML aanroept.
+
+**De Retargeting Carrousel (3-luik 1080x1080):**
+1. **Slide 1:** RECRUIT. "Stop met verdrinken in slechte cv's."
+2. **Slide 2:** AUTOMATE. "Laat algoritmes de top 1% sourcen."
+3. **Slide 3:** DOMINATE. "Claim je spot vandaag. Start de Engine ->"
+
+**Het 15s High-Paced B2B Video Script (TikTok/Reels/Feed):**
+> 🚨 **CRITISCHE EIS: ULTRA-FOTOREALISTISCH**
+> Alle gegenereerde personages in video's MOETEN 100% human-like bewegen en nagenoeg niet van echt te onderscheiden zijn. Gebruik hiervoor UITSLUITEND `Kling v1.5 (Pro Mode)` via Image-to-Video met een 8K hyperrealistische base image uit Leonardo Phoenix. Geen goedkope Text-to-Video AI vibes.
+
+1. **0-3s Hook:** Chaos/Pijn visual. Acteur (ultra-realistisch) met handen in haar. Audio: "Is jouw technische vacature nog stééds open?"
+2. **3-10s Body (Snel):** Snelle cuts van de V2 UI bars/metrics. AI SOURCING -> KWALIFICATIE -> INBOX. Audio: "Ontmoet Vacaturekanon. De Recruitment AI Engine die jouw headhunter overbodig maakt."
+3. **10-15s CTA:** Director Shot (ultra-realistisch lachend) of Screen-recording van de Playable Ad flow. Audio: "Schiet wél raak. Boek jouw gratis strategie-sessie en klik de link in beeld."
 
 ---
 

@@ -1,0 +1,3 @@
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_productie_202603_v2/team_lachen.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_productie_202603_v2/collega_telefoon.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_productie_202603_v2/vakman_product.mp4'

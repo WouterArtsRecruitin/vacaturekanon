@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technisch Productiemedewerker Kunststof | Beutech Steenwijk</title>
+<meta name="description" content="Beutech zoekt een Technisch Productiemedewerker Kunststof in Steenwijk. Werk met state-of-the-art spuitgietmachines in een professioneel plasticsproductiebedrijf.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#092354;
+  --accent2:#0D3580;
+  --orange:#D34336;
+  --dark:#0B1220;
+  --bg:#fff;
+  --muted:#5A6A85;
+  --border:#E2E8F0;
+  --r:12px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+.container{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(11,18,32,.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.35rem;color:#fff;text-decoration:none;letter-spacing:-0.5px}
+.logo span{color:var(--orange)}
+.btn-nav{background:var(--orange);color:#fff;padding:10px 22px;border-radius:8px;
+  font-size:.875rem;font-weight:600;text-decoration:none;
+  transition:transform .15s,box-shadow .15s}
+.btn-nav:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(211,67,54,.4)}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-overlay{position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(7,14,35,.92) 0%,rgba(0,30,80,.72) 55%,rgba(0,52,135,.25) 100%)}
+.hero-content{position:relative;z-index:2;padding:9rem 0 6rem;max-width:720px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;
+  border-radius:100px;background:rgba(211,67,54,.15);border:1px solid rgba(211,67,54,.3);
+  margin-bottom:1.75rem}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.badge span{font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.5px;text-transform:uppercase}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,5.5vw,4.6rem);
+  font-weight:800;color:#fff;line-height:1.05;letter-spacing:-1px;margin-bottom:1.5rem}
+h1 em{font-style:normal;color:var(--orange)}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.75);line-height:1.75;max-width:520px;margin-bottom:1.25rem}
+.hero-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.25rem}
+.hero-meta span{font-size:.9rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;
+  padding:15px 30px;border-radius:9px;font-size:1rem;font-weight:700;text-decoration:none;
+  box-shadow:0 4px 20px rgba(211,67,54,.45);transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(211,67,54,.5)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid rgba(255,255,255,.3);color:#fff;
+  padding:15px 30px;border-radius:9px;font-size:1rem;text-decoration:none;
+  transition:border-color .15s,background .15s}
+.btn-outline:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.06)}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:#092354;padding:2rem 0}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12)}
+.stat{background:#092354;padding:1.5rem 2rem;text-align:center}
+.stat-val{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:800;color:#fff;line-height:1}
+.stat-label{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.4rem;text-transform:uppercase;letter-spacing:.5px}
+
+/* ── SECTIONS ── */
+section{padding:6rem 0}
+.section-label{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:2px;color:var(--orange);margin-bottom:1rem}
+h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,3.5vw,2.75rem);
+  font-weight:800;line-height:1.15;letter-spacing:-.5px;margin-bottom:1.25rem}
+.accent{color:var(--orange)}
+.section-sub{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:580px}
+
+/* ── OVER BEUTECH ── */
+#over{background:#F8FAFC}
+.over-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.over-text p{font-size:1rem;color:var(--muted);line-height:1.85;margin-bottom:1.25rem}
+.over-img{border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,48,135,.15)}
+.over-img img{width:100%;height:360px;object-fit:cover;object-position:center}
+
+/* ── FUNCTIE ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--r);
+  padding:2rem;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+.list{list-style:none}
+.list li{display:flex;align-items:flex-start;gap:.75rem;padding:10px 0;
+  border-bottom:1px solid var(--border);font-size:.9rem;color:#475569;line-height:1.65}
+.list li:last-child{border-bottom:none}
+.check{color:var(--orange);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ── AANBOD ── */
+#aanbod{background:#092354}
+#aanbod h2{color:#fff}
+#aanbod .section-label{color:rgba(211,67,54,.9)}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.benefit-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--r);padding:1.75rem;
+  transition:background .2s,transform .2s,border-color .2s}
+.benefit-card:hover{background:rgba(211,67,54,.1);border-color:rgba(211,67,54,.35);transform:translateY(-4px)}
+.benefit-icon{font-size:1.75rem;margin-bottom:.85rem}
+.benefit-card h4{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.benefit-card p{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.65}
+
+/* ── FOTO GALLERY ── */
+#gallery{background:#F8FAFC}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.gallery-img{border-radius:12px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.gallery-img img{width:100%;height:100%;object-fit:cover;object-position:center top;
+  transition:transform .4s ease}
+.gallery-img:hover img{transform:scale(1.03)}
+
+/* ── SOLLICITEREN ── */
+#solliciteren .apply-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem}
+.apply-cta{background:var(--dark);border-radius:var(--r);padding:2.5rem;text-align:center}
+.apply-cta .icon{font-size:3.5rem;margin-bottom:1.25rem}
+.apply-cta h4{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:#fff;margin-bottom:.75rem}
+.apply-cta p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:2rem}
+.contact-card{border:1px solid var(--border);border-radius:var(--r);padding:2rem}
+.contact-card h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.5rem}
+.contact-row{display:flex;align-items:center;gap:1rem;padding:1rem 0;
+  border-bottom:1px solid var(--border);text-decoration:none;color:var(--dark);
+  transition:color .15s}
+.contact-row:last-child{border-bottom:none}
+.contact-row:hover{color:var(--accent2)}
+.ci{width:44px;height:44px;border-radius:10px;background:rgba(0,48,135,.08);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-row small{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.contact-row strong{font-weight:600;font-size:.9rem}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#fff;padding:3rem 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.copy{font-size:.78rem;color:rgba(255,255,255,.35)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .over-grid,.two-col,.apply-wrap,.benefits-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo" style="color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:800">Beu<span style="color:#D34336">tech</span>.</a>
+    <a href="#solliciteren" class="btn-nav">Direct Solliciteren</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="hero_wide.png" alt="Beutech kunststof productie Steenwijk">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>Vacature · Direct beschikbaar · Steenwijk</span>
+      </div>
+      <h1>Technisch<br>Productiemedewerker<br><em>Kunststof</em></h1>
+      <p class="hero-sub">
+        Werk dagelijks met state-of-the-art spuitgietmachines in een moderne 
+        productiefaciliteit. Jij zorgt ervoor dat elk kunststof onderdeel perfect 
+        van kwaliteit is.
+      </p>
+      <div class="hero-meta">
+        <span>📍 Steenwijk, Overijssel</span>
+        <span>⏱️ Fulltime · 40 uur</span>
+        <span>🏭 Productie &amp; Manufacturing</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#solliciteren" class="btn-primary">Direct Solliciteren →</a>
+        <a href="#de-functie" class="btn-outline">Bekijk de Functie</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat"><div class="stat-val">40+</div><div class="stat-label">Jaar Ervaring</div></div>
+      <div class="stat"><div class="stat-val">150+</div><div class="stat-label">Medewerkers</div></div>
+      <div class="stat"><div class="stat-val">1000+</div><div class="stat-label">Producten</div></div>
+      <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Maatwerk</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- OVER BEUTECH -->
+<section id="over">
+  <div class="container">
+    <span class="section-label">Over Beutech</span>
+    <h2>Specialist in kunststof<br><span class="accent">maatwerk producten</span></h2>
+    <div class="over-grid">
+      <div class="over-text">
+        <p>
+          Beutech in Steenwijk is al meer dan 40 jaar specialist in het produceren van 
+          hoogwaardige kunststof producten op maat. Met een modern machinepark van 
+          Arburg en Engel spuitgietmachines produceren we onderdelen voor klanten 
+          in de industrie, automotive en medische sector.
+        </p>
+        <p>
+          Als Technisch Productiemedewerker ben jij de experthand achter ons 
+          kwaliteitsproces. Van het instellen van de machine tot het uitvoeren van 
+          maatcontroles — jij waarborgt dat elk product voldoet aan de hoogste eisen.
+        </p>
+        <p>
+          Werken bij Beutech betekent werken in een hecht team, met de nieuwste 
+          technologie en alle ruimte om door te groeien.
+        </p>
+      </div>
+      <div class="over-img">
+        <img src="05_team_lachen.png" alt="Beutech team samen aan het werk">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DE FUNCTIE -->
+<section id="de-functie">
+  <div class="container">
+    <span class="section-label">Functieomschrijving</span>
+    <h2>Wat ga je <span class="accent">doen?</span></h2>
+    <p class="section-sub">
+      Een afwisselende functie waarbij vakmanschap, technisch inzicht en 
+      oog voor kwaliteit centraal staan.
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>🎯 Jouw Taken</h3>
+        <ul class="list">
+          <li><span class="check">✓</span>Instellen en bedienen van spuitgietmachines (Arburg / Engel)</li>
+          <li><span class="check">✓</span>Uitvoeren van kwaliteitscontroles en maatcontroles</li>
+          <li><span class="check">✓</span>Omstellen van machines voor nieuwe productieorders</li>
+          <li><span class="check">✓</span>Bewaken van procesparameters voor optimale productie</li>
+          <li><span class="check">✓</span>Signaleren en oplossen van productieproblemen</li>
+          <li><span class="check">✓</span>Bijhouden van productie- en kwaliteitsregistraties</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>✅ Wat Wij Vragen</h3>
+        <ul class="list">
+          <li><span class="check">✓</span>MBO technische opleiding (kunststoftechniek, werktuigbouwkunde of vergelijkbaar)</li>
+          <li><span class="check">✓</span>Ervaring met spuitgietmachines of productieomgeving is een plus</li>
+          <li><span class="check">✓</span>Kwaliteitsbewust en oog voor detail</li>
+          <li><span class="check">✓</span>Technisch inzicht en probleemoplossend vermogen</li>
+          <li><span class="check">✓</span>Teamspeler met zelfstandige werkhouding</li>
+          <li><span class="check">✓</span>Bereid om in ploegendienst te werken</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="padding:4rem 0">
+  <div class="container">
+    <span class="section-label">Kijk binnen</span>
+    <h2>Jouw toekomstige <span class="accent">werkplek</span></h2>
+    <div class="gallery-grid">
+      <div class="gallery-img"><img src="05_team_lachen.png" alt="Beutech team — samen mooie dingen maken"></div>
+      <div class="gallery-img"><img src="06_collega_overleg.png" alt="Collega's bij Beutech"></div>
+      <div class="gallery-img"><img src="07_trots_vakman.png" alt="Trotse vakman kunststof Beutech"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AANBOD -->
+<section id="aanbod">
+  <div class="container">
+    <span class="section-label">Arbeidsvoorwaarden</span>
+    <h2>Wat wij <span class="accent">bieden</span></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <h4>Competitief Salaris</h4>
+        <p>Marktconform salaris met ploegentoeslag en jaarlijkse beoordeling</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📈</div>
+        <h4>Doorgroeimogelijkheden</h4>
+        <p>Van operator naar allround vakman — we investeren in jouw ontwikkeling</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🎓</div>
+        <h4>Opleidingen &amp; Trainingen</h4>
+        <p>Interne en externe opleidingen voor technisch en persoonlijk groei</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏭</div>
+        <h4>Modern Machinepark</h4>
+        <p>Werken met nieuwste Arburg en Engel spuitgietmachines</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🤝</div>
+        <h4>Hecht Team</h4>
+        <p>Collegiale sfeer in een familiebedrijf waar jij ertoe doet</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🚗</div>
+        <h4>Goede Bereikbaarheid</h4>
+        <p>Centraal gelegen in Steenwijk, ook per OV bereikbaar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLLICITEREN -->
+<section id="solliciteren">
+  <div class="container">
+    <span class="section-label">Interesse?</span>
+    <h2>Solliciteer <span class="accent">direct</span></h2>
+    <div class="apply-wrap">
+      <div class="contact-card">
+        <h3>Direct Contact</h3>
+        <a href="tel:0639592745" class="contact-row" id="tel-link">
+          <div class="ci">📞</div>
+          <div><small>Bel of WhatsApp</small><strong>06 39 59 27 45</strong></div>
+        </a>
+        <a href="mailto:rvanwijk@recruitin.nl?subject=Sollicitatie%20Technisch%20Productiemedewerker%20Kunststof%20-%20Beutech" class="contact-row" id="email-link">
+          <div class="ci">✉️</div>
+          <div><small>E-mail</small><strong>rvanwijk@recruitin.nl</strong></div>
+        </a>
+        <a href="https://beutech.nl/vacatures" target="_blank" class="contact-row" id="website-link">
+          <div class="ci">🌐</div>
+          <div><small>Alle vacatures</small><strong>beutech.nl/vacatures</strong></div>
+        </a>
+      </div>
+      <div class="apply-cta">
+        <div class="icon">🚀</div>
+        <h4>Klaar om te starten?</h4>
+        <p>
+          Stuur je motivatie (ook een korte WhatsApp werkt!) naar Remco van Wijk. 
+          We reageren altijd binnen één werkdag.
+        </p>
+        <a href="mailto:rvanwijk@recruitin.nl?subject=Sollicitatie%20Technisch%20Productiemedewerker%20Kunststof%20-%20Beutech" 
+           class="btn-primary" id="apply-btn" style="width:100%;justify-content:center">
+          ✉️ Solliciteer Nu
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="logo">Beu<span style="color:var(--orange)">tech</span>.</div>
+    <div class="copy">© 2026 Beutech B.V. — Steenwijk. Campagne via Recruitin B.V.</div>
+  </div>
+</footer>
+
+</body>
+</html>

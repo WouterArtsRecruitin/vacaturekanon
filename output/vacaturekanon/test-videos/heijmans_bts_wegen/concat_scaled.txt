@@ -1,0 +1,6 @@
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_01_aankomst_scaled.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_02_briefing_scaled.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_03_inspectie_scaled.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_04_lunch_scaled.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_05_horizon_scaled.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/heijmans_bts_wegen/tmp_06_blooper_scaled.mp4'

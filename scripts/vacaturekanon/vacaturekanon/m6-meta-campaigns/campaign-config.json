@@ -1,0 +1,346 @@
+{
+  "note": "Meta ads gericht op KANDIDATEN (werkzoekenden/passieve kandidaten). NIET op bedrijven die de dienst kopen.",
+  "campaigns": [
+    {
+      "sector": "Oil & Gas",
+      "campaign_name": "VK-OG-{{bedrijfsnaam}}",
+      "objective": "LEAD_GENERATION",
+      "daily_budget_eur": 25,
+      "audience": {
+        "age_min": 23,
+        "age_max": 55,
+        "genders": ["all"],
+        "geo": {
+          "regions": ["Gelderland", "Overijssel", "Noord-Brabant"],
+          "radius_km": 40,
+          "cities_extra": ["Rotterdam", "Den Haag", "Dordrecht"]
+        },
+        "interests": [
+          "Oil and gas industry",
+          "Petroleum engineering",
+          "Process engineering",
+          "Shell (company)",
+          "NAM",
+          "Gasunie",
+          "Offshore",
+          "Pipeline",
+          "HSE",
+          "HSEQ",
+          "Maintenance engineering",
+          "Instrument engineering"
+        ],
+        "job_titles_include": [
+          "Engineer",
+          "Technician",
+          "Process",
+          "Maintenance",
+          "Instrument",
+          "HSE",
+          "Operator",
+          "Inspector",
+          "Commissioning"
+        ],
+        "education": ["MBO", "HBO", "University"],
+        "exclude_employers": ["Recruitment", "Uitzendbureau", "Staffing", "Detachering"],
+        "lookalike_source": "pixel_lead_events_180d"
+      },
+      "placements": ["facebook_feed", "instagram_feed", "instagram_stories", "instagram_reels"],
+      "ad_sets": [
+        {
+          "name": "OG-Breed-PassiefZoekend",
+          "targeting_type": "interest_based",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 60
+        },
+        {
+          "name": "OG-Retargeting-WebBezoekers30d",
+          "targeting_type": "custom_audience",
+          "source": "pixel_website_visitors_30d",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 25
+        },
+        {
+          "name": "OG-Lookalike-1pct",
+          "targeting_type": "lookalike",
+          "source": "pixel_lead_events_180d",
+          "lookalike_pct": 1,
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 15
+        }
+      ]
+    },
+    {
+      "sector": "Constructie & Infra",
+      "campaign_name": "VK-CI-{{bedrijfsnaam}}",
+      "objective": "LEAD_GENERATION",
+      "daily_budget_eur": 25,
+      "audience": {
+        "age_min": 22,
+        "age_max": 58,
+        "genders": ["all"],
+        "geo": {
+          "regions": ["Gelderland", "Overijssel", "Noord-Brabant"],
+          "radius_km": 50
+        },
+        "interests": [
+          "Construction",
+          "Civil engineering",
+          "BIM",
+          "AutoCAD",
+          "Bouwkunde",
+          "Heijmans",
+          "BAM",
+          "Volker Wessels",
+          "Project management",
+          "Werkvoorbereiding",
+          "Grond- weg en waterbouw",
+          "STABU",
+          "Revit"
+        ],
+        "job_titles_include": [
+          "Werkvoorbereider",
+          "Projectleider",
+          "Calculator",
+          "Uitvoerder",
+          "BIM",
+          "Civiel",
+          "Bouwkundig",
+          "Opzichter",
+          "Directievoerder"
+        ],
+        "education": ["MBO", "HBO", "University"],
+        "exclude_employers": ["Recruitment", "Uitzendbureau", "Staffing"],
+        "lookalike_source": "pixel_lead_events_180d"
+      },
+      "placements": ["facebook_feed", "instagram_feed", "instagram_stories", "instagram_reels"],
+      "ad_sets": [
+        {
+          "name": "CI-Breed-PassiefZoekend",
+          "targeting_type": "interest_based",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 60
+        },
+        {
+          "name": "CI-Retargeting-WebBezoekers30d",
+          "targeting_type": "custom_audience",
+          "source": "pixel_website_visitors_30d",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 25
+        },
+        {
+          "name": "CI-Lookalike-1pct",
+          "targeting_type": "lookalike",
+          "source": "pixel_lead_events_180d",
+          "lookalike_pct": 1,
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 15
+        }
+      ]
+    },
+    {
+      "sector": "Productie & Manufacturing",
+      "campaign_name": "VK-PM-{{bedrijfsnaam}}",
+      "objective": "LEAD_GENERATION",
+      "daily_budget_eur": 20,
+      "audience": {
+        "age_min": 22,
+        "age_max": 55,
+        "genders": ["all"],
+        "geo": {
+          "regions": ["Gelderland", "Overijssel", "Noord-Brabant"],
+          "radius_km": 40
+        },
+        "interests": [
+          "Manufacturing",
+          "CNC machining",
+          "Production management",
+          "Lean manufacturing",
+          "Six Sigma",
+          "Quality management",
+          "ISO 9001",
+          "Supply chain management",
+          "Maintenance",
+          "Industrial engineering",
+          "FMEA",
+          "MES systems"
+        ],
+        "job_titles_include": [
+          "Operator",
+          "Productiemedewerker",
+          "Productieleider",
+          "Planner",
+          "Kwaliteitsmanager",
+          "Maintenance",
+          "CNC",
+          "Supply Chain",
+          "Procesoperator"
+        ],
+        "education": ["MBO", "HBO"],
+        "exclude_employers": ["Recruitment", "Uitzendbureau", "Staffing"],
+        "lookalike_source": "pixel_lead_events_180d"
+      },
+      "placements": ["facebook_feed", "instagram_feed", "instagram_stories", "instagram_reels"],
+      "ad_sets": [
+        {
+          "name": "PM-Breed-PassiefZoekend",
+          "targeting_type": "interest_based",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 65
+        },
+        {
+          "name": "PM-Retargeting-WebBezoekers30d",
+          "targeting_type": "custom_audience",
+          "source": "pixel_website_visitors_30d",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 20
+        },
+        {
+          "name": "PM-Lookalike-1pct",
+          "targeting_type": "lookalike",
+          "source": "pixel_lead_events_180d",
+          "lookalike_pct": 1,
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 15
+        }
+      ]
+    },
+    {
+      "sector": "Automation & High Tech",
+      "campaign_name": "VK-AT-{{bedrijfsnaam}}",
+      "objective": "LEAD_GENERATION",
+      "daily_budget_eur": 30,
+      "audience": {
+        "age_min": 22,
+        "age_max": 50,
+        "genders": ["all"],
+        "geo": {
+          "regions": ["Gelderland", "Overijssel", "Noord-Brabant"],
+          "radius_km": 60,
+          "cities_extra": ["Eindhoven", "Helmond", "Enschede"]
+        },
+        "interests": [
+          "PLC programming",
+          "Industrial automation",
+          "Siemens",
+          "Beckhoff",
+          "Rockwell Automation",
+          "SCADA",
+          "Robotics",
+          "Machine vision",
+          "ASML",
+          "High Tech Campus Eindhoven",
+          "Mechatronics",
+          "Embedded systems",
+          "Motion control"
+        ],
+        "job_titles_include": [
+          "PLC",
+          "Automation",
+          "Controls",
+          "Robotics",
+          "Vision",
+          "Systems Engineer",
+          "Software Engineer",
+          "Firmware",
+          "Commissioning"
+        ],
+        "education": ["MBO", "HBO", "University"],
+        "exclude_employers": ["Recruitment", "Uitzendbureau", "Staffing", "Detachering"],
+        "lookalike_source": "pixel_lead_events_180d"
+      },
+      "placements": ["facebook_feed", "instagram_feed", "instagram_stories", "instagram_reels", "facebook_right_hand_column"],
+      "ad_sets": [
+        {
+          "name": "AT-Breed-PassiefZoekend",
+          "targeting_type": "interest_based",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 55
+        },
+        {
+          "name": "AT-Retargeting-WebBezoekers30d",
+          "targeting_type": "custom_audience",
+          "source": "pixel_website_visitors_30d",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 25
+        },
+        {
+          "name": "AT-Lookalike-1pct",
+          "targeting_type": "lookalike",
+          "source": "pixel_lead_events_180d",
+          "lookalike_pct": 1,
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 20
+        }
+      ]
+    },
+    {
+      "sector": "Renewable Energy",
+      "campaign_name": "VK-RE-{{bedrijfsnaam}}",
+      "objective": "LEAD_GENERATION",
+      "daily_budget_eur": 25,
+      "audience": {
+        "age_min": 22,
+        "age_max": 50,
+        "genders": ["all"],
+        "geo": {
+          "regions": ["Gelderland", "Overijssel", "Noord-Brabant"],
+          "radius_km": 60,
+          "cities_extra": ["Amsterdam", "Groningen", "Den Haag"]
+        },
+        "interests": [
+          "Renewable energy",
+          "Solar energy",
+          "Wind energy",
+          "Vestas",
+          "Siemens Gamesa",
+          "Vattenfall",
+          "SolarEdge",
+          "Eneco",
+          "Nuon",
+          "Energy transition",
+          "Electrical engineering",
+          "Grid infrastructure",
+          "Energy storage"
+        ],
+        "job_titles_include": [
+          "Solar",
+          "Wind",
+          "Energy",
+          "Electrical",
+          "Grid",
+          "Renewable",
+          "Project Developer",
+          "Turbine",
+          "Power"
+        ],
+        "education": ["MBO", "HBO", "University"],
+        "exclude_employers": ["Recruitment", "Uitzendbureau", "Staffing"],
+        "lookalike_source": "pixel_lead_events_180d"
+      },
+      "placements": ["facebook_feed", "instagram_feed", "instagram_stories", "instagram_reels"],
+      "ad_sets": [
+        {
+          "name": "RE-Breed-PassiefZoekend",
+          "targeting_type": "interest_based",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 60
+        },
+        {
+          "name": "RE-Retargeting-WebBezoekers30d",
+          "targeting_type": "custom_audience",
+          "source": "pixel_website_visitors_30d",
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 25
+        },
+        {
+          "name": "RE-Lookalike-1pct",
+          "targeting_type": "lookalike",
+          "source": "pixel_lead_events_180d",
+          "lookalike_pct": 1,
+          "bid_strategy": "LOWEST_COST",
+          "budget_share_pct": 15
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/01_aankomst.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/02_vakwerk_cnc.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/03_koffiepauze.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/04_samen_tillen.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/05_einde_dag.mp4'
+file '/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/test-videos/beutech_bts_werkenbij/merged_v3/06_blooper.mp4'

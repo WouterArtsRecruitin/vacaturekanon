@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3BDEP838GM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3BDEP838GM');
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '238226887541404');
+      fbq('track', 'PageView');
+      fbq('track', 'Lead');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=238226887541404&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <meta charset="UTF-8">
+    <title>Systeem Ingelogd | Vacaturekanon V2 Wachtlijst</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg: #07050f;
+            --orange: #ff00cc; /* Neon Pink/Magenta B2B accent */
+            --muted: #a1a1aa;
+            --white: #ffffff;
+            --glow: 0 0 40px rgba(255, 0, 204, 0.4);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255,0,204,0.06), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255,0,204,0.04), transparent 25%);
+        }
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 650px;
+            padding: 50px 40px;
+            border-radius: 16px;
+            background: rgba(18, 13, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--orange);
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .eyebrow::before, .eyebrow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: var(--orange);
+            opacity: 0.5;
+        }
+        .eyebrow::before { left: -45px; }
+        .eyebrow::after { right: -45px; }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+        h1 span {
+            color: var(--orange);
+            text-shadow: var(--glow);
+        }
+
+        p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .status-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(255,0,204,0.1);
+            border: 1px solid rgba(255,0,204,0.2);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background-color: var(--orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--orange);
+            animation: pulsate 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulsate {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px var(--orange); }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #ffffff;
+            color: #000;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 100px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-overlay"></div>
+
+    <div class="container" id="mainCard">
+        <span class="eyebrow">Aanmelding Voltooid</span>
+        <h1>BAM! Plek <span>Bevestigd.</span></h1>
+        
+        <div class="status-box">
+            <div class="pulse"></div>
+            STATUS: TOEGEVOEGD AAN DE WACHTLIJST
+        </div>
+
+        <p>
+            Jouw exclusieve V2 Waitlist plek is veiliggesteld. Je staat officieel geregistreerd voor vroege toegang tot ons nieuwe wervingssysteem.
+        </p>
+        <p>
+            Je hoort direct van ons zodra wij lokale B2B-capaciteit vrijspelen. Je voorkomt agressief 100% opstartkosten. Geen enkele concurrent is je nu nog voor. Tot snel aan de frontlinie.
+        </p>
+
+        <a href="/" class="btn">Keer terug naar basis</a>
+    </div>
+
+    <script>
+        gsap.to("#mainCard", {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.2
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is jouw Uitvoerder / Calculator vacature al te lang open? | vacaturekanon.nl</title>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '238226887541404');
+    fbq('track', 'PageView');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #060708;
+      --surf: #0C0E13;
+      --oranje: #E8630A;
+      --tekst: #DDE0EE;
+      --grijs: #2D2D2D;
+      --muted: #6B7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--tekst);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #1a1d24;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--tekst);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--oranje);
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .sector-badge {
+      display: inline-block;
+      background: rgba(232, 99, 10, 0.12);
+      border: 1px solid rgba(232, 99, 10, 0.3);
+      color: var(--oranje);
+      padding: 0.3rem 0.9rem;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    h1 em {
+      color: var(--oranje);
+      font-style: normal;
+    }
+
+    .sub {
+      font-size: 1.15rem;
+      color: #9CA3AF;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--oranje);
+      color: white;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.88;
+    }
+
+    .trust {
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--surf);
+      border-top: 1px solid #1a1d24;
+      border-bottom: 1px solid #1a1d24;
+      padding: 2.5rem 2rem;
+      margin: 3rem 0;
+    }
+
+    .stats-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--oranje);
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* HOE HET WERKT */
+    .hoe {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .hoe h2 {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .stappen {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stap {
+      background: var(--surf);
+      border: 1px solid #1a1d24;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stap-nr {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--oranje);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stap h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .stap p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* FORM SECTIE */
+    .form-sectie {
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .form-sectie h2 {
+      font-size: 1.9rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .form-sectie .form-sub {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .stat-highlight {
+      display: inline-block;
+      background: rgba(232, 99, 10, 0.1);
+      border: 1px solid rgba(232, 99, 10, 0.2);
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.88rem;
+      color: #E8A87C;
+      margin-bottom: 2rem;
+    }
+
+    .jotform-wrapper {
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 530px;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 530px;
+      border: none;
+      display: block;
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-outer {
+      background: var(--surf);
+      border-top: 1px solid var(--border);
+      padding: 4rem 2rem;
+    }
+
+    .proof-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .proof-inner h2 {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .quote-card {
+      background: var(--surf2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 2rem;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--oranje);
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    blockquote {
+      font-size: 1.1rem;
+      color: var(--tekst);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    cite {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    cite strong {
+      color: #9CA3AF;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--tekst);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding: 3.5rem 1.2rem 2.5rem;
+      }
+
+      .stats-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .stat-item::after {
+        display: none;
+      }
+
+      .stappen {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-items {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: center;
+      }
+    }
+
+    /* ── ANIMATE ON SCROLL ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top notificatiebalk -->
+  <div class="topbalk">
+    <strong>🏗️ Constructie schaarste 9.1/10</strong> — Gemiddelde doorlooptijd: 6,1 mnd — Kosten/jaar:
+    €24.800
+  </div>
+
+  <!-- Navigatie -->
+  <header>
+    <nav>
+      <a class="logo" href="/">kandidatentekort<span>.nl</span></a>
+      <a class="nav-cta" href="#analyse">Gratis analyse →</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero-wrapper">
+    <section class="hero">
+      <div class="sector-badge">🏗️ Constructie · Zuid-Holland</div>
+      <h1>Is jouw <em>Uitvoerder / Calculator</em> vacature<br>al langer dan 6 weken open?</h1>
+      <p class="hero-sub">
+        Constructie bedrijven in Zuid-Holland kampen met extreme technische schaarste.
+        Ontvang <strong>gratis</strong> een analyse van jouw wervingssituatie — direct in je inbox.
+      </p>
+      <a href="#analyse" class="cta-btn">Vraag gratis analyse aan →</a>
+      <div class="trust-items">
+        <span>Gratis</span>
+        <span>Geen verplichtingen</span>
+        <span>Binnen 10 min in je inbox</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Stats -->
+  <section class="stats-outer">
+    <div class="stats-inner">
+      <div class="stat-item fade-up">
+        <div class="stat-num">9.1/10</div>
+        <div class="stat-label">Schaarste-score<br>Constructie technici in NL</div>
+      </div>
+      <div class="stat-item fade-up" style="transition-delay:0.1s">
+        <div class="stat-num">6,1 mnd</div>
+        <div class="stat-label">Gemiddelde doorlooptijd<br>open Uitvoerder / Calculator vacature</div>
+      </div>
+      <div class="stat-item fade-up" style="transition-delay:0.2s">
+        <div class="stat-num">€24.800</div>
+        <div class="stat-label">Gemiddelde kosten per jaar<br>onvervulde vacature</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pijnpunt -->
+  <section class="pijnpunt-sectie">
+    <div class="pijnpunt-inner fade-up">
+      <h2>Elke dag zonder Uitvoerder / Calculator is een dag<br>met projectvertraging en boeteclausules door capaciteitstekort.</h2>
+      <p style="margin-top:1rem">
+        De Constructie arbeidsmarkt staat onder ongekende druk. Terwijl de vraag stijgt,
+        daalt het beschikbare talent. <strong>81% van bouwbedrijven mist deadlines door personeelstekort</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Hoe het werkt -->
+  <section class="hoe" id="hoe-het-werkt">
+    <h2 class="sectie-titel fade-up">Hoe het werkt</h2>
+    <p class="sectie-sub fade-up">Een persoonlijke arbeidsmarktanalyse in 3 stappen</p>
+    <div class="stappen">
+      <div class="stap fade-up">
+        <div class="stap-nr">01</div>
+        <h3>Vul het formulier in</h3>
+        <p>2 minuten. Functie, sector en regio — meer hebben we niet nodig om een accurate analyse te maken.</p>
+      </div>
+      <div class="stap fade-up" style="transition-delay:0.1s">
+        <div class="stap-nr">02</div>
+        <h3>Wij analyseren de markt</h3>
+        <p>Ons systeem checkt beschikbaarheid, concurrentie en salaris voor jouw specifieke profiel in Zuid-Holland.</p>
+      </div>
+      <div class="stap fade-up" style="transition-delay:0.2s">
+        <div class="stap-nr">03</div>
+        <h3>Rapport in je inbox</h3>
+        <p>Binnen 10 minuten ontvang je een persoonlijk rapport met concrete aanbevelingen voor jouw werving.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulier -->
+  <section class="form-sectie" id="analyse">
+    <h2 class="fade-up">Vraag jouw gratis analyse aan</h2>
+    <p class="form-sub fade-up">Gratis, vrijblijvend en binnen 10 minuten in je inbox.</p>
+    <div class="stat-highlight fade-up">81% van bouwbedrijven mist deadlines door personeelstekort</div>
+    <div class="jotform-wrapper fade-up">
+      <iframe id="jotform-iframe"
+        src="https://form.jotform.com/?utm_source=landingpage&utm_campaign=KT_Constructie_202603_BouwbedrijfJansen&sector=constructie&regio=Zuid-Holland"
+        scrolling="yes" allow="geolocation; microphone; camera" loading="lazy"
+        title="Gratis arbeidsmarkt analyse aanvragen">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="proof-outer">
+    <div class="proof-inner">
+      <h2 class="fade-up">Wat klanten zeggen</h2>
+      <div class="quote-card fade-up">
+        <blockquote>
+          "Binnen 6 weken hadden we 3 gekwalificeerde kandidaten voor een rol
+          die al 5 maanden openstond. De analyse gaf ons direct inzicht in
+          waarom ons zoekveld te smal was."
+        </blockquote>
+        <cite>— HR Manager · <strong>Constructie bedrijf, Zuid-Holland</strong></cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Recruitin B.V. · Doesburg ·
+      <a href="mailto:info@recruitin.nl">info@recruitin.nl</a>
+    </p>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/algemene-voorwaarden">Algemene Voorwaarden</a>
+      <a href="https://recruitin.nl" target="_blank">Recruitin.nl</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Smooth scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Fade-in animaties ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Scroll depth tracking (Meta Pixel) ──
+    let tracked = {};
+    window.addEventListener('scroll', () => {
+      const pct = Math.round(
+        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+      );
+      [25, 50, 75, 90].forEach(p => {
+        if (pct >= p && !tracked[p]) {
+          tracked[p] = true;
+          if (typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'ScrollDepth', { depth: p, sector: 'constructie' });
+          }
+        }
+      });
+    }, { passive: true });
+
+    // ── Jotform Lead event ──
+    window.addEventListener('message', e => {
+      if (e.data && e.data.action === 'submission-completed') {
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+        if (typeof gtag !== 'undefined') gtag('event', 'generate_lead');
+        // Redirect na submit
+        setTimeout(() => {
+          window.location.href = '/bedankt?campagne=KT_Constructie_202603_BouwbedrijfJansen';
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+
+</html>

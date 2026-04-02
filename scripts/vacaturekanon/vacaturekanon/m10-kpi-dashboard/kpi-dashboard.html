@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacaturekanon — KPI Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E85D04;
+      --orange-dim: rgba(232,93,4,0.15);
+      --dark: #0D1117;
+      --surface: #161B22;
+      --surface-2: #21262D;
+      --border: #30363D;
+      --text: #E6EDF3;
+      --text-muted: #8B949E;
+      --green: #3FB950;
+      --green-dim: rgba(63,185,80,0.15);
+      --red: #F85149;
+      --red-dim: rgba(248,81,73,0.15);
+      --yellow: #D29922;
+      --yellow-dim: rgba(210,153,34,0.15);
+      --blue: #58A6FF;
+      --blue-dim: rgba(88,166,255,0.12);
+      --radius: 8px;
+      --radius-lg: 12px;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    a { color: var(--blue); }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar__logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 18px;
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar__logo-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .sidebar__nav {
+      padding: 16px 0;
+      flex: 1;
+    }
+
+    .sidebar__nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      background: none;
+      border-top: none;
+      border-right: none;
+      border-bottom: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .sidebar__nav-item:hover {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .sidebar__nav-item.is-active {
+      color: var(--orange);
+      border-left-color: var(--orange);
+      background: var(--orange-dim);
+    }
+
+    .sidebar__nav-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+
+    .sidebar__footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .topbar__title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--text);
+    }
+
+    .topbar__sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .topbar__controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .select-field {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    .btn-refresh {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-refresh:hover { color: var(--text); border-color: var(--text-muted); }
+
+    /* ============================================================
+       METRIC CARDS
+    ============================================================ */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .metric-card__label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-card__value {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric-card__delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
+    .metric-card__delta--up {
+      background: var(--green-dim);
+      color: var(--green);
+    }
+
+    .metric-card__delta--down {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .metric-card__delta--neutral {
+      background: var(--yellow-dim);
+      color: var(--yellow);
+    }
+
+    .metric-card__target {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       STATUS BANNER
+    ============================================================ */
+    .status-banner {
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-banner--ok { background: var(--green-dim); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+    .status-banner--warn { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(210,153,34,0.25); }
+    .status-banner--crit { background: var(--red-dim); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+
+    /* ============================================================
+       GRID ROWS
+    ============================================================ */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ============================================================
+       PANELS
+    ============================================================ */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .panel__header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel__title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .panel__badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
+
+    .panel__body { padding: 20px; }
+
+    /* ============================================================
+       MINI CHART (pure CSS bar chart)
+    ============================================================ */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 80px;
+    }
+
+    .bar-chart__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-chart__bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      background: var(--orange-dim);
+      transition: background 0.2s;
+      min-height: 4px;
+    }
+
+    .bar-chart__col.is-active .bar-chart__bar {
+      background: var(--orange);
+    }
+
+    .bar-chart__label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       CAMPAIGN TABLE
+    ============================================================ */
+    .table-wrap { overflow-x: auto; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(48,54,61,0.5);
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
+    }
+
+    .badge--green { background: var(--green-dim); color: var(--green); }
+    .badge--orange { background: var(--orange-dim); color: var(--orange); }
+    .badge--yellow { background: var(--yellow-dim); color: var(--yellow); }
+    .badge--red { background: var(--red-dim); color: var(--red); }
+    .badge--blue { background: var(--blue-dim); color: var(--blue); }
+
+    /* ============================================================
+       PROGRESS BAR
+    ============================================================ */
+    .progress-bar {
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar__fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--orange);
+      transition: width 0.6s ease;
+    }
+
+    /* ============================================================
+       AD VARIANT CARDS
+    ============================================================ */
+    .variant-card {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+    }
+
+    .variant-card:last-child { margin-bottom: 0; }
+
+    .variant-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .variant-card__name { font-weight: 600; font-size: 13px; }
+
+    .variant-card__metrics {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .variant-card__metrics span { display: flex; flex-direction: column; gap: 2px; }
+    .variant-card__metrics strong { color: var(--text); font-weight: 600; }
+
+    /* ============================================================
+       CHECKLIST
+    ============================================================ */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .checklist__icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .checklist__icon--ok { background: var(--green-dim); color: var(--green); }
+    .checklist__icon--warn { background: var(--yellow-dim); color: var(--yellow); }
+    .checklist__icon--fail { background: var(--red-dim); color: var(--red); }
+
+    /* ============================================================
+       VIEWS (tabs)
+    ============================================================ */
+    .view { display: none; }
+    .view.is-active { display: block; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .app { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 12px 0; }
+      .sidebar__nav { display: flex; flex-direction: row; overflow-x: auto; }
+      .sidebar__nav-item { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; flex-shrink: 0; }
+      .sidebar__nav-item.is-active { border-bottom-color: var(--orange); border-left-color: transparent; }
+      .main { padding: 20px 16px; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .sidebar__footer { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" aria-label="Navigatie">
+    <div class="sidebar__logo">
+      <span>VACATUREKANON</span>
+      <span class="sidebar__logo-dot" aria-hidden="true"></span>
+    </div>
+    <div class="sidebar__nav" role="tablist">
+      <button class="sidebar__nav-item is-active" role="tab" aria-selected="true" data-view="overview" type="button">
+        <span class="sidebar__nav-icon" aria-hidden="true">&#128202;</span>
+        Overzicht
+      </button>
+      <button class="sidebar__nav-item" role="tab" aria-selected="false" data-view="campagnes" type="button">
+        <span class="sidebar__nav-icon" aria-hidden="true">&#127919;</span>
+        Campagnes
+      </button>
+      <button class="sidebar__nav-item" role="tab" aria-selected="false" data-view="ads" type="button">
+        <span class="sidebar__nav-icon" aria-hidden="true">&#127916;</span>
+        Advertenties
+      </button>
+      <button class="sidebar__nav-item" role="tab" aria-selected="false" data-view="kandidaten" type="button">
+        <span class="sidebar__nav-icon" aria-hidden="true">&#128101;</span>
+        Kandidaten
+      </button>
+      <button class="sidebar__nav-item" role="tab" aria-selected="false" data-view="aanbevelingen" type="button">
+        <span class="sidebar__nav-icon" aria-hidden="true">&#10024;</span>
+        Aanbevelingen
+      </button>
+    </div>
+    <div class="sidebar__footer">
+      Vacaturekanon &mdash; Recruitin B.V.<br>
+      <span id="currentDate" style="font-size:11px;"></span>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <div class="topbar__title" id="viewTitle">Portfolio Overzicht</div>
+        <div class="topbar__sub" id="viewSub">Alle actieve campagnes &mdash; week 10, 2026</div>
+      </div>
+      <div class="topbar__controls">
+        <select class="select-field" id="periodFilter" aria-label="Periode selectie">
+          <option value="week">Deze week</option>
+          <option value="month">Deze maand</option>
+          <option value="quarter">Dit kwartaal</option>
+        </select>
+        <button class="btn-refresh" type="button" id="refreshBtn" aria-label="Data verversen">
+          <span aria-hidden="true">&#8635;</span> Verversen
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: OVERZICHT -->
+    <div class="view is-active" id="view-overview" role="tabpanel">
+
+      <div class="metrics-grid" id="overviewMetrics" aria-label="Kerncijfers">
+        <!-- Dynamisch gevuld via JS -->
+      </div>
+
+      <div id="statusBannerContainer"></div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel__header">
+            <span class="panel__title">CPL per week (leads)</span>
+            <span class="panel__badge">Benchmark: &euro;15&ndash;25</span>
+          </div>
+          <div class="panel__body">
+            <div class="bar-chart" id="cplChart" role="img" aria-label="CPL grafiek per week"></div>
+            <div style="margin-top:12px;font-size:12px;color:var(--text-muted);">
+              Groen = onder benchmark &bull; Oranje = boven benchmark
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel__header">
+            <span class="panel__title">Actieve campagnes status</span>
+          </div>
+          <div class="panel__body" id="campaignStatusList">
+            <!-- Dynamisch -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIEW: CAMPAGNES -->
+    <div class="view" id="view-campagnes" role="tabpanel">
+      <div class="panel" style="margin-bottom:24px;">
+        <div class="panel__header">
+          <span class="panel__title">Alle campagnes</span>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="campaignsTable" aria-label="Campagne overzicht">
+            <thead>
+              <tr>
+                <th>Campagne</th>
+                <th>Sector</th>
+                <th>Status</th>
+                <th>Budget</th>
+                <th>Bereik</th>
+                <th>CTR</th>
+                <th>Leads</th>
+                <th>CPL</th>
+                <th>Dag</th>
+              </tr>
+            </thead>
+            <tbody id="campaignsTableBody">
+              <!-- Dynamisch -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: ADVERTENTIES -->
+    <div class="view" id="view-ads" role="tabpanel">
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel__header">
+            <span class="panel__title">Ad varianten performance</span>
+          </div>
+          <div class="panel__body" id="adVariantsContainer">
+            <!-- Dynamisch -->
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel__header">
+            <span class="panel__title">Creative KPI drempels</span>
+          </div>
+          <div class="panel__body">
+            <ul class="checklist" id="creativeChecklist">
+              <!-- Dynamisch -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: KANDIDATEN -->
+    <div class="view" id="view-kandidaten" role="tabpanel">
+      <div class="metrics-grid" id="kandidatenMetrics" aria-label="Kandidaatcijfers">
+        <!-- Dynamisch -->
+      </div>
+      <div class="panel">
+        <div class="panel__header">
+          <span class="panel__title">Kandidaat funnel per campagne</span>
+        </div>
+        <div class="panel__body" id="kandidaatFunnel">
+          <!-- Dynamisch -->
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: AANBEVELINGEN -->
+    <div class="view" id="view-aanbevelingen" role="tabpanel">
+      <div class="panel">
+        <div class="panel__header">
+          <span class="panel__title">Optimalisatie aanbevelingen</span>
+          <span class="panel__badge" id="aanbevelingenCount">0 acties</span>
+        </div>
+        <div class="panel__body" id="aanbevelingenList">
+          <!-- Dynamisch -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     KPI DATA — vervang met live API calls (Meta Marketing API)
+     Alle getallen zijn hardcoded demo-data voor de interface
+  ============================================================ */
+  var KPI_DATA = {
+    periode: 'week',
+    gegenereerd: new Date().toISOString(),
+    campagnes: [
+      {
+        id: 'VK-AT-TechflowBV',
+        naam: 'VK-AT-TechflowBV',
+        klant: 'Techflow BV',
+        sector: 'Automation',
+        status: 'Actief',
+        dag: 14,
+        budget_besteed: 420,
+        bereik: 18500,
+        impressies: 72000,
+        klikken: 540,
+        ctr: 0.75,
+        leads: 34,
+        cpl: 12.35,
+        video_views: 12400,
+        video_completion: 48,
+        frequentie: 2.4,
+        top_variant: 'Variant-A',
+        kandidaten: 18,
+        gescreend: 12,
+        interviews: 5,
+        aannames: 1,
+        ad_sets: [
+          { naam: 'Prospecting', cpl: 12.80, status: 'ok' },
+          { naam: 'Retargeting', cpl: 8.40, status: 'ok' },
+          { naam: 'Lookalike', cpl: 18.20, status: 'ok' }
+        ]
+      },
+      {
+        id: 'VK-CI-BamInfraBV',
+        naam: 'VK-CI-BamInfraBV',
+        klant: 'BAM Infra BV',
+        sector: 'Constructie',
+        status: 'Actief',
+        dag: 7,
+        budget_besteed: 280,
+        bereik: 9200,
+        impressies: 34000,
+        klikken: 238,
+        ctr: 0.70,
+        leads: 14,
+        cpl: 20.00,
+        video_views: 6800,
+        video_completion: 41,
+        frequentie: 1.8,
+        top_variant: 'Variant-B',
+        kandidaten: 7,
+        gescreend: 5,
+        interviews: 2,
+        aannames: 0,
+        ad_sets: [
+          { naam: 'Prospecting', cpl: 18.60, status: 'ok' },
+          { naam: 'Retargeting', cpl: 12.00, status: 'ok' },
+          { naam: 'Lookalike', cpl: 28.00, status: 'warn' }
+        ]
+      },
+      {
+        id: 'VK-RE-WindNLBV',
+        naam: 'VK-RE-WindNLBV',
+        klant: 'WindNL BV',
+        sector: 'Renewable Energy',
+        status: 'Aandacht',
+        dag: 21,
+        budget_besteed: 680,
+        bereik: 24000,
+        impressies: 98000,
+        klikken: 490,
+        ctr: 0.50,
+        leads: 18,
+        cpl: 37.78,
+        video_views: 18200,
+        video_completion: 35,
+        frequentie: 3.8,
+        top_variant: 'Variant-C',
+        kandidaten: 9,
+        gescreend: 6,
+        interviews: 3,
+        aannames: 1,
+        ad_sets: [
+          { naam: 'Prospecting', cpl: 42.00, status: 'crit' },
+          { naam: 'Retargeting', cpl: 22.00, status: 'ok' },
+          { naam: 'Lookalike', cpl: 48.00, status: 'crit' }
+        ]
+      }
+    ],
+    weken: [
+      { label: 'W7', cpl: 21.40, leads: 22 },
+      { label: 'W8', cpl: 18.60, leads: 28 },
+      { label: 'W9', cpl: 16.20, leads: 31 },
+      { label: 'W10', cpl: 19.80, leads: 66 }
+    ],
+    ad_varianten: [
+      { naam: 'Variant A — Salaris Hook', ctr: 0.92, cpl: 11.20, leads: 38, status: 'ok' },
+      { naam: 'Variant B — Carriere Hook', ctr: 0.74, cpl: 16.80, leads: 24, status: 'ok' },
+      { naam: 'Variant C — Urgentie Hook', ctr: 0.55, cpl: 28.40, leads: 4, status: 'warn' }
+    ]
+  };
+
+  /* ============================================================
+     HELPERS — GEEN innerHTML, alle DOM via createElement
+  ============================================================ */
+  function el(tag, props) {
+    var element = document.createElement(tag);
+    if (!props) { return element; }
+    if (props.cls) { element.className = props.cls; }
+    if (props.text !== undefined) { element.textContent = props.text; }
+    if (props.html !== undefined) {
+      // Alleen voor statische strings (geen user input), nimmer voor user data
+      element.textContent = props.html;
+    }
+    if (props.attrs) {
+      for (var k in props.attrs) {
+        if (Object.prototype.hasOwnProperty.call(props.attrs, k)) {
+          element.setAttribute(k, props.attrs[k]);
+        }
+      }
+    }
+    if (props.style) {
+      for (var s in props.style) {
+        if (Object.prototype.hasOwnProperty.call(props.style, s)) {
+          element.style[s] = props.style[s];
+        }
+      }
+    }
+    return element;
+  }
+
+  function append(parent) {
+    var children = Array.prototype.slice.call(arguments, 1);
+    for (var i = 0; i < children.length; i++) {
+      parent.appendChild(children[i]);
+    }
+    return parent;
+  }
+
+  function formatEuro(val) {
+    return '\u20AC' + val.toFixed(2).replace('.', ',');
+  }
+
+  function formatNum(val) {
+    return val.toLocaleString('nl-NL');
+  }
+
+  function statusBadgeClass(status) {
+    var map = {
+      'Actief': 'badge--green',
+      'Aandacht': 'badge--yellow',
+      'Kritisch': 'badge--red',
+      'Afgerond': 'badge--blue',
+      'Gepauzeerd': 'badge--orange'
+    };
+    return map[status] || 'badge--orange';
+  }
+
+  /* ============================================================
+     OVERVIEW METRICS
+  ============================================================ */
+  function renderOverviewMetrics() {
+    var container = document.getElementById('overviewMetrics');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var campagnes = KPI_DATA.campagnes;
+    var totLeads = campagnes.reduce(function (s, c) { return s + c.leads; }, 0);
+    var totBudget = campagnes.reduce(function (s, c) { return s + c.budget_besteed; }, 0);
+    var totKandidaten = campagnes.reduce(function (s, c) { return s + c.kandidaten; }, 0);
+    var totAannames = campagnes.reduce(function (s, c) { return s + c.aannames; }, 0);
+    var gemCPL = totLeads > 0 ? totBudget / totLeads : 0;
+
+    var cards = [
+      { label: 'Totaal leads (week)', value: totLeads, delta: '+18%', type: 'up', target: 'Doel: 60/week' },
+      { label: 'Gem. CPL', value: formatEuro(gemCPL), delta: gemCPL <= 25 ? 'OK' : 'Te hoog', type: gemCPL <= 25 ? 'up' : 'down', target: 'Benchmark: \u20AC15\u201325' },
+      { label: 'Kandidaten aangeleverd', value: totKandidaten, delta: '+22%', type: 'up', target: 'Deze maand totaal' },
+      { label: 'Aannames', value: totAannames, delta: totAannames >= 1 ? 'Op schema' : 'Wacht', type: totAannames >= 1 ? 'up' : 'neutral', target: 'Actieve campagnes: ' + campagnes.length }
+    ];
+
+    cards.forEach(function (card) {
+      var c = el('div', { cls: 'metric-card', attrs: { role: 'article' } });
+      var lbl = el('div', { cls: 'metric-card__label', text: card.label });
+      var val = el('div', { cls: 'metric-card__value', text: String(card.value) });
+      var delta = el('div', { cls: 'metric-card__delta metric-card__delta--' + card.type, text: card.delta });
+      var target = el('div', { cls: 'metric-card__target', text: card.target });
+      append(c, lbl, val, delta, target);
+      container.appendChild(c);
+    });
+  }
+
+  /* ============================================================
+     STATUS BANNER
+  ============================================================ */
+  function renderStatusBanner() {
+    var container = document.getElementById('statusBannerContainer');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var critiek = KPI_DATA.campagnes.filter(function (c) { return c.status === 'Kritisch'; });
+    var aandacht = KPI_DATA.campagnes.filter(function (c) { return c.status === 'Aandacht'; });
+
+    var banner = el('div', { cls: 'status-banner' });
+    var icon = el('span');
+    var msg = el('span');
+
+    if (critiek.length > 0) {
+      banner.className = 'status-banner status-banner--crit';
+      icon.textContent = '\u26A0';
+      msg.textContent = critiek.length + ' campagne(s) kritisch: ' + critiek.map(function (c) { return c.naam; }).join(', ');
+    } else if (aandacht.length > 0) {
+      banner.className = 'status-banner status-banner--warn';
+      icon.textContent = '\u26A0';
+      msg.textContent = aandacht.length + ' campagne(s) vereisen aandacht: ' + aandacht.map(function (c) { return c.naam; }).join(', ');
+    } else {
+      banner.className = 'status-banner status-banner--ok';
+      icon.textContent = '\u2713';
+      msg.textContent = 'Alle campagnes draaien binnen KPI-grenzen. Goed bezig!';
+    }
+
+    append(banner, icon, msg);
+    container.appendChild(banner);
+  }
+
+  /* ============================================================
+     CPL BAR CHART
+  ============================================================ */
+  function renderCplChart() {
+    var container = document.getElementById('cplChart');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var maxCpl = Math.max.apply(null, KPI_DATA.weken.map(function (w) { return w.cpl; }));
+    var isLastActive = true;
+
+    KPI_DATA.weken.forEach(function (week, i) {
+      var col = el('div', { cls: 'bar-chart__col' + (i === KPI_DATA.weken.length - 1 && isLastActive ? ' is-active' : '') });
+      var heightPct = Math.round((week.cpl / (maxCpl * 1.2)) * 100);
+      var bar = el('div', { cls: 'bar-chart__bar', style: { height: heightPct + '%' } });
+      var label = el('div', { cls: 'bar-chart__label', text: week.label });
+      append(col, bar, label);
+      container.appendChild(col);
+    });
+  }
+
+  /* ============================================================
+     CAMPAIGN STATUS LIST
+  ============================================================ */
+  function renderCampaignStatusList() {
+    var container = document.getElementById('campaignStatusList');
+    if (!container) { return; }
+    container.textContent = '';
+
+    KPI_DATA.campagnes.forEach(function (c) {
+      var row = el('div', { style: { marginBottom: '16px' } });
+
+      var header = el('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' } });
+      var name = el('span', { text: c.naam, style: { fontSize: '13px', fontWeight: '600' } });
+      var badge = el('span', { cls: 'badge ' + statusBadgeClass(c.status), text: c.status });
+      append(header, name, badge);
+
+      var progress = el('div', { cls: 'progress-bar', attrs: { role: 'progressbar', 'aria-valuenow': c.dag, 'aria-valuemin': '0', 'aria-valuemax': '21' } });
+      var fill = el('div', { cls: 'progress-bar__fill', style: { width: Math.min(100, Math.round((c.dag / 21) * 100)) + '%' } });
+      progress.appendChild(fill);
+
+      var meta = el('div', { style: { display: 'flex', justifyContent: 'space-between', marginTop: '4px', fontSize: '11px', color: 'var(--text-muted)' } });
+      var dagText = el('span', { text: 'Dag ' + c.dag + ' / 21' });
+      var cplText = el('span', { text: 'CPL ' + formatEuro(c.cpl) });
+      append(meta, dagText, cplText);
+
+      append(row, header, progress, meta);
+      container.appendChild(row);
+    });
+  }
+
+  /* ============================================================
+     CAMPAIGNS TABLE
+  ============================================================ */
+  function renderCampaignsTable() {
+    var tbody = document.getElementById('campaignsTableBody');
+    if (!tbody) { return; }
+    tbody.textContent = '';
+
+    KPI_DATA.campagnes.forEach(function (c) {
+      var tr = document.createElement('tr');
+
+      function td(text, cls) {
+        var cell = document.createElement('td');
+        if (cls) {
+          var badge = el('span', { cls: 'badge ' + cls, text: text });
+          cell.appendChild(badge);
+        } else {
+          cell.textContent = text;
+        }
+        return cell;
+      }
+
+      tr.appendChild(td(c.naam));
+      tr.appendChild(td(c.sector));
+      tr.appendChild(td(c.status, statusBadgeClass(c.status)));
+      tr.appendChild(td(formatEuro(c.budget_besteed)));
+      tr.appendChild(td(formatNum(c.bereik)));
+      tr.appendChild(td(c.ctr.toFixed(2) + '%'));
+      tr.appendChild(td(String(c.leads)));
+      var cplTd = document.createElement('td');
+      cplTd.textContent = formatEuro(c.cpl);
+      cplTd.style.color = c.cpl <= 25 ? 'var(--green)' : (c.cpl <= 40 ? 'var(--yellow)' : 'var(--red)');
+      cplTd.style.fontWeight = '600';
+      tr.appendChild(cplTd);
+      tr.appendChild(td('Dag ' + c.dag));
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ============================================================
+     AD VARIANTEN
+  ============================================================ */
+  function renderAdVariants() {
+    var container = document.getElementById('adVariantsContainer');
+    if (!container) { return; }
+    container.textContent = '';
+
+    KPI_DATA.ad_varianten.forEach(function (v) {
+      var card = el('div', { cls: 'variant-card' });
+      var header = el('div', { cls: 'variant-card__header' });
+      var name = el('span', { cls: 'variant-card__name', text: v.naam });
+      var badge = el('span', { cls: 'badge ' + (v.status === 'ok' ? 'badge--green' : 'badge--yellow'), text: v.status === 'ok' ? 'OK' : 'Aandacht' });
+      append(header, name, badge);
+
+      var metrics = el('div', { cls: 'variant-card__metrics' });
+
+      function mkMetric(label, val) {
+        var span = document.createElement('span');
+        var strong = el('strong', { text: val });
+        var small = document.createElement('small');
+        small.textContent = label;
+        small.style.display = 'block';
+        append(span, strong, small);
+        return span;
+      }
+
+      append(metrics,
+        mkMetric('CTR', v.ctr.toFixed(2) + '%'),
+        mkMetric('CPL', formatEuro(v.cpl)),
+        mkMetric('Leads', String(v.leads))
+      );
+
+      append(card, header, metrics);
+      container.appendChild(card);
+    });
+  }
+
+  /* ============================================================
+     CREATIVE CHECKLIST
+  ============================================================ */
+  function renderCreativeChecklist() {
+    var container = document.getElementById('creativeChecklist');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var checks = [];
+    KPI_DATA.campagnes.forEach(function (c) {
+      var ctrOk = c.ctr >= 0.8;
+      var cplOk = c.cpl <= 25;
+      var freqOk = c.frequentie <= 3;
+
+      checks.push({ text: c.naam + ' — CTR ' + c.ctr.toFixed(2) + '%', ok: ctrOk ? 'ok' : (c.ctr >= 0.5 ? 'warn' : 'fail') });
+      checks.push({ text: c.naam + ' — CPL ' + formatEuro(c.cpl), ok: cplOk ? 'ok' : (c.cpl <= 40 ? 'warn' : 'fail') });
+      checks.push({ text: c.naam + ' — Frequentie ' + c.frequentie, ok: freqOk ? 'ok' : 'warn' });
+    });
+
+    checks.forEach(function (check) {
+      var li = document.createElement('li');
+      var icon = el('div', { cls: 'checklist__icon checklist__icon--' + check.ok });
+      icon.textContent = check.ok === 'ok' ? '\u2713' : (check.ok === 'warn' ? '!' : '\u2717');
+      icon.setAttribute('aria-hidden', 'true');
+      var text = el('span', { text: check.text });
+      append(li, icon, text);
+      container.appendChild(li);
+    });
+  }
+
+  /* ============================================================
+     KANDIDATEN METRICS
+  ============================================================ */
+  function renderKandidatenMetrics() {
+    var container = document.getElementById('kandidatenMetrics');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var campagnes = KPI_DATA.campagnes;
+    var totK = campagnes.reduce(function (s, c) { return s + c.kandidaten; }, 0);
+    var totG = campagnes.reduce(function (s, c) { return s + c.gescreend; }, 0);
+    var totI = campagnes.reduce(function (s, c) { return s + c.interviews; }, 0);
+    var totA = campagnes.reduce(function (s, c) { return s + c.aannames; }, 0);
+
+    var cards = [
+      { label: 'Aangeleverd', value: totK, delta: 'Onge\u00EBvalueerd: ' + (totK - totG) },
+      { label: 'Gescreend', value: totG, delta: 'Ratio: ' + Math.round((totG / totK) * 100) + '%' },
+      { label: 'Interviews', value: totI, delta: 'Ratio: ' + Math.round((totI / totG) * 100) + '%' },
+      { label: 'Aannames', value: totA, delta: 'Hire rate: ' + Math.round((totA / totK) * 100) + '%' }
+    ];
+
+    cards.forEach(function (card) {
+      var c = el('div', { cls: 'metric-card' });
+      var lbl = el('div', { cls: 'metric-card__label', text: card.label });
+      var val = el('div', { cls: 'metric-card__value', text: String(card.value) });
+      var delta = el('div', { cls: 'metric-card__target', text: card.delta });
+      append(c, lbl, val, delta);
+      container.appendChild(c);
+    });
+  }
+
+  /* ============================================================
+     KANDIDAAT FUNNEL
+  ============================================================ */
+  function renderKandidaatFunnel() {
+    var container = document.getElementById('kandidaatFunnel');
+    if (!container) { return; }
+    container.textContent = '';
+
+    KPI_DATA.campagnes.forEach(function (c) {
+      var section = el('div', { style: { marginBottom: '24px' } });
+      var title = el('div', { text: c.naam, style: { fontWeight: '700', fontSize: '14px', marginBottom: '12px' } });
+      section.appendChild(title);
+
+      var stages = [
+        { label: 'Aangeleverd', val: c.kandidaten, total: c.kandidaten },
+        { label: 'Gescreend', val: c.gescreend, total: c.kandidaten },
+        { label: 'Interviews', val: c.interviews, total: c.kandidaten },
+        { label: 'Aannames', val: c.aannames, total: c.kandidaten }
+      ];
+
+      stages.forEach(function (stage) {
+        var row = el('div', { style: { marginBottom: '8px' } });
+        var header = el('div', { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '12px' } });
+        var lbl = el('span', { text: stage.label, style: { color: 'var(--text-muted)' } });
+        var num = el('span', { text: stage.val + ' / ' + stage.total, style: { fontWeight: '600' } });
+        append(header, lbl, num);
+        var bar = el('div', { cls: 'progress-bar' });
+        var fill = el('div', { cls: 'progress-bar__fill', style: { width: (stage.total > 0 ? Math.round((stage.val / stage.total) * 100) : 0) + '%' } });
+        bar.appendChild(fill);
+        append(row, header, bar);
+        section.appendChild(row);
+      });
+
+      container.appendChild(section);
+    });
+  }
+
+  /* ============================================================
+     AANBEVELINGEN
+  ============================================================ */
+  function renderAanbevelingen() {
+    var container = document.getElementById('aanbevelingenList');
+    var countBadge = document.getElementById('aanbevelingenCount');
+    if (!container) { return; }
+    container.textContent = '';
+
+    var aanbevelingen = [];
+
+    KPI_DATA.campagnes.forEach(function (c) {
+      if (c.ctr < 0.5) {
+        aanbevelingen.push({ prio: 'crit', text: c.naam + ': CTR te laag (' + c.ctr.toFixed(2) + '%). Ververs creative direct. Pause slechtste variant.' });
+      } else if (c.ctr < 0.8) {
+        aanbevelingen.push({ prio: 'warn', text: c.naam + ': CTR onder benchmark (' + c.ctr.toFixed(2) + '%). Test nieuw onderwerp en visual.' });
+      }
+      if (c.cpl > 40) {
+        aanbevelingen.push({ prio: 'crit', text: c.naam + ': CPL kritisch (' + formatEuro(c.cpl) + '). Stop slechtste ad-set en herverdeeel budget.' });
+      } else if (c.cpl > 25) {
+        aanbevelingen.push({ prio: 'warn', text: c.naam + ': CPL boven benchmark (' + formatEuro(c.cpl) + '). Analyseer audience overlap.' });
+      }
+      if (c.frequentie > 3) {
+        aanbevelingen.push({ prio: 'warn', text: c.naam + ': Frequentie te hoog (' + c.frequentie + '). Audience uitbreiden of creative roteren.' });
+      }
+      if (c.dag > 14 && c.aannames === 0) {
+        aanbevelingen.push({ prio: 'warn', text: c.naam + ': Dag ' + c.dag + ' zonder aanname. Bespreek met klant: zijn interviews gepland?' });
+      }
+    });
+
+    if (aanbevelingen.length === 0) {
+      var ok = el('div', { cls: 'status-banner status-banner--ok' });
+      ok.appendChild(el('span', { text: '\u2713 Geen acties vereist. Alle campagnes binnen KPI-grenzen.' }));
+      container.appendChild(ok);
+    } else {
+      aanbevelingen.forEach(function (a) {
+        var banner = el('div', { cls: 'status-banner status-banner--' + (a.prio === 'crit' ? 'crit' : 'warn'), style: { marginBottom: '10px' } });
+        var icon = el('span', { text: a.prio === 'crit' ? '\u26A0' : '!' });
+        var msg = el('span', { text: a.text });
+        append(banner, icon, msg);
+        container.appendChild(banner);
+      });
+    }
+
+    if (countBadge) {
+      countBadge.textContent = aanbevelingen.length + ' actie' + (aanbevelingen.length !== 1 ? 's' : '');
+    }
+  }
+
+  /* ============================================================
+     NAV / VIEW SWITCHING
+  ============================================================ */
+  var viewTitles = {
+    overview: { title: 'Portfolio Overzicht', sub: 'Alle actieve campagnes' },
+    campagnes: { title: 'Campagnes', sub: 'Gedetailleerde campagne-statistieken' },
+    ads: { title: 'Advertenties', sub: 'Creative performance en aanbevelingen' },
+    kandidaten: { title: 'Kandidaten', sub: 'Funnel van lead tot aanname' },
+    aanbevelingen: { title: 'Aanbevelingen', sub: 'Optimalisatie-acties op basis van KPIs' }
+  };
+
+  function switchView(viewId) {
+    var views = document.querySelectorAll('.view');
+    for (var i = 0; i < views.length; i++) {
+      views[i].classList.remove('is-active');
+    }
+    var target = document.getElementById('view-' + viewId);
+    if (target) { target.classList.add('is-active'); }
+
+    var navItems = document.querySelectorAll('.sidebar__nav-item');
+    for (var j = 0; j < navItems.length; j++) {
+      navItems[j].classList.remove('is-active');
+      navItems[j].setAttribute('aria-selected', 'false');
+      if (navItems[j].getAttribute('data-view') === viewId) {
+        navItems[j].classList.add('is-active');
+        navItems[j].setAttribute('aria-selected', 'true');
+      }
+    }
+
+    var info = viewTitles[viewId] || { title: '', sub: '' };
+    var titleEl = document.getElementById('viewTitle');
+    var subEl = document.getElementById('viewSub');
+    if (titleEl) { titleEl.textContent = info.title; }
+    if (subEl) { subEl.textContent = info.sub; }
+  }
+
+  /* ============================================================
+     DATUM IN SIDEBAR
+  ============================================================ */
+  function setCurrentDate() {
+    var el2 = document.getElementById('currentDate');
+    if (el2) {
+      var d = new Date();
+      el2.textContent = d.toLocaleDateString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+  }
+
+  /* ============================================================
+     EVENT LISTENERS — geen inline onclick
+  ============================================================ */
+  function init() {
+    setCurrentDate();
+
+    // Nav buttons
+    var navItems = document.querySelectorAll('.sidebar__nav-item');
+    for (var i = 0; i < navItems.length; i++) {
+      navItems[i].addEventListener('click', function () {
+        var viewId = this.getAttribute('data-view');
+        if (viewId) { switchView(viewId); }
+      });
+    }
+
+    // Refresh button
+    var refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', function () {
+        this.textContent = '\u21BA Laden...';
+        var self = this;
+        setTimeout(function () {
+          renderAll();
+          self.textContent = '\u21BA Verversen';
+        }, 800);
+      });
+    }
+
+    // Period filter
+    var periodFilter = document.getElementById('periodFilter');
+    if (periodFilter) {
+      periodFilter.addEventListener('change', function () {
+        KPI_DATA.periode = this.value;
+        renderAll();
+      });
+    }
+
+    renderAll();
+  }
+
+  function renderAll() {
+    renderOverviewMetrics();
+    renderStatusBanner();
+    renderCplChart();
+    renderCampaignStatusList();
+    renderCampaignsTable();
+    renderAdVariants();
+    renderCreativeChecklist();
+    renderKandidatenMetrics();
+    renderKandidaatFunnel();
+    renderAanbevelingen();
+  }
+
+  // Start na DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+
+</body>
+</html>

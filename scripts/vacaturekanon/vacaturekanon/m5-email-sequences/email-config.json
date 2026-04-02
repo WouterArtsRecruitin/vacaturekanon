@@ -1,0 +1,132 @@
+{
+  "project": "Vacaturekanon",
+  "sender": {
+    "name": "Wouter \u2014 Recruitin",
+    "email": "warts@recruitin.nl",
+    "reply_to": "warts@recruitin.nl"
+  },
+  "sequences": {
+    "hot": {
+      "name": "VK-HOT",
+      "emails": 5,
+      "duration_days": 21,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "09:00", "label": "Welkom + Calendly" },
+        { "email": 2, "day": 4,  "time": "09:00", "label": "Case study" },
+        { "email": 3, "day": 9,  "time": "10:00", "label": "Bel-verzoek" },
+        { "email": 4, "day": 14, "time": "09:00", "label": "Alternatief aanbod" },
+        { "email": 5, "day": 21, "time": "09:00", "label": "Laatste kans" }
+      ],
+      "stop_on_reply": true,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": true
+    },
+    "warm": {
+      "name": "VK-WARM",
+      "emails": 7,
+      "duration_days": 21,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "09:00", "label": "Welkom" },
+        { "email": 2, "day": 3,  "time": "10:00", "label": "Educatief: traditionele werving werkt niet" },
+        { "email": 3, "day": 7,  "time": "09:00", "label": "Hoe Vacaturekanon werkt (3 stappen)" },
+        { "email": 4, "day": 10, "time": "10:00", "label": "Case study" },
+        { "email": 5, "day": 14, "time": "09:00", "label": "ROI argument" },
+        { "email": 6, "day": 18, "time": "10:00", "label": "Calendly reminder" },
+        { "email": 7, "day": 21, "time": "09:00", "label": "Laatste kans" }
+      ],
+      "stop_on_reply": true,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": true
+    },
+    "cold": {
+      "name": "VK-COLD",
+      "emails": 5,
+      "duration_days": 35,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "10:00", "label": "Welkom" },
+        { "email": 2, "day": 7,  "time": "10:00", "label": "Educatief: 3 redenen" },
+        { "email": 3, "day": 14, "time": "10:00", "label": "Sector update + cijfers" },
+        { "email": 4, "day": 21, "time": "10:00", "label": "Zo werkt het als je er klaar voor bent" },
+        { "email": 5, "day": 35, "time": "09:00", "label": "Re-activatie check-in" }
+      ],
+      "stop_on_reply": true,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": true
+    },
+    "onboarding": {
+      "name": "VK-ONBOARDING",
+      "emails": 4,
+      "duration_days": 14,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "10:00", "label": "Update build status" },
+        { "email": 2, "day": 2,  "time": "10:00", "label": "Campagne LIVE" },
+        { "email": 3, "day": 8,  "time": "10:00", "label": "Evaluatie/Optimalisatie" },
+        { "email": 4, "day": 14, "time": "10:00", "label": "Mid-campagne review & interviews" }
+      ],
+      "stop_on_reply": false,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": false
+    },
+    "intake_chaser": {
+      "name": "VK-INTAKE-CHASER",
+      "emails": 4,
+      "duration_days": 10,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "09:00", "label": "Welkom + Jotform Link" },
+        { "email": 2, "day": 2,  "time": "10:00", "label": "Reminder 1" },
+        { "email": 3, "day": 5,  "time": "10:00", "label": "Reminder 2" },
+        { "email": 4, "day": 10, "time": "10:00", "label": "Pauze / On-hold" }
+      ],
+      "stop_on_reply": true,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": false
+    },
+    "meta_inbound": {
+      "name": "VK-META-INBOUND",
+      "emails": 5,
+      "duration_days": 14,
+      "schedule": [
+        { "email": 1, "day": 0,  "time": "09:00", "label": "Analyse aanvraag / Calendly" },
+        { "email": 2, "day": 2,  "time": "10:00", "label": "Vacaturekanon Methode" },
+        { "email": 3, "day": 5,  "time": "09:00", "label": "ROI & Checkout link" },
+        { "email": 4, "day": 9,  "time": "10:00", "label": "Beschikbaarheid & Call" },
+        { "email": 5, "day": 14, "time": "09:00", "label": "Break-up & Opties" }
+      ],
+      "stop_on_reply": true,
+      "stop_on_click": false,
+      "stop_on_calendly_booking": true
+    }
+  },
+  "personalization_tokens": [
+    "{{voornaam}}",
+    "{{achternaam}}",
+    "{{bedrijfsnaam}}",
+    "{{sector}}",
+    "{{doelgroep_functietitels}}",
+    "{{regio}}",
+    "{{urgentie}}",
+    "{{maandelijks_budget}}",
+    "{{aantal_medewerkers}}",
+    "{{CALENDLY_URL}}",
+    "{{JOTFORM_URL}}"
+  ],
+  "tracking": {
+    "open_tracking": true,
+    "click_tracking": true,
+    "unsubscribe_link": true,
+    "unsubscribe_text": "Geen interesse meer? Klik hier om af te melden."
+  },
+  "lemlist_settings": {
+    "api_endpoint": "https://api.lemlist.com/api",
+    "campaign_labels": {
+      "hot": "VK-HOT-2026",
+      "warm": "VK-WARM-2026",
+      "cold": "VK-COLD-2026",
+      "onboarding": "VK-ONBOARDING-2026",
+      "intake_chaser": "VK-INTAKE-CHASER-2026",
+      "meta_inbound": "VK-META-INBOUND-2026"
+    },
+    "sender_name": "Wouter van Hees",
+    "linkedin_connect": true
+  }
+}

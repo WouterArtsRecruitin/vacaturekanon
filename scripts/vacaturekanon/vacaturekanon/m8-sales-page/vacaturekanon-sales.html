@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacaturekanon — Vacatures gevuld in 3 weken. Gegarandeerd.</title>
+  <meta name="description" content="Vacaturekanon vult technische vacatures in Oil & Gas, Constructie, Automation en meer. Social media recruitment dat werkt. Gegarandeerd resultaat in 3 weken.">
+  <meta property="og:title" content="Vacaturekanon — Vacatures gevuld in 3 weken">
+  <meta property="og:description" content="Bereik passieve kandidaten die niet op Jobboard.nl zitten. Betaal per resultaat.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E85D04;
+      --orange-dark: #C44E00;
+      --orange-light: #FF7518;
+      --dark: #111827;
+      --dark-2: #1F2937;
+      --dark-3: #374151;
+      --mid: #6B7280;
+      --light: #F9FAFB;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+      --border-dark: #374151;
+      --text: #111827;
+      --text-muted: #6B7280;
+      --success: #10B981;
+      --radius: 8px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --nav-h: 68px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container--narrow { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* ============================================================
+       URGENCY STRIP
+    ============================================================ */
+    .urgency-strip {
+      background: var(--orange);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 24px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      position: relative;
+      z-index: 200;
+    }
+
+    .urgency-strip span {
+      display: inline-block;
+      margin: 0 8px;
+    }
+
+    .urgency-strip .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+
+    /* ============================================================
+       STICKY NAV
+    ============================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav__logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav__logo-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      border-radius: 50%;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav__links a:hover { color: var(--dark); }
+
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+    }
+
+    .nav__cta:hover { background: var(--orange-dark); }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav__mobile {
+      display: none;
+      position: absolute;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .nav__mobile.is-open { display: block; }
+
+    .nav__mobile ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 16px;
+    }
+
+    .nav__mobile ul a {
+      display: block;
+      padding: 12px 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__mobile .nav__cta {
+      display: flex;
+      justify-content: center;
+      padding: 14px 20px;
+      font-size: 16px;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 96px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232,93,4,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232,93,4,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,93,4,0.15);
+      border: 1px solid rgba(232,93,4,0.3);
+      color: var(--orange-light);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .hero__title em {
+      color: var(--orange);
+      font-style: normal;
+      display: block;
+    }
+
+    .hero__sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 28px;
+      border-radius: var(--radius);
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 16px 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+    .hero__guarantee {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero__guarantee-icon {
+      width: 16px;
+      height: 16px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: white;
+    }
+
+    /* Hero card */
+    .hero__card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero__card-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .hero__stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero__stat:last-of-type { border-bottom: none; }
+
+    .hero__stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .hero__stat-value {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--orange);
+    }
+
+    .hero__stat-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+      text-align: right;
+    }
+
+    .hero__card-cta {
+      margin-top: 20px;
+      display: block;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+    }
+
+    .hero__card-cta:hover { background: var(--orange-dark); }
+
+    /* ============================================================
+       TRUST BAR
+    ============================================================ */
+    .trust-bar {
+      background: var(--light);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .trust-bar__inner {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .trust-bar__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .trust-bar__icon {
+      width: 32px;
+      height: 32px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .trust-bar__num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--dark);
+    }
+
+    .trust-bar__divider {
+      width: 1px;
+      height: 32px;
+      background: var(--border);
+    }
+
+    /* ============================================================
+       SECTION BASES
+    ============================================================ */
+    .section { padding: 80px 0; }
+    .section--dark { background: var(--dark); color: var(--white); }
+    .section--alt { background: var(--light); }
+
+    .section__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section__sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .section--dark .section__sub { color: rgba(255,255,255,0.6); }
+
+    .section__header { margin-bottom: 56px; }
+    .section__header--center { text-align: center; }
+    .section__header--center .section__sub { margin: 0 auto; }
+
+    /* ============================================================
+       PROBLEM SECTION
+    ============================================================ */
+    .problem__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .problem__content { padding-top: 8px; }
+
+    .problem__list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .problem__list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .problem__list-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(232,93,4,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+      margin-top: 1px;
+      color: var(--orange);
+    }
+
+    .problem__stat-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .problem__metric {
+      padding: 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .problem__metric-value {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 40px;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .problem__metric-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .problem__metric-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       HOW IT WORKS
+    ============================================================ */
+    .hiw__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+
+    .hiw__steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: calc(12.5% + 32px);
+      right: calc(12.5% + 32px);
+      height: 2px;
+      background: linear-gradient(to right, var(--orange), var(--orange-light));
+      z-index: 0;
+    }
+
+    .hiw__step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hiw__step-num {
+      width: 64px;
+      height: 64px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 24px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+
+    .hiw__step-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .hiw__step-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .hiw__timeline {
+      margin-top: 48px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .hiw__tl-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .hiw__tl-item + .hiw__tl-item::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .hiw__tl-day {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+
+    .hiw__tl-event {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    .hiw__tl-item--highlight .hiw__tl-event { color: var(--orange); }
+
+    /* ============================================================
+       FEATURES
+    ============================================================ */
+    .features__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .feature-card__icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(232,93,4,0.08);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card__title {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .feature-card__desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       SECTORS
+    ============================================================ */
+    .sectors__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .sector-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .sector-card:hover {
+      border-color: var(--orange);
+      background: rgba(232,93,4,0.05);
+    }
+
+    .sector-card__icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sector-card__name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .sector-card__krapte {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: rgba(232,93,4,0.15);
+      color: var(--orange-light);
+      letter-spacing: 0.03em;
+    }
+
+    /* ============================================================
+       PRICING
+    ============================================================ */
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      background: var(--white);
+      transition: box-shadow 0.2s;
+    }
+
+    .pricing-card:hover { box-shadow: var(--shadow); }
+
+    .pricing-card--featured {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(232,93,4,0.08);
+    }
+
+    .pricing-card__badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pricing-card__name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+
+    .pricing-card__sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pricing-card__price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card__amount {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 44px;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .pricing-card__period {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .pricing-card__guarantee {
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pricing-card__divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .pricing-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .pricing-card__features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .pricing-card__features .check {
+      color: var(--success);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-card__features .cross {
+      color: var(--mid);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-card__features .muted { color: var(--text-muted); }
+
+    .btn-pricing-primary {
+      display: block;
+      width: 100%;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px;
+      border-radius: var(--radius);
+      text-align: center;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .btn-pricing-primary:hover { background: var(--orange-dark); }
+
+    .btn-pricing-secondary {
+      display: block;
+      width: 100%;
+      background: var(--white);
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px;
+      border-radius: var(--radius);
+      text-align: center;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .btn-pricing-secondary:hover { border-color: var(--dark); }
+
+    .pricing__note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       ROI SECTION
+    ============================================================ */
+    .roi__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .roi__calc {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .roi__calc-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: var(--dark);
+    }
+
+    .roi__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+
+    .roi__row--total {
+      border-bottom: none;
+      padding-top: 20px;
+      margin-top: 4px;
+    }
+
+    .roi__row-label { color: var(--text-muted); }
+    .roi__row-value { font-weight: 700; color: var(--dark); }
+    .roi__row--total .roi__row-label {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--dark);
+    }
+    .roi__row--total .roi__row-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--success);
+    }
+
+    .roi__content {}
+    .roi__content .section__title { font-size: clamp(28px, 3vw, 44px); }
+
+    .roi__breakdown {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .roi__item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .roi__item-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(232,93,4,0.08);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .roi__item-title { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+    .roi__item-desc { font-size: 14px; color: var(--text-muted); }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .testimonial-card__stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+      color: #F59E0B;
+      font-size: 16px;
+    }
+
+    .testimonial-card__quote {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-card__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .testimonial-card__name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--dark);
+    }
+
+    .testimonial-card__role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .testimonial-card__result {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       FAQ ACCORDION (CSS-only: checkbox technique)
+    ============================================================ */
+    .faq__list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq__item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .faq__item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .faq__label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--dark);
+      background: var(--white);
+      user-select: none;
+      transition: background 0.15s;
+      gap: 16px;
+    }
+
+    .faq__label:hover { background: var(--light); }
+
+    .faq__icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.3s;
+      color: var(--orange);
+    }
+
+    .faq__item input:checked ~ .faq__label { background: var(--light); }
+    .faq__item input:checked ~ .faq__label .faq__icon { transform: rotate(45deg); background: var(--orange); color: var(--white); }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq__item input:checked ~ .faq__answer { max-height: 400px; }
+
+    .faq__answer-inner {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       FINAL CTA
+    ============================================================ */
+    .final-cta {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a0800 100%);
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,93,4,0.2) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .final-cta__inner { position: relative; z-index: 1; }
+
+    .final-cta__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .final-cta__title em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .final-cta__sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 40px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta__actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .final-cta__btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 17px;
+      padding: 18px 32px;
+      border-radius: var(--radius);
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .final-cta__btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+    .final-cta__btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 18px 32px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .final-cta__btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    .final-cta__guarantee {
+      margin-top: 24px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .final-cta__guarantee strong { color: rgba(255,255,255,0.6); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 48px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer__brand {}
+
+    .footer__logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer__tagline {
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 240px;
+      margin-bottom: 20px;
+    }
+
+    .footer__kvk {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer__col-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+
+    .footer__links a:hover { color: var(--white); }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    /* ============================================================
+       COOKIE BANNER
+    ============================================================ */
+    .cookie-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      max-width: 480px;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .cookie-banner.is-hidden { display: none; }
+
+    .cookie-banner__text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+    .cookie-banner__actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .cookie-banner__accept {
+      flex: 1;
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .cookie-banner__decline {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      border: none;
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    /* ============================================================
+       BACK TO TOP
+    ============================================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 16px rgba(232,93,4,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 90;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-to-top.is-visible { opacity: 1; pointer-events: auto; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__card { max-width: 480px; }
+      .hiw__steps { grid-template-columns: repeat(2, 1fr); }
+      .hiw__steps::before { display: none; }
+      .sectors__grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+      .hero { padding: 64px 0 56px; }
+      .problem__grid { grid-template-columns: 1fr; }
+      .features__grid { grid-template-columns: 1fr; }
+      .pricing__grid { grid-template-columns: 1fr; }
+      .roi__grid { grid-template-columns: 1fr; }
+      .testimonials__grid { grid-template-columns: 1fr; }
+      .sectors__grid { grid-template-columns: repeat(2, 1fr); }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .trust-bar__divider { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hiw__steps { grid-template-columns: 1fr; }
+      .sectors__grid { grid-template-columns: 1fr 1fr; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .hero__actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .cookie-banner { left: 16px; right: 16px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- URGENCY STRIP -->
+  <div class="urgency-strip" id="urgencyStrip">
+    <span>Technische vacatures staan gemiddeld</span>
+    <strong>67 dagen open</strong>
+    <span class="dot"></span>
+    <span>Vacaturekanon vult ze in</span>
+    <strong>3 weken</strong>
+    <span class="dot"></span>
+    <a href="#pricing" style="text-decoration:underline;color:inherit;">Bekijk tarieven &rarr;</a>
+  </div>
+
+  <!-- STICKY NAV -->
+  <nav class="nav" id="mainNav" aria-label="Hoofdnavigatie">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Vacaturekanon homepage">
+          <span>VACATUREKANON</span>
+          <span class="nav__logo-dot" aria-hidden="true"></span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="#hoe-het-werkt">Hoe het werkt</a></li>
+          <li><a href="#sectoren">Sectoren</a></li>
+          <li><a href="#pricing">Tarieven</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#intake" class="nav__cta">Gratis intake &rarr;</a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile" id="mobileMenu" role="navigation" aria-label="Mobiel menu">
+      <ul>
+        <li><a href="#hoe-het-werkt">Hoe het werkt</a></li>
+        <li><a href="#sectoren">Sectoren</a></li>
+        <li><a href="#pricing">Tarieven</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#intake" class="nav__cta">Gratis intake starten &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Gespecialiseerd in technisch recruitment
+          </div>
+          <h1 class="hero__title" id="heroTitle">
+            Jullie vacature
+            <em>gevuld in 3 weken.</em>
+          </h1>
+          <p class="hero__sub">
+            Vacaturekanon bereikt de passieve kandidaten die niet reageren op Jobboard.nl
+            &mdash; via gerichte social media campagnes in Oil&nbsp;&amp;&nbsp;Gas, Constructie, Automation en meer.
+          </p>
+          <div class="hero__actions">
+            <a href="#intake" class="btn-primary">
+              Start gratis intake &rarr;
+            </a>
+            <a href="#hoe-het-werkt" class="btn-ghost">
+              Bekijk hoe het werkt
+            </a>
+          </div>
+          <div class="hero__guarantee">
+            <div class="hero__guarantee-icon" aria-hidden="true">&#10003;</div>
+            <span>Geen resultaat in 3 weken? Je betaalt niets extra. Gegarandeerd.</span>
+          </div>
+        </div>
+        <div class="hero__card" aria-label="Resultaten overzicht">
+          <p class="hero__card-title">Gemiddelde resultaten</p>
+          <div class="hero__stat">
+            <span class="hero__stat-label">Tijd tot eerste kandidaat</span>
+            <div>
+              <div class="hero__stat-value">7 dagen</div>
+              <div class="hero__stat-note">na campagne live</div>
+            </div>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-label">Vacature gevuld binnen</span>
+            <div>
+              <div class="hero__stat-value">21 dagen</div>
+              <div class="hero__stat-note">gemiddeld 18&ndash;24 dgn</div>
+            </div>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-label">Kostprijs per hire</span>
+            <div>
+              <div class="hero__stat-value">&euro;2.250</div>
+              <div class="hero__stat-note">vs &euro;12.000&ndash;&euro;18.000 traditioneel</div>
+            </div>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-label">Klanten die terugkeren</span>
+            <div>
+              <div class="hero__stat-value">87%</div>
+              <div class="hero__stat-note">binnen 6 maanden</div>
+            </div>
+          </div>
+          <a href="#intake" class="hero__card-cta">Vrijblijvend intake plannen &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar" aria-label="Kerncijfers">
+    <div class="container">
+      <div class="trust-bar__inner">
+        <div class="trust-bar__item">
+          <div class="trust-bar__icon" aria-hidden="true" style="color:white;">&#10003;</div>
+          <div>
+            <div class="trust-bar__num">180+</div>
+            <div>vacatures gevuld</div>
+          </div>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true"></div>
+        <div class="trust-bar__item">
+          <div class="trust-bar__icon" aria-hidden="true" style="color:white;">&#8987;</div>
+          <div>
+            <div class="trust-bar__num">21 dgn</div>
+            <div>gemiddeld time-to-hire</div>
+          </div>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true"></div>
+        <div class="trust-bar__item">
+          <div class="trust-bar__icon" aria-hidden="true" style="color:white;">&#128202;</div>
+          <div>
+            <div class="trust-bar__num">5 sectoren</div>
+            <div>Oil &amp; Gas tot Automation</div>
+          </div>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true"></div>
+        <div class="trust-bar__item">
+          <div class="trust-bar__icon" aria-hidden="true" style="color:white;">&#128176;</div>
+          <div>
+            <div class="trust-bar__num">&euro;2.250</div>
+            <div>gemiddeld per hire</div>
+          </div>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true"></div>
+        <div class="trust-bar__item">
+          <div class="trust-bar__icon" aria-hidden="true" style="color:white;">&#128578;</div>
+          <div>
+            <div class="trust-bar__num">87%</div>
+            <div>klanten keren terug</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM SECTION -->
+  <section class="section" id="probleem" aria-labelledby="probleemTitle">
+    <div class="container">
+      <div class="problem__grid">
+        <div class="problem__content">
+          <p class="section__label">Het probleem</p>
+          <h2 class="section__title" id="probleemTitle">
+            Technische kandidaten zitten niet op Jobboard.nl
+          </h2>
+          <p style="font-size:17px;color:var(--text-muted);line-height:1.7;margin-bottom:8px;">
+            In 2026 is 73% van alle technische professionals <strong>passief werkzoekend</strong>. Ze kijken geen vacaturesites. Ze worden al gebeld door bureaus. Ze reageren niet op koude mails.
+          </p>
+          <p style="font-size:17px;color:var(--text-muted);line-height:1.7;">
+            Maar ze zitten wel dagelijks op Instagram, Facebook en YouTube &mdash; en daar bereiken wij ze.
+          </p>
+          <ul class="problem__list" role="list">
+            <li>
+              <div class="problem__list-icon" aria-hidden="true">&#x26A0;</div>
+              <span>Traditionele bureaus rekenen <strong>15-25% van jaarsalaris</strong> &mdash; ook als ze jouw vacature maanden open laten staan</span>
+            </li>
+            <li>
+              <div class="problem__list-icon" aria-hidden="true">&#x26A0;</div>
+              <span>Jobboards geven je bereik onder de <strong>27% actieve kandidaten</strong> &mdash; niet de 73% die je echt wil</span>
+            </li>
+            <li>
+              <div class="problem__list-icon" aria-hidden="true">&#x26A0;</div>
+              <span>Elke dag dat een vacature openstaat kost jou gemiddeld <strong>&euro;800-&euro;1.500</strong> aan productiviteitsverlies</span>
+            </li>
+            <li>
+              <div class="problem__list-icon" aria-hidden="true">&#10003;</div>
+              <span><strong>Vacaturekanon</strong> bereikt precies de professionals die jij zoekt &mdash; in jouw regio, in jouw sector</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="problem__stat-card" aria-label="Marktstatistieken">
+            <div class="problem__metric">
+              <div class="problem__metric-value">9,4/10</div>
+              <div class="problem__metric-label">Krapte-index Automation &amp; High Tech</div>
+              <div class="problem__metric-sub">UWV Arbeidsmarkt in Cijfers 2025</div>
+            </div>
+            <div class="problem__metric">
+              <div class="problem__metric-value">67 dgn</div>
+              <div class="problem__metric-label">Gemiddelde doorlooptijd technische vacature</div>
+              <div class="problem__metric-sub">Recruitmentbenchmark.nl 2025</div>
+            </div>
+            <div class="problem__metric">
+              <div class="problem__metric-value">&euro;18.400</div>
+              <div class="problem__metric-label">Totale kosten per openstaande vacature/jaar</div>
+              <div class="problem__metric-sub">Productiviteitsverlies + bureaukosten + advertenties</div>
+            </div>
+            <div class="problem__metric">
+              <div class="problem__metric-value">3,8</div>
+              <div class="problem__metric-label">Vacatures per werkzoekende in automation sector</div>
+              <div class="problem__metric-sub">CBS Statline Q4 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--dark" id="hoe-het-werkt" aria-labelledby="hiwTitle">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="section__label">Hoe het werkt</p>
+        <h2 class="section__title" id="hiwTitle">Van intake tot aanname in 3 weken</h2>
+        <p class="section__sub">
+          Geen maandenlang wachten. Wij bouwen een gerichte campagne en jij ontvangt gekwalificeerde kandidaten.
+        </p>
+      </div>
+      <div class="hiw__steps" role="list">
+        <div class="hiw__step" role="listitem">
+          <div class="hiw__step-num" aria-label="Stap 1">1</div>
+          <h3 class="hiw__step-title">Intake (dag 1)</h3>
+          <p class="hiw__step-desc">Jij vult een intake van 5 minuten in. Wij bepalen de exacte doelgroep, regio en boodschap.</p>
+        </div>
+        <div class="hiw__step" role="listitem">
+          <div class="hiw__step-num" aria-label="Stap 2">2</div>
+          <h3 class="hiw__step-title">Campagne live (dag 5)</h3>
+          <p class="hiw__step-desc">Dedicated landingspagina, video-advertenties en gerichte targeting op Meta gaan live.</p>
+        </div>
+        <div class="hiw__step" role="listitem">
+          <div class="hiw__step-num" aria-label="Stap 3">3</div>
+          <h3 class="hiw__step-title">Eerste kandidaten (dag 7&ndash;10)</h3>
+          <p class="hiw__step-desc">Passieve professionals reageren op jouw vacature. Wij screenen en leveren direct cv&rsquo;s.</p>
+        </div>
+        <div class="hiw__step" role="listitem">
+          <div class="hiw__step-num" aria-label="Stap 4">4</div>
+          <h3 class="hiw__step-title">Aanname (dag 18&ndash;21)</h3>
+          <p class="hiw__step-desc">Jij kiest de beste kandidaat. Vacature gevuld. Garantie: of we gaan door zonder extra kosten.</p>
+        </div>
+      </div>
+      <div class="hiw__timeline" aria-label="Tijdlijn">
+        <div class="hiw__tl-item">
+          <div class="hiw__tl-day">Dag 1</div>
+          <div class="hiw__tl-event">Intake</div>
+        </div>
+        <div class="hiw__tl-item">
+          <div class="hiw__tl-day">Dag 5</div>
+          <div class="hiw__tl-event">Campagne live</div>
+        </div>
+        <div class="hiw__tl-item hiw__tl-item--highlight">
+          <div class="hiw__tl-day">Dag 7</div>
+          <div class="hiw__tl-event">Eerste leads</div>
+        </div>
+        <div class="hiw__tl-item hiw__tl-item--highlight">
+          <div class="hiw__tl-day">Dag 10&ndash;14</div>
+          <div class="hiw__tl-event">Interviews</div>
+        </div>
+        <div class="hiw__tl-item hiw__tl-item--highlight">
+          <div class="hiw__tl-day">Dag 18&ndash;21</div>
+          <div class="hiw__tl-event">Aanname</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section--alt" id="features" aria-labelledby="featuresTitle">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="section__label">Wat je krijgt</p>
+        <h2 class="section__title" id="featuresTitle">Alles wat je nodig hebt. Niets wat je niet nodig hebt.</h2>
+      </div>
+      <div class="features__grid">
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#127916;</div>
+          <h3 class="feature-card__title">Cinematic video-advertenties</h3>
+          <p class="feature-card__desc">AI-gegenereerde video&rsquo;s specifiek voor jouw sector, met tekst overlays en muziek. Voor Stories, Reels en Feed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#127919;</div>
+          <h3 class="feature-card__title">Hyper-gerichte targeting</h3>
+          <p class="feature-card__desc">We richten ons op professionals in jouw specifieke regio, sector en functieprofiel. Geen verspild bereik.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#128196;</div>
+          <h3 class="feature-card__title">Dedicated landingspagina</h3>
+          <p class="feature-card__desc">Conversie-geoptimaliseerde pagina voor jouw vacature, met jouw huisstijl. Inclusief Pixel tracking en A/B test.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#128202;</div>
+          <h3 class="feature-card__title">Wekelijkse rapportage</h3>
+          <p class="feature-card__desc">Transparant dashboard: bereik, CTR, leads en CPL. Elke week in je inbox. Geen verrassingen.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#128272;</div>
+          <h3 class="feature-card__title">Kandidaat-screening</h3>
+          <p class="feature-card__desc">Wij screenen de eerste responses en sturen je alleen gekwalificeerde kandidaten door. Jij bespaart tijd.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#127808;</div>
+          <h3 class="feature-card__title">3-weken garantie</h3>
+          <p class="feature-card__desc">Geen eerste relevante kandidaten binnen 21 dagen? We verlengen de campagne kosteloos tot het resultaat er is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section class="section section--dark" id="sectoren" aria-labelledby="sectorenTitle">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="section__label">Sectoren</p>
+        <h2 class="section__title" id="sectorenTitle">Diepgaand sectorkennis. Geen generalist.</h2>
+        <p class="section__sub">Wij kennen de markt, de functies, de salarisnormen en de kandidaten per sector. Dat merk je in elk resultaat.</p>
+      </div>
+      <div class="sectors__grid" role="list">
+        <div class="sector-card" role="listitem">
+          <span class="sector-card__icon" aria-hidden="true">&#9928;</span>
+          <div class="sector-card__name">Oil &amp; Gas</div>
+          <span class="sector-card__krapte">Krapte 8,5/10</span>
+        </div>
+        <div class="sector-card" role="listitem">
+          <span class="sector-card__icon" aria-hidden="true">&#127959;</span>
+          <div class="sector-card__name">Constructie &amp; Infra</div>
+          <span class="sector-card__krapte">Krapte 9,1/10</span>
+        </div>
+        <div class="sector-card" role="listitem">
+          <span class="sector-card__icon" aria-hidden="true">&#9881;</span>
+          <div class="sector-card__name">Productie &amp; Manufacturing</div>
+          <span class="sector-card__krapte">Krapte 7,8/10</span>
+        </div>
+        <div class="sector-card" role="listitem">
+          <span class="sector-card__icon" aria-hidden="true">&#129302;</span>
+          <div class="sector-card__name">Automation &amp; High Tech</div>
+          <span class="sector-card__krapte">Krapte 9,4/10</span>
+        </div>
+        <div class="sector-card" role="listitem">
+          <span class="sector-card__icon" aria-hidden="true">&#9889;</span>
+          <div class="sector-card__name">Renewable Energy</div>
+          <span class="sector-card__krapte">Krapte 9,7/10</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing" aria-labelledby="pricingTitle">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="section__label">Tarieven</p>
+        <h2 class="section__title" id="pricingTitle">Transparant. Resultaatgericht. Eerlijk.</h2>
+        <p class="section__sub">Geen successfee van 20% jaarsalaris. Je betaalt een vaste prijs voor het volledige recruitment-traject.</p>
+      </div>
+      <div class="pricing__grid">
+
+        <!-- STARTER -->
+        <div class="pricing-card">
+          <div class="pricing-card__name">Starter</div>
+          <div class="pricing-card__sub">1 vacature, 1 campagne, 30 dagen</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">&euro;1.750</span>
+            <span class="pricing-card__period">eenmalig</span>
+          </div>
+          <div class="pricing-card__guarantee">
+            <span>&#10003;</span> 3-weken garantie inbegrepen
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features" role="list">
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> 1 vacature campagne</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> 3 video-advertenties (AI-gegenereerd)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Dedicated landingspagina</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Meta Ads budget &euro;500 (inbegrepen)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Wekelijkse rapportage</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Kandidaat-screening (max 10)</li>
+            <li><span class="cross" aria-label="Niet inbegrepen">&mdash;</span> <span class="muted">Lookalike audiences</span></li>
+            <li><span class="cross" aria-label="Niet inbegrepen">&mdash;</span> <span class="muted">Email nurture sequence</span></li>
+          </ul>
+          <button class="btn-pricing-secondary" type="button" id="btnStarterCta">Vrijblijvend intake &rarr;</button>
+        </div>
+
+        <!-- GROEI (featured) -->
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__badge">Meest gekozen</div>
+          <div class="pricing-card__name">Groei</div>
+          <div class="pricing-card__sub">1 vacature, volledige campagne, 60 dagen</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">&euro;2.750</span>
+            <span class="pricing-card__period">eenmalig</span>
+          </div>
+          <div class="pricing-card__guarantee">
+            <span>&#10003;</span> 3-weken garantie + 30 dagen verlenging
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features" role="list">
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> 1 vacature campagne</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> 6 video-advertenties (3 sectoren)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Dedicated landingspagina</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Meta Ads budget &euro;900 (inbegrepen)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Lookalike audiences 1%</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Email nurture sequence</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Wekelijkse rapportage + adviesgesprek</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Kandidaat-screening (max 30)</li>
+          </ul>
+          <button class="btn-pricing-primary" type="button" id="btnGroeiCta">Start Groei campagne &rarr;</button>
+        </div>
+
+        <!-- SCALE -->
+        <div class="pricing-card">
+          <div class="pricing-card__name">Scale</div>
+          <div class="pricing-card__sub">3+ vacatures, doorlopend partnership</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">&euro;4.500</span>
+            <span class="pricing-card__period">/maand</span>
+          </div>
+          <div class="pricing-card__guarantee">
+            <span>&#10003;</span> Dedicated account manager + SLA
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features" role="list">
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Onbeperkt vacatures</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Video-advertenties op aanvraag</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Multi-channel (Meta + LinkedIn)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Meta Ads budget &euro;2.000 (inbegrepen)</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Volledige ATS-integratie</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Dedicated account manager</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> Maandelijkse strategiesessie</li>
+            <li><span class="check" aria-label="Inbegrepen">&#10003;</span> SLA: 5 werkdagen campagne live</li>
+          </ul>
+          <button class="btn-pricing-secondary" type="button" id="btnScaleCta">Neem contact op &rarr;</button>
+        </div>
+
+      </div>
+      <p class="pricing__note">
+        Alle tarieven exclusief BTW. Meta advertentiebudget is inbegrepen in het tarief.
+        <a href="#faq" style="color:var(--orange);font-weight:600;">Vragen? Zie de FAQ &darr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ROI SECTION -->
+  <section class="section section--alt" id="roi" aria-labelledby="roiTitle">
+    <div class="container">
+      <div class="roi__grid">
+        <div class="roi__content">
+          <p class="section__label">Return on Investment</p>
+          <h2 class="section__title" id="roiTitle">Elke euro die je uitgeeft, verdien je tienvoudig terug.</h2>
+          <div class="roi__breakdown">
+            <div class="roi__item">
+              <div class="roi__item-icon" aria-hidden="true">&#128181;</div>
+              <div>
+                <div class="roi__item-title">Besparing vs. traditioneel bureau</div>
+                <div class="roi__item-desc">Bij een salaris van &euro;4.500/mnd rekent een bureau 20% = &euro;10.800. Vacaturekanon Groei-pakket: &euro;2.750. Besparing: &euro;8.050 per hire.</div>
+              </div>
+            </div>
+            <div class="roi__item">
+              <div class="roi__item-icon" aria-hidden="true">&#9201;</div>
+              <div>
+                <div class="roi__item-title">Sneller gevuld = minder productiviteitsverlies</div>
+                <div class="roi__item-desc">Van 67 dagen naar 21 dagen = 46 dagen bespaard. Bij &euro;800/dag productiviteitsverlies: &euro;36.800 terug.</div>
+              </div>
+            </div>
+            <div class="roi__item">
+              <div class="roi__item-icon" aria-hidden="true">&#128279;</div>
+              <div>
+                <div class="roi__item-title">Betere kandidaatkwaliteit</div>
+                <div class="roi__item-desc">Passieve kandidaten die bewust kiezen voor jouw bedrijf blijven langer. Lagere verloop = lagere recruitmentkosten op lange termijn.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="roi__calc" aria-label="ROI berekening voorbeeld">
+          <div class="roi__calc-title">Rekenvoorbeeld: 1 Automation Engineer</div>
+          <div class="roi__row">
+            <span class="roi__row-label">Jaarsalaris kandidaat</span>
+            <span class="roi__row-value">&euro;72.000</span>
+          </div>
+          <div class="roi__row">
+            <span class="roi__row-label">Traditioneel bureau (18%)</span>
+            <span class="roi__row-value" style="color:#EF4444;">&minus;&euro;12.960</span>
+          </div>
+          <div class="roi__row">
+            <span class="roi__row-label">Vacaturekanon Groei</span>
+            <span class="roi__row-value" style="color:var(--success);">&minus;&euro;2.750</span>
+          </div>
+          <div class="roi__row">
+            <span class="roi__row-label">Productiviteitsverlies bespaard</span>
+            <span class="roi__row-value" style="color:var(--success);">+&euro;36.800</span>
+          </div>
+          <div class="roi__row roi__row--total">
+            <span class="roi__row-label">Netto voordeel</span>
+            <span class="roi__row-value">+&euro;47.010</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials" aria-labelledby="testimonialsTitle">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <p class="section__label">Klantervaringen</p>
+        <h2 class="section__title" id="testimonialsTitle">Wat onze opdrachtgevers zeggen</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 sterren beoordeling">
+            &#9733;&#9733;&#9733;&#9733;&#9733;
+          </div>
+          <p class="testimonial-card__quote">
+            &ldquo;Onze PLC-programmeur vacature stond 71 dagen open. Vacaturekanon had hem gevuld in 18 dagen. De kandidaat werkt er nu al 8 maanden met veel plezier.&rdquo;
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">MK</div>
+            <div>
+              <div class="testimonial-card__name">Mark K.</div>
+              <div class="testimonial-card__role">Operations Director, Automation bedrijf Eindhoven</div>
+            </div>
+          </div>
+          <div class="testimonial-card__result">&#10003; Gevuld in 18 dagen &mdash; &euro;9.200 bespaard</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 sterren beoordeling">
+            &#9733;&#9733;&#9733;&#9733;&#9733;
+          </div>
+          <p class="testimonial-card__quote">
+            &ldquo;Drie Werkvoorbereiders in &eacute;&eacute;n campagne. We hadden ze nodig voor een groot infraproject in Gelderland. Alledrie starten volgende maand. Ongelofelijk effectief.&rdquo;
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">SB</div>
+            <div>
+              <div class="testimonial-card__name">Sandra B.</div>
+              <div class="testimonial-card__role">HR Manager, Infrabedrijf Arnhem</div>
+            </div>
+          </div>
+          <div class="testimonial-card__result">&#10003; 3 hires in 24 dagen &mdash; Scale pakket</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars" aria-label="5 sterren beoordeling">
+            &#9733;&#9733;&#9733;&#9733;&#9733;
+          </div>
+          <p class="testimonial-card__quote">
+            &ldquo;Ik was sceptisch over social media recruitment voor offshore technici. Maar de kandidaten die binnenkwamen waren &eacute;cht goed &mdash; precies het profiel dat wij zoeken.&rdquo;
+          </p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">PV</div>
+            <div>
+              <div class="testimonial-card__name">Peter V.</div>
+              <div class="testimonial-card__role">CEO, Oil &amp; Gas dienstverlener Rotterdam</div>
+            </div>
+          </div>
+          <div class="testimonial-card__result">&#10003; Gevuld in 22 dagen &mdash; &euro;14.600 bespaard</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--alt" id="faq" aria-labelledby="faqTitle">
+    <div class="container--narrow">
+      <div class="section__header section__header--center">
+        <p class="section__label">Veelgestelde vragen</p>
+        <h2 class="section__title" id="faqTitle">Alles wat je wil weten</h2>
+      </div>
+      <div class="faq__list" role="list">
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq1" name="faq-accordion">
+          <label class="faq__label" for="faq1">
+            <span>Hoe werkt de 3-weken garantie precies?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Als je binnen 21 dagen na campagne-start geen eerste relevante, gekwalificeerde kandidaat hebt ontvangen, verlengen wij de campagne kosteloos. Dat betekent dat wij extra advertentiebudget inzetten en de targeting aanpassen &mdash; tot het resultaat er is. De garantie is schriftelijk vastgelegd in onze opdrachtbevestiging.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq2" name="faq-accordion">
+          <label class="faq__label" for="faq2">
+            <span>Is het Meta advertentiebudget inbegrepen in de prijs?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Ja. Voor het Starter pakket is &euro;500 Meta Ads budget inbegrepen. Voor Groei is dat &euro;900 en voor Scale &euro;2.000 per maand. Je betaalt geen extra kosten boven op het tarief. Eventueel aanvullend budget in overleg.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq3" name="faq-accordion">
+          <label class="faq__label" for="faq3">
+            <span>Wat als de kandidaat binnen 3 maanden vertrekt?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              In het Scale pakket bieden we een 3-maanden retentiegarantie: als de aangenomen kandidaat binnen 3 maanden vertrekt (anders dan door ontslag om dringende reden), starten we een vervangende campagne zonder meerkosten. Voor Starter en Groei raden we een proefperiode af te spreken met de kandidaat.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq4" name="faq-accordion">
+          <label class="faq__label" for="faq4">
+            <span>Hoe verschilt Vacaturekanon van een traditioneel detacheerbureau?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Wij zijn g&eacute;&eacute;n detacheerbureau. De kandidaat treedt direct in dienst bij jou als opdrachtgever &mdash; er is geen bureaucontract, geen inleenvergoeding, geen maandelijkse factuur per kandidaat. Vacaturekanon verkoopt een recruitmentcampagne, niet een tijdelijke arbeidskracht. Je betaalt eenmalig voor de dienst, niet doorlopend per uur of per maand dat iemand werkt.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq5" name="faq-accordion">
+          <label class="faq__label" for="faq5">
+            <span>Werkt dit ook voor niche-functies met weinig kandidaten?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Juist voor niche-functies werkt social media recruitment het best. Passieve kandidaten voor specifieke rollen (PLC-programmeur, Process Engineer, Wind Technician) zijn bijna nooit actief op jobboards. Via gerichte Facebook/Instagram targeting bereiken we ze wel. We hanteren ook een uitgebreidere lookalike audience voor moeilijke profielen.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq6" name="faq-accordion">
+          <label class="faq__label" for="faq6">
+            <span>Hoe snel kan een campagne live gaan?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Gemiddeld 5 werkdagen na ontvangst van het ingevulde intake-formulier. In het Scale pakket garanderen we dit via SLA. Spoed is mogelijk (3 werkdagen) tegen een toeslag van &euro;350. De snelste campagne die we ooit hebben gebouwd was live in 52 uur na intake.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq7" name="faq-accordion">
+          <label class="faq__label" for="faq7">
+            <span>In welke regio's zijn jullie actief?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Primair Gelderland, Overijssel en Noord-Brabant. Op aanvraag ook andere provincies. Voor offshore Oil &amp; Gas en projecten in meerdere regio&rsquo;s werken we landelijk. Neem contact op om je situatie te bespreken.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" role="listitem">
+          <input type="checkbox" id="faq8" name="faq-accordion">
+          <label class="faq__label" for="faq8">
+            <span>Moet ik zelf iets doen bij de campagne?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </label>
+          <div class="faq__answer">
+            <div class="faq__answer-inner">
+              Vrijwel niet. Jij vult de intake in (5 minuten) en beoordeelt de kandidaten die wij aanleveren. Wij regelen de landingspagina, video&rsquo;s, targeting, advertenties, budget en rapportage. Je ontvangt cv&rsquo;s in je mailbox en een wekelijkse update. Meer hoef je niet te doen.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTAKE FORM / FINAL CTA -->
+  <section class="final-cta" id="intake" aria-labelledby="ctaTitle">
+    <div class="container">
+      <div class="final-cta__inner">
+        <h2 class="final-cta__title" id="ctaTitle">
+          Klaar om jullie vacature
+          <em>te vullen?</em>
+        </h2>
+        <p class="final-cta__sub">
+          Start de gratis intake. Geen verplichtingen, geen verborgen kosten.
+          Binnen 24 uur weet je of en hoe Vacaturekanon kan helpen.
+        </p>
+        <div class="final-cta__actions">
+          <a href="https://form.jotform.com/252881347421054" class="final-cta__btn-primary" rel="noopener">
+            Start gratis intake &rarr;
+          </a>
+          <a href="mailto:wouter@vacaturekanon.nl" class="final-cta__btn-ghost">
+            Liever bellen of mailen
+          </a>
+        </div>
+        <p class="final-cta__guarantee">
+          <strong>Geen verplichtingen.</strong> De intake is gratis en vrijblijvend.
+          Je ontvangt binnen 1 werkdag een voorstel op maat.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <span>VACATUREKANON</span>
+            <span style="width:8px;height:8px;background:var(--orange);border-radius:50%;display:inline-block;" aria-hidden="true"></span>
+          </div>
+          <p class="footer__tagline">
+            Technische vacatures gevuld via social media. Gegarandeerd in 3 weken.
+          </p>
+          <p class="footer__kvk">Recruitin B.V. &mdash; KvK: [nummer] &mdash; Doesburg, Gelderland</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Diensten</p>
+          <ul class="footer__links">
+            <li><a href="#hoe-het-werkt">Hoe het werkt</a></li>
+            <li><a href="#sectoren">Sectoren</a></li>
+            <li><a href="#pricing">Tarieven</a></li>
+            <li><a href="#intake">Gratis intake</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Sectoren</p>
+          <ul class="footer__links">
+            <li><a href="#sectoren">Oil &amp; Gas</a></li>
+            <li><a href="#sectoren">Constructie &amp; Infra</a></li>
+            <li><a href="#sectoren">Automation</a></li>
+            <li><a href="#sectoren">Renewable Energy</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Contact</p>
+          <ul class="footer__links">
+            <li><a href="mailto:wouter@vacaturekanon.nl">wouter@vacaturekanon.nl</a></li>
+            <li><a href="https://vacaturekanon.nl">vacaturekanon.nl</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Recruitin B.V. Alle rechten voorbehouden.</span>
+        <span>
+          <a href="/privacy" style="color:rgba(255,255,255,0.4);margin-right:16px;transition:color 0.2s;" id="privacyLink">Privacybeleid</a>
+          <a href="/algemene-voorwaarden" style="color:rgba(255,255,255,0.4);transition:color 0.2s;" id="avLink">Algemene voorwaarden</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner is-hidden" id="cookieBanner" role="dialog" aria-label="Cookie-toestemming" aria-live="polite">
+    <p class="cookie-banner__text">
+      Wij gebruiken cookies voor analytics en advertentieoptimalisatie (Meta Pixel, GA4).
+      Jouw keuze wordt 1 jaar opgeslagen.
+    </p>
+    <div class="cookie-banner__actions">
+      <button class="cookie-banner__accept" type="button" id="cookieAccept">Accepteren</button>
+      <button class="cookie-banner__decline" type="button" id="cookieDecline">Weigeren</button>
+    </div>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Terug naar boven">&#8593;</button>
+
+  <!-- SCRIPTS — alle event listeners via addEventListener, geen inline onclick -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ============================================================
+         UTILITIES — cookie (SameSite=Lax, GEEN localStorage)
+      ============================================================ */
+      function setCookie(name, value, days) {
+        var maxAge = (days || 365) * 24 * 60 * 60;
+        document.cookie = name + '=' + encodeURIComponent(value) +
+          '; max-age=' + maxAge +
+          '; path=/' +
+          '; SameSite=Lax';
+      }
+
+      function getCookie(name) {
+        var prefix = name + '=';
+        var parts = document.cookie.split('; ');
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i];
+          if (part.indexOf(prefix) === 0) {
+            return decodeURIComponent(part.slice(prefix.length));
+          }
+        }
+        return null;
+      }
+
+      /* ============================================================
+         HAMBURGER MENU
+      ============================================================ */
+      var hamburgerBtn = document.getElementById('hamburgerBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+
+      if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener('click', function () {
+          var isOpen = mobileMenu.classList.contains('is-open');
+          if (isOpen) {
+            mobileMenu.classList.remove('is-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.setAttribute('aria-label', 'Menu openen');
+          } else {
+            mobileMenu.classList.add('is-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            hamburgerBtn.setAttribute('aria-label', 'Menu sluiten');
+          }
+        });
+
+        // Sluit menu bij klik op link
+        var mobileLinks = mobileMenu.querySelectorAll('a');
+        for (var i = 0; i < mobileLinks.length; i++) {
+          mobileLinks[i].addEventListener('click', function () {
+            mobileMenu.classList.remove('is-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.setAttribute('aria-label', 'Menu openen');
+          });
+        }
+      }
+
+      /* ============================================================
+         COOKIE BANNER
+      ============================================================ */
+      var cookieBanner = document.getElementById('cookieBanner');
+      var cookieAccept = document.getElementById('cookieAccept');
+      var cookieDecline = document.getElementById('cookieDecline');
+
+      function hideCookieBanner() {
+        if (cookieBanner) {
+          cookieBanner.classList.add('is-hidden');
+        }
+      }
+
+      function showCookieBanner() {
+        if (cookieBanner) {
+          cookieBanner.classList.remove('is-hidden');
+        }
+      }
+
+      if (!getCookie('vk_consent')) {
+        // Toon banner na 1 seconde
+        setTimeout(showCookieBanner, 1000);
+      }
+
+      if (cookieAccept) {
+        cookieAccept.addEventListener('click', function () {
+          setCookie('vk_consent', 'accepted', 365);
+          hideCookieBanner();
+          // Activeer Meta Pixel tracking na toestemming
+          if (typeof fbq !== 'undefined') {
+            fbq('consent', 'grant');
+          }
+        });
+      }
+
+      if (cookieDecline) {
+        cookieDecline.addEventListener('click', function () {
+          setCookie('vk_consent', 'declined', 30);
+          hideCookieBanner();
+        });
+      }
+
+      /* ============================================================
+         BACK TO TOP
+      ============================================================ */
+      var backToTop = document.getElementById('backToTop');
+
+      if (backToTop) {
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 400) {
+            backToTop.classList.add('is-visible');
+          } else {
+            backToTop.classList.remove('is-visible');
+          }
+        }, { passive: true });
+
+        backToTop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      /* ============================================================
+         PRICING CTA BUTTONS — scroll naar intake
+      ============================================================ */
+      function scrollToIntake() {
+        var intakeSection = document.getElementById('intake');
+        if (intakeSection) {
+          intakeSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      var pricingButtons = ['btnStarterCta', 'btnGroeiCta', 'btnScaleCta'];
+      for (var j = 0; j < pricingButtons.length; j++) {
+        var btn = document.getElementById(pricingButtons[j]);
+        if (btn) {
+          btn.addEventListener('click', scrollToIntake);
+        }
+      }
+
+      /* ============================================================
+         SCROLL DEPTH TRACKING (Meta Pixel)
+      ============================================================ */
+      var scrollDepths = [25, 50, 75, 90];
+      var firedDepths = {};
+
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) { return; }
+        var pct = Math.round((scrollTop / docHeight) * 100);
+        for (var k = 0; k < scrollDepths.length; k++) {
+          var depth = scrollDepths[k];
+          if (pct >= depth && !firedDepths[depth]) {
+            firedDepths[depth] = true;
+            if (typeof fbq !== 'undefined' && getCookie('vk_consent') === 'accepted') {
+              fbq('trackCustom', 'ScrollDepth', { depth: depth });
+            }
+          }
+        }
+      }, { passive: true });
+
+      /* ============================================================
+         PRIVACY + AV LINKS
+      ============================================================ */
+      var privacyLink = document.getElementById('privacyLink');
+      var avLink = document.getElementById('avLink');
+
+      if (privacyLink) {
+        privacyLink.addEventListener('mouseover', function () {
+          this.style.color = 'rgba(255,255,255,0.7)';
+        });
+        privacyLink.addEventListener('mouseout', function () {
+          this.style.color = 'rgba(255,255,255,0.4)';
+        });
+      }
+
+      if (avLink) {
+        avLink.addEventListener('mouseover', function () {
+          this.style.color = 'rgba(255,255,255,0.7)';
+        });
+        avLink.addEventListener('mouseout', function () {
+          this.style.color = 'rgba(255,255,255,0.4)';
+        });
+      }
+
+    })();
+  </script>
+
+  <!-- META PIXEL — conditioneel (na cookie toestemming) -->
+  <!-- VERVANG [META_PIXEL_ID] met het werkelijke pixel ID -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    // Start in consent-only modus totdat gebruiker toestemming geeft
+    fbq('consent', 'revoke');
+    fbq('init', '[META_PIXEL_ID]');
+    fbq('track', 'PageView');
+
+    // Als cookie al gezet is: activeer consent direct
+    (function() {
+      var parts = document.cookie.split('; ');
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i] === 'vk_consent=accepted') {
+          fbq('consent', 'grant');
+          break;
+        }
+      }
+    })();
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=[META_PIXEL_ID]&ev=PageView&noscript=1"
+      alt="">
+  </noscript>
+
+</body>
+</html>

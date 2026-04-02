@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<title>Vacaturekanon Playable Ad</title>
+<!-- VERPLICHTE META ADS CTA SCRIPT -->
+<script>
+  function ctaClick() {
+    // Roept de interne Meta Facebook App interface op voor de conversie!
+    if (typeof FbPlayableAd !== 'undefined') {
+      FbPlayableAd.onCTAClick();
+    } else {
+      // Fallback als je hem lokaal in je browser test
+      window.open('https://vacaturekanon-2026-demo.netlify.app/index-v2.html#cta', '_blank');
+    }
+  }
+</script>
+<style>
+  /* Vacaturekanon 2026 Brand Theme */
+  body, html { margin:0; padding:0; background-color: #07050f; color: white; font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow: hidden; height: 100%; width: 100%; touch-action: none; }
+  * { box-sizing: border-box; }
+
+  /* Subtiele diagonale lijnen achtergrond */
+  body {
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
+  }
+
+  /* Transities & Schermen */
+  .screen { position: absolute; top:0; left:0; width:100%; height:100%; display:none; flex-direction: column; justify-content: center; align-items: center; text-align:center; padding: 20px; z-index: 10; }
+  .active { display: flex; animation: fadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Typografie -> Gekopieerd van referentie (Chunky Outline Text) */
+  h1 { font-size: 56px; font-weight: 900; margin-bottom: 5px; letter-spacing: 1px; text-transform: uppercase; }
+  
+  /* Outline Magenta stijl a la "VACATURE" */
+  .outline-magenta { color: transparent; -webkit-text-stroke: 2px #ff00cc; text-shadow: 0 0 15px rgba(255,0,204,0.3); }
+  
+  /* Solid White stijl a la "SCHIET JOUW RAAK" */
+  .solid-white { color: #ffffff; }
+
+  /* Subheader styling (KLAAR VOOR RESULTAAT?) */
+  .sub-head { color: #ff5e00; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 20px; }
+
+  p { color: #a1a1aa; font-size: 18px; margin-bottom: 40px; line-height:1.5; font-weight: 300; }
+
+  /* Knoppen -> EXACT nagemaakt (White Pill Button) */
+  .btn { background: #ffffff; border: none; color: #000000; padding: 16px 40px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: 0.2s; box-shadow: 0 6px 15px rgba(0,0,0,0.5); width: auto; min-width: 250px; }
+  .btn:active { transform: scale(0.95); background: #f0f0f0; }
+
+  /* Knop met Outline a la "Start een campagne" navbar */
+  .btn-outline { background: transparent; border: 1px solid rgba(255,0,204,0.5); color: #ffffff; }
+  .btn-outline:active { background: rgba(255,0,204,0.1); }
+
+  /* Visuals - CSS Only */
+  .radar { width: 140px; height: 140px; border: 2px dashed rgba(255,0,204,0.5); border-radius: 50%; position: relative; margin-bottom: 40px; }
+  .radar::before { content: ""; position: absolute; top:50%; left:50%; width: 12px; height: 12px; background: #ff5e00; border-radius:50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px #ff5e00; }
+  .radar-sweep { position: absolute; top:50%; left:50%; width: 70px; height: 70px; border-bottom: 2px solid #ff00cc; border-right: 2px solid #ff00cc; transform-origin: 0 0; animation: spin 1.5s linear infinite; background: linear-gradient(45deg, transparent, rgba(255,0,204,0.3)); }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  .bar-chart { display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 140px; margin-bottom: 40px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom:10px;}
+  .bar { width: 40px; background: #ffffff; border-radius: 4px 4px 0 0; animation: grow 1s ease-out forwards; }
+  .bar:nth-child(1) { height: 0%; opacity: 0.4; }
+  .bar:nth-child(2) { height: 0%; opacity: 0.7; animation-delay: 0.2s; }
+  .bar:nth-child(3) { height: 0%; background: #ff00cc; box-shadow: 0 0 20px #ff00cc; animation-delay: 0.4s; }
+
+  /* Navigatie bolletjes */
+  .dots { position: absolute; bottom: 40px; display: flex; gap: 12px; z-index: 20; }
+  .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 50%; transition: 0.3s; }
+  .dot.active { background: #ff00cc; box-shadow: 0 0 10px #ff00cc; }
+</style>
+</head>
+<body>
+  
+  <!-- CSS Background Decoratie (Glow dots) -->
+  <svg class="stars" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10%" cy="20%" r="2" fill="#ff007f" opacity="0.6"/>
+    <circle cx="80%" cy="15%" r="1.5" fill="#ff8c00" opacity="0.8"/>
+    <circle cx="40%" cy="80%" r="2" fill="#ff007f" opacity="0.4"/>
+    <circle cx="85%" cy="85%" r="2.5" fill="#ff8c00" opacity="0.5"/>
+  </svg>
+
+  <!-- Scherm 1: RECRUIT -->
+  <div id="screen-1" class="screen active">
+    <div class="radar">
+      <div class="radar-sweep"></div>
+    </div>
+    <div class="sub-head">Systeem initialisatie</div>
+    <h1 class="outline-magenta">RECRUIT.</h1>
+    <p>Vakspecialisten, direct en<br>volledig exclusief.</p>
+    <!-- Hint interactie voor de user -->
+    <button class="btn btn-outline" onclick="nextScreen(2)">START ENGINE &rarr;</button>
+  </div>
+
+  <!-- Scherm 2: AUTOMATE -->
+  <div id="screen-2" class="screen">
+    <div class="bar-chart">
+      <div class="bar" style="animation-name: grow1;"></div>
+      <div class="bar" style="animation-name: grow2;"></div>
+      <div class="bar" style="animation-name: grow3;"></div>
+    </div>
+    <div class="sub-head">Proces versnelling</div>
+    <h1 class="outline-magenta">AUTOMATE.</h1>
+    <p>Uren, niet maanden.<br>Razendsnelle pre-selectie.</p>
+    <button class="btn btn-outline" onclick="nextScreen(3)">VOLGENDE STAP &rarr;</button>
+  </div>
+
+  <!-- Scherm 3: DOMINATE (CTA) -->
+  <div id="screen-3" class="screen">
+    <div class="sub-head">Klaar voor resultaat?</div>
+    <h1 class="solid-white" style="font-size:36px; margin-bottom: 0;">SCHIET JOUW</h1>
+    <h1 class="outline-magenta" style="font-size:62px; margin-bottom: 0; line-height:1;">VACATURE</h1>
+    <h1 class="solid-white" style="font-size:48px; margin-bottom: 20px;">RAAK.</h1>
+    
+    <p style="color: #a1a1aa; font-weight:300; font-size:16px; margin-bottom: 40px;">
+      Plan een gratis strategie-sessie. Wij analyseren<br>jouw doelgroep en demonstreren resultaat.
+    </p>
+    
+    <button class="btn" style="padding: 20px;" onclick="ctaClick()">🚀 Automation Starten &rarr;</button>
+  </div>
+
+  <!-- Paginering -->
+  <div class="dots">
+    <div id="dot-1" class="dot active"></div>
+    <div id="dot-2" class="dot"></div>
+    <div id="dot-3" class="dot"></div>
+  </div>
+
+  <style>
+    @keyframes grow1 { to { height: 40%; } }
+    @keyframes grow2 { to { height: 70%; } }
+    @keyframes grow3 { to { height: 100%; } }
+  </style>
+
+  <script>
+    // Logica voor schermwissel
+    function nextScreen(num) {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.dot').forEach(el => el.classList.remove('active'));
+      document.getElementById('screen-' + num).classList.add('active');
+      document.getElementById('dot-' + num).classList.add('active');
+    }
+  </script>
+</body>
+</html>

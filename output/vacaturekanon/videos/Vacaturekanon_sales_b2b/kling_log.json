@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-03-23T01:06:35.475730",
+  "klant": "Vacaturekanon",
+  "sector": "sales-b2b",
+  "model": "kling-v1-6",
+  "mode": "pro",
+  "duration": 10,
+  "scenes": {
+    "awareness": {
+      "task_id": "864809401524944988",
+      "url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260323/d19782930fdc64a191db46b8b4a0d268-5c781011-58a3-4c6c-9b1f-288d5edad9b4.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAFoA_3rqk7uuVOBv-Lsaz2_D5ZokSWrPGeSLHzHMtXGAG3dg7E59qL46Fx0O1PCM62CgfrmCPcy9MB5fIdWpGhAJgf3jbHaOuom_VY91Z4UUEqRTqXGehuHyxiTiKA8kU3gk3j404D2-AHCisbaCtScUVNhz_aoYYOlLgpNeiBtdEgxwiH67SyerN_BRnvc-8FQ-a3ezjd8ZvLeV0Xfpw63XutrGCPHtwHB_Zn7uNuAoRoSLL46pEJbTw3u2hySdPDYoj5mIiB3qs4xQSW9RhiHiZHNDnv4-znsS4ya2SNhokd4nhv9hSgFMAE&x-kcdn-pid=112781&ksSecret=5d046c9d1c67fecf5aedd14273882133&ksTime=69e7ee4a"
+    },
+    "consideration": {
+      "task_id": "864809405199155293",
+      "url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260323/a1a00070efc18e4f9966b4f86aea2c3b-128ca578-6b7c-4012-bf60-afacc20784c0.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAFpSQ0ht9q-EHidS5D3ZsI4dXywhQgP2tG6-H6pq4OlN7A7IKKi610k5tDYetPlfWtmT1wFKupxY7stC8rGgox-KIfNzEO2eJuV0yBu9C0IreEuPKY_ppUHAhFxkc90d8s29tpt4XFJPeSx29uVQoeUS0Hif7aLl6PuogOB_K7TQyh30XFgOsqbDctpOgSUDhOYRpD6IvZ2fWNDUbaZYXaStBJ8qMT8xEQ-2yA8V86IohoSsdEjH3N5CFugfV1OmSbeCusDIiCntX8y2E-w64lh0A8Cb1hrVNLgdmIhwu-uh0uetZUevygFMAE&x-kcdn-pid=112781&ksSecret=745ccd963d239b5c4dd14115881cb195&ksTime=69e7ee4c"
+    },
+    "conversion": {
+      "task_id": "864809451093246019",
+      "url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260323/da605d0a3a44cffe7bf3465909ea8cc0-3b3e8aef-f4db-468e-bb8d-808ed70939b2.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAEOja1MZHzBUiJ7qSnvZv6gxvBZuHmsk05usVe8wrjwxVCTyN9d7pVGlFsNew9rq2v8S-9IoXAXfAenlAsLYchOOyNFpA4XdOZCg4GVAKsq4kTaMJ6QzWor_pEzI8L7LPr-s49K1Adx7uehhvMJQyc_Qy0YR8VI2XEH8XGBBIgmxliA57gXTFnKouGhO149jXGHjjDAGoXVEsqQTAyWa9y23PyUwTR74IdBfTRwATttdxoSHs_XK2axmPlM1WFnjCEe17mbIiDpXAZig-1VxAKvQy0P_FRfrqgcmH-0v3XBKAKgf6hLWCgFMAE&x-kcdn-pid=112781&ksSecret=bb18a63d4fab20eb82b46eacbacca2c0&ksTime=69e7ee49"
+    }
+  }
+}

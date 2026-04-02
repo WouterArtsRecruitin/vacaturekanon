@@ -35,7 +35,7 @@ except ImportError:
     pyjwt = None
 
 # ── Config ───────────────────────────────────────────────────────────────────
-env_path = Path(__file__).resolve().parents[1] / ".env"
+env_path = Path(__file__).resolve().parent / ".kt_env"
 load_dotenv(env_path, override=True)
 
 KLING_ACCESS_KEY = os.getenv("KLING_ACCESS_KEY", "")
@@ -52,6 +52,14 @@ POLL_TIMEOUT   = 900  # 15 minuten max wachttijd
 
 # ── Sector motion prompts ─────────────────────────────────────────────────────
 SECTOR_MOTION = {
+    "humor": {
+        "bg_hint": "factory floor, realistic natural lighting",
+        "scenes": [
+            "candid documentary footage, normal walking pace, the mechanic turns around with an annoyed sigh and walks out of frame, extremely realistic unposed human mechanics, natural skin, minor camera shake",
+            "ultra-realistic human behavior, the mechanic sitting at the laptop heavily rubs his neck in exhaustion, wincing slightly as if having a headache from the screen, true human micro-expressions, breathing naturally",
+            "subtle documentary shot, manager awkwardly adjusts the golden trash-can trophy in his hands, blinking naturally, realistic office micro-movements, no overly cinematic motion",
+        ],
+    },
     "oil-gas": {
         "bg_hint":   "oil refinery background, industrial pipes, flare stack, dusk lighting",
         "scenes": [
@@ -92,6 +100,14 @@ SECTOR_MOTION = {
             "camera soft pan, subject smiling pointing right, renewable energy site background",
         ],
     },
+    "heijmans": {
+        "bg_hint":   "large Dutch infrastructure project background, highway construction, bridge works, excavators, Heijmans-style civil engineering site, Netherlands landscape",
+        "scenes": [
+            "camera slowly zooms in, subject frustrated reviewing civil engineering blueprints at site office desk, hard hat on table",
+            "camera gentle push-in, subject standing confidently arms crossed, large infrastructure construction site in background, safety vest",
+            "camera slow pan right, subject smiling relaxed pointing right off frame, finished road or bridge in background, golden hour lighting",
+        ],
+    },
 }
 
 # ── Hulpfuncties ─────────────────────────────────────────────────────────────
@@ -113,6 +129,8 @@ def sector_to_slug(sector: str) -> str:
         "automation": "automation", "automatisering": "automation",
         "productie": "productie", "manufacturing": "productie",
         "renewable energy": "renewable-energy", "renewable": "renewable-energy",
+        "heijmans": "heijmans", "infra": "heijmans", "gww": "heijmans",
+        "civiel": "heijmans", "grond weg waterbouw": "heijmans",
     }
     return mapping.get(sector.lower().strip(), sector.lower().replace(" ", "-"))
 
@@ -162,13 +180,13 @@ def submit_kling_job(image_path: Path, scene_prompt: str,
 
     img_b64 = image_to_base64(image_path)
     payload = {
-        "model_name":   "kling-v2-6",   # Nieuwste stabiele model per docs
-        "image":        img_b64,        # API v2 slikt de raw base64 string zonder data-uri tag
+        "model_name":   "kling-v1-5",   # Pro model for superior ultra-realistic human physics
+        "image":        img_b64,
         "prompt":       scene_prompt,
         "duration":     duur,
         "aspect_ratio": formaat,
         "cfg_scale":    0.5,
-        "mode":         "std",
+        "mode":         "pro",
     }
 
     try:
@@ -252,6 +270,7 @@ def schrijf_invideo_instructie(campagne_naam: str, sector: str,
         "oil & gas": "8.5/10", "constructie": "9.1/10",
         "automation": "9.4/10", "productie": "7.8/10",
         "renewable energy": "9.7/10",
+        "heijmans": "9.2/10",
     }
     schaarste = schaarste_map.get(sector.lower(), "8+/10")
 

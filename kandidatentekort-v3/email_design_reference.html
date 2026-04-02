@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head><meta charset="UTF-8"><style>
+  body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+  .wrap{max-width:640px;margin:40px auto;background:#fff;border-radius:8px;overflow:hidden}
+  .header{background:#060708;padding:28px 40px}
+  .logo{color:#fff;font-size:1.1rem;font-weight:700}
+  .logo span{color:#E8630A}
+  .body{padding:32px 40px;color:#1a1a1a;line-height:1.7}
+  h2{color:#060708;font-size:1.2rem;margin:24px 0 8px}
+  .card{background:#f9f9f9;border-left:3px solid #E8630A;padding:16px 20px;border-radius:4px;margin:12px 0;white-space:pre-wrap;font-size:0.92rem}
+  .card.green{border-color:#22c55e}
+  .card.blue{border-color:#3b82f6}
+  .cta-btn{display:inline-block;background:#E8630A;color:#fff;padding:13px 26px;border-radius:6px;text-decoration:none;font-weight:600;margin:16px 0}
+  .footer{background:#f4f4f4;padding:18px 40px;font-size:0.8rem;color:#888;text-align:center}
+</style></head>
+<body><div class="wrap">
+  <div class="header"><div class="logo">kandidaten<span>tekort</span>.nl</div></div>
+  <div class="body">
+    <p>Hoi {{voornaam}},</p>
+    <p>Hieronder vind je de volledige AI-analyse van de vacaturetekst voor <strong>{{bedrijf}}</strong>.</p>
+
+    <h2>📊 Vacature Score</h2>
+    <div class="card">{{score}}</div>
+
+    <h2>⚠️ Top 3 Verbeterpunten</h2>
+    <div class="card">{{verbeterpunten}}</div>
+
+    <h2>✏️ Herschreven Vacaturetekst</h2>
+    <div class="card green">{{verbeterde_vacature}}</div>
+
+    <h2>🎯 Marketing Adviezen</h2>
+    <div class="card blue">{{tips}}</div>
+
+    <p style="margin-top:24px">Wil je bespreken hoe we dit concreet aanpakken voor {{bedrijf}}?</p>
+    <a href="https://calendly.com/wouter-arts-/vacature-analyse-advies" class="cta-btn">Plan gratis strategiegesprek →</a>
+    <p style="margin-top:28px;font-size:0.9rem;color:#555">Met vriendelijke groet,<br><strong>Wouter Arts</strong><br>Recruitin B.V. | Doesburg<br><a href="tel:+31614314593" style="color:#E8630A">+31 6 14 31 45 93</a></p>
+  </div>
+  <div class="footer">kandidatentekort.nl · Recruitin B.V. · Doesburg · <a href="https://recruitin.nl" style="color:#E8630A">recruitin.nl</a></div>
+</div></body></html>

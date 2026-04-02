@@ -1,0 +1,21 @@
+{
+  "bedrijfsnaam": "TestBedrijf B.V.",
+  "sector": "Automation & High Tech",
+  "bedrijfswebsite_url": "https://testbedrijf.nl",
+  "aantal_medewerkers": "250-500",
+  "campagnedoel": "Vacature snel vullen",
+  "doelgroep_functietitels": "PLC Programmeur",
+  "opleidingsniveau": "HBO",
+  "regio": "Gelderland",
+  "maandelijks_budget": "€2.500-€5.000",
+  "looptijd": "3 maanden",
+  "usps_werkgever": "Innovatief bedrijf\nFlexibele werktijden\nOpleidingsbudget",
+  "tone_of_voice": "Technisch & inhoudelijk",
+  "voornaam": "Test",
+  "achternaam": "User",
+  "functietitel_contact": "HR Manager",
+  "email": "test@testbedrijf.nl",
+  "telefoonnummer": "06-99999999",
+  "urgentie": "Urgent (1-3 maanden)",
+  "opmerkingen": "Dit is een E2E test — mag verwijderd worden"
+}

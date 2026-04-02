@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITEL}} gezocht in {{REGIO}}? | Vacaturekanon.nl</title>
+  <meta name="description"
+    content="Ontvang gratis een persoonlijke arbeidsmarktanalyse voor jouw {{TITEL}} vacature in {{REGIO}}. Binnen 10 minuten in je inbox.">
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      }; if (!f._fbq) f._fbq = n;
+      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+    }(window,
+      document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '{{META_PIXEL_ID}}');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id={{META_PIXEL_ID}}&ev=PageView&noscript=1" /></noscript>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{GA4_ID}}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '{{GA4_ID}}');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      /* Vacaturekanon Branding */
+      --brand-primary: #0C0E13;
+      --brand-accent: #E8630A;
+      --brand-accent-hover: #ff7315;
+
+      /* UI Palette */
+      --bg-body: #060708;
+      --bg-card: #0C0E13;
+      --bg-card-hover: #161922;
+      --text-main: #FFFFFF;
+      --text-muted: #9CA3AF;
+      --border-color: rgba(255, 255, 255, 0.08);
+
+      /* Glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-blur: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-heading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigatie */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(6, 7, 8, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .logo em {
+      color: var(--brand-accent);
+      font-style: normal;
+    }
+
+    .nav-cta {
+      background: var(--brand-accent);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--brand-accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 10rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 0%, rgba(232, 99, 10, 0.15) 0%, transparent 50%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(circle at 15% 50%, rgba(232, 99, 10, 0.05) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(232, 99, 10, 0.05) 0%, transparent 25%);
+      z-index: -1;
+    }
+
+    .hero-inner {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232, 99, 10, 0.1);
+      border: 1px solid rgba(232, 99, 10, 0.2);
+      color: var(--brand-accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--brand-accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(232, 99, 10, 0.7);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(232, 99, 10, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(232, 99, 10, 0);
+      }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    h1 em {
+      color: var(--brand-accent);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .btn-primary {
+      background: var(--brand-accent);
+      color: white;
+      box-shadow: 0 8px 24px -6px rgba(232, 99, 10, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -8px rgba(232, 99, 10, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Stats */
+    .stats {
+      padding: 4rem 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 2.5rem;
+      color: var(--brand-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 8rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .accent-text {
+      color: var(--brand-accent);
+    }
+
+    /* Stappen */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--brand-accent);
+      background: var(--bg-card-hover);
+    }
+
+    .step-nr {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--brand-accent);
+      opacity: 0.1;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      line-height: 1;
+    }
+
+    .step-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .step-card p {
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    /* Form Sectie */
+    .form-section {
+      background: radial-gradient(circle at 100% 100%, rgba(232, 99, 10, 0.1) 0%, transparent 40%);
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      padding: 4rem;
+      border-radius: 32px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-banner {
+      background: rgba(232, 99, 10, 0.05);
+      border: 1px solid rgba(232, 99, 10, 0.1);
+      color: var(--brand-accent);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .jotform-box {
+      min-height: 560px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .jotform-box iframe {
+      width: 100%;
+      min-height: 560px;
+      border: none;
+    }
+
+    /* Social Proof */
+    .proof {
+      background: var(--bg-card);
+    }
+
+    .quote-box {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 4rem;
+      background: var(--bg-body);
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .quote-box::before {
+      content: '“';
+      font-family: 'Outfit', sans-serif;
+      font-size: 8rem;
+      color: var(--brand-accent);
+      opacity: 0.2;
+      position: absolute;
+      top: -1rem;
+      left: 2rem;
+      line-height: 1;
+    }
+
+    blockquote {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    cite {
+      font-style: normal;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    cite strong {
+      color: var(--text-main);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .footer-logo em {
+      color: var(--brand-accent);
+      font-style: normal;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand-accent);
+    }
+
+    .footer-copy {
+      color: rgba(255, 255, 255, 0.2);
+      font-size: 0.8rem;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 900px) {
+
+      .stats-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-container {
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">Vacature<em>kanon</em></a>
+      <a href="#analyse" class="nav-cta">Gratis Analyse</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="badge reveal active">
+          <span class="badge-dot"></span>
+          {{SECTOR}} · {{REGIO}}
+        </div>
+        <h1 class="reveal active">Is jouw <em>{{TITEL}}</em> vacature al langer dan 6 weken open?</h1>
+        <p class="reveal active">
+          {{SECTOR}} bedrijven in {{REGIO}} kampen met extreme technische schaarste.
+          Ontvang <strong>gratis</strong> een persoonlijke analyse van jouw wervingssituatie — direct in je inbox.
+        </p>
+        <div class="hero-btns reveal active">
+          <a href="#analyse" class="btn btn-primary">Vraag gratis analyse aan</a>
+          <a href="#hoe-het-werkt" class="btn btn-secondary">Hoe het werkt</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <h3>{{SCHAARSTE}}</h3>
+          <p>Schaarste-score<br>{{SECTOR}} technici in NL</p>
+        </div>
+        <div class="stat-card reveal">
+          <h3>{{DOORLOOP}}</h3>
+          <p>Gemiddelde doorlooptijd<br>open {{TITEL}} vacature</p>
+        </div>
+        <div class="stat-card reveal">
+          <h3>{{KOSTEN}}</h3>
+          <p>Faalkosten per jaar<br>bij onvervulde vacature</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="pijnpunt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="reveal">Elke dag zonder {{TITEL}} kost <span class="accent-text">geld.</span></h2>
+        <p class="reveal">
+          De {{SECTOR}} arbeidsmarkt staat onder ongekende druk. Terwijl de vraag stijgt,
+          daalt het beschikbare talent. 1 op de 5 vacatures in {{REGIO}} staat langer dan 6 maanden open.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hoe-het-werkt" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="reveal">Hoe het werkt</h2>
+        <p class="reveal">In 3 stappen naar een persoonlijke marktanalyse</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-nr">01</div>
+          <h3>Vul formulier in</h3>
+          <p>Slechts 2 minuten werk. Geef ons de functie, sector en regio door.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-nr">02</div>
+          <h3>AI Analyseert</h3>
+          <p>Ons systeem checkt real-time de beschikbaarheid en concurrentie in de regio.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-nr">03</div>
+          <h3>Rapport direct</h3>
+          <p>Binnen 10 minuten ontvang je het volledige rapport in jouw inbox.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" id="analyse">
+    <div class="container">
+      <div class="form-container">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <h2 class="reveal">Analyse aanvragen</h2>
+          <p class="reveal">Gratis, vrijblijvend en binnen 10 minuten geleverd.</p>
+        </div>
+        <div class="stat-banner reveal">
+          🚀 {{STAT1}}
+        </div>
+        <div class="jotform-box reveal">
+          <iframe id="jotform-iframe"
+            src="{{JOTFORM_URL}}?utm_source=landingpage&utm_campaign={{CAMPAGNE_NAAM}}&sector={{SECTOR_SLUG}}&regio={{REGIO}}"
+            scrolling="yes" allow="geolocation; microphone; camera" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="container">
+      <div class="quote-box reveal">
+        <blockquote>
+          "Binnen 6 weken hadden we 3 gekwalificeerde kandidaten voor een rol die al 5 maanden openstond.
+          De analyse gaf ons direct inzicht in waarom ons bereik voorheen te smal was."
+        </blockquote>
+        <cite>— HR Manager · <strong>{{SECTOR}} bedrijf, {{REGIO}}</strong></cite>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <a href="/" class="footer-logo">Vacature<em>kanon</em></a>
+      <div class="footer-links">
+        <a href="#privacy">Privacybeleid</a>
+        <a href="#voorwaarden">Voorwaarden</a>
+        <a href="https://recruitin.nl">Recruitin.nl</a>
+      </div>
+      <p class="footer-copy">
+        © 2026 Recruitin B.V. · Doesburg · info@recruitin.nl
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal animation on scroll
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    // Run once on load
+    reveal();
+
+    // Meta Pixel tracking scroll
+    let tracked = {};
+    window.addEventListener('scroll', () => {
+      const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 90].forEach(p => {
+        if (pct >= p && !tracked[p]) {
+          tracked[p] = true;
+          if (typeof fbq !== 'undefined') fbq('trackCustom', 'ScrollDepth', { depth: p });
+        }
+      });
+    }, { passive: true });
+
+    // Lead event tracking (Jotform)
+    window.addEventListener('message', e => {
+      if (e.data && e.data.action === 'submission-completed') {
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+        if (typeof gtag !== 'undefined') gtag('event', 'generate_lead');
+      }
+    });
+  </script>
+</body>
+
+</html>

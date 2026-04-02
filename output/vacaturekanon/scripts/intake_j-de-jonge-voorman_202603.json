@@ -1,0 +1,91 @@
+{
+  "bedrijfsnaam": "J de Jonge",
+  "bedrijfsnaam_kort": "J",
+  "tagline": "Creating The Next-Gen Industry",
+  "over_bedrijf": "Sinds 1954 is J de Jonge een vertrouwde leider in EPC-contractering.\nGespecialiseerd in mechanische en piping systemen.\nMet locaties in Nederland, België, Duitsland en Saudi-Arabië.",
+  "website": "https://jdejonge.com",
+  "sector": "constructie",
+  "opgericht": "1954",
+  "medewerkers": "217+",
+  "stats": [
+    {
+      "waarde": "16.844m²",
+      "label": "Productiecapaciteit"
+    },
+    {
+      "waarde": "217+",
+      "label": "Medewerkers"
+    },
+    {
+      "waarde": "1954",
+      "label": "Opgericht"
+    },
+    {
+      "waarde": "55+",
+      "label": "Culturen"
+    }
+  ],
+  "functietitel": "Voorman",
+  "locatie": "Nederland",
+  "dienstverband": "Fulltime",
+  "hero_intro": "Join The Next Gen Connectors. Word onderdeel van een familiebedrijf waar innovatie en samenwerking de toekomst van engineering vormgeven.",
+  "taken": [
+    "Aansturen en coördineren van montage- en constructieploegen",
+    "Toezicht houden op kwaliteit en voortgang van projecten",
+    "Werkplanningen opstellen en bewaken",
+    "Communiceren met projectmanagers en opdrachtgevers",
+    "Zorgen voor veilige werkomgeving (VCA)"
+  ],
+  "eisen": [
+    "Minimaal 5 jaar ervaring in de industriële of EPC-sector",
+    "Relevante technische opleiding (MBO/HBO)",
+    "VCA-VOL certificaat",
+    "Ervaring met mechanische installaties en piping",
+    "Rijbewijs B"
+  ],
+  "benefits": [
+    {
+      "icon": "💰",
+      "titel": "Competitief Salaris",
+      "tekst": "Marktconform salaris passend bij ervaring"
+    },
+    {
+      "icon": "🚗",
+      "titel": "Bedrijfsauto",
+      "tekst": "Volledige bedrijfsauto inclusief privégebruik"
+    },
+    {
+      "icon": "📚",
+      "titel": "Flow Academy",
+      "tekst": "Groei via onze eigen Flow Academy"
+    },
+    {
+      "icon": "🛡️",
+      "titel": "Pensioen",
+      "tekst": "Uitstekende pensioenregeling"
+    },
+    {
+      "icon": "🤝",
+      "titel": "Team",
+      "tekst": "Hechte no-nonsense familie cultuur"
+    },
+    {
+      "icon": "🌍",
+      "titel": "Internationaal",
+      "tekst": "Projecten in NL, Europa en worldwide"
+    },
+    {
+      "icon": "⚡",
+      "titel": "Innovatie",
+      "tekst": "Cutting-edge technologie en systemen"
+    },
+    {
+      "icon": "🌱",
+      "titel": "Duurzaam",
+      "tekst": "CO₂ Prestatieladder niveau 3"
+    }
+  ],
+  "hr_email": "hr@jdejonge.com",
+  "hr_telefoon": "+31 (0)10 248 58 00",
+  "careers_url": "https://jdejonge.com/careers"
+}

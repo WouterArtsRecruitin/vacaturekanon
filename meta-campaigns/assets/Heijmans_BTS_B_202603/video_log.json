@@ -1,0 +1,20 @@
+[
+  {
+    "scene_id": "B1_prep",
+    "task_id": "860838151341490186",
+    "prompt": "Raw behind-the-scenes: Dutch road construction worker (male, 45-50, yellow safety vest, real person not model) being pre…",
+    "submitted_at": "2026-03-11T23:32:07.775947",
+    "status": "completed",
+    "video_url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260312/6c075b5bcb1ac4f466602b0324362f72-11e29ff3-8b18-4a9c-a508-bc9bdac6d3f4.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAEoT8S6ZdiFfd-8iDKzRjUSzFqWm9luB9FaB8NaWfzczE9GdCeGE8cA7UV1unHXtTUt0HQNQPDajjK6qVLtHhhfNcyR2hI011lu48DoHQs2YUT_RwAhS76LUf28piQE3x71RtjjA9yOqz0zcoaQIKgA1vNGPIO2ZDZzFry2_vklxQeVgqK-EaWqeBXb8nL_EGIiWdn22mslAmcOmYCrDx2PYcnrs4YHIxMWPpBDSkQ-xBoSf6vJMx190TgGD4GP2nZFxCPDIiC3IUzRXIedYzYRfZJ0n_9NPBcpYfCZKO8QXabTjACjMygFMAE&x-kcdn-pid=112781&ksSecret=7760928b9ddb7f7237c8912abb4229fa&ksTime=69d97c52",
+    "completed_at": "2026-03-11T23:40:28.921518"
+  },
+  {
+    "scene_id": "B2_blooper",
+    "task_id": "860838161038049362",
+    "prompt": "Raw BTS blooper: same Dutch construction worker starts speaking to camera, immediately loses his line mid-sentence, burs…",
+    "submitted_at": "2026-03-11T23:32:10.109225",
+    "status": "completed",
+    "video_url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260312/a8d8818b333b1ad7e04fa5da8cd9d021-ec4ea5e1-3e76-409a-a1b8-89f817062631.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAFl0xpJTANlozmweGkshpuGr_qg3vEnFPB1Pdf5OtqdWZR0MWkQeulG5tHunYaXn9qyVNxbL2Twpz75UNtYX43Qjm0Zp2dSHXVZilnh2AxJJf-MLltF0MyAOxojvIZWjdpoLsegY4_hPCkeZ9ZUvoJktWiH2nLs87t_86JYGsvBiVjCmFIzSeWvHC1YG3FmkqLOjrwdqksAHAxqXhs913S9_6N2EwnSdElG5lkhiJ5cyBoSk8Q9wF5iLa3FHD-a4yQLv8RpIiCUVpih_zQitk0vDyax6ZxCZEh9O0yQoaCnOqIjvVVEDSgFMAE&x-kcdn-pid=112781&ksSecret=eef7fa9fc6226555daa0c1012f505a60&ksTime=69d97c53",
+    "completed_at": "2026-03-11T23:40:38.653476"
+  }
+]

@@ -1,0 +1,20 @@
+Task,Priority,Timeframe,Owner,Status,Start Date,Target Date,Notes
+"Increase campaign budget: €10.74 → €500/month",CRITICAL,Week 1,Meta Ads Manager,TODO,2026-03-31,2026-04-07,Daily budget: €16.67
+"Set up CPL monitoring alert (trigger: > €12)",CRITICAL,Week 1,Analytics,TODO,2026-03-31,2026-04-07,Create automated alert
+"Create 3 new ad variants with headlines",HIGH,Week 1-2,Creative,TODO,2026-03-31,2026-04-14,"1) Benefit-driven 2) Urgency 3) Pain-point"
+"Launch A/B test: Monitor CTR/CPC daily",HIGH,Week 1,Ads Manager,TODO,2026-03-31,2026-04-14,Compare performance metrics
+"Review creative performance: Pause worst variant",HIGH,Week 2,Ads Manager,TODO,2026-04-07,2026-04-14,After 48 hours testing
+"Create audience segments: Junior vs. Senior",HIGH,Week 2-3,Targeting,TODO,2026-04-07,2026-04-21,2 separate ad sets
+"Audit landing page: Load time",MEDIUM,Week 3,UX/Performance,TODO,2026-04-07,2026-04-21,Target: < 2 seconds
+"Optimize landing page images (< 200KB)",MEDIUM,Week 3,UX,TODO,2026-04-07,2026-04-21,Compress all images
+"Add video testimonial (60-90 sec from employee)",MEDIUM,Week 3,Content,TODO,2026-04-07,2026-04-21,Record & upload
+"Add salary range prominently (€4500-€6500)",MEDIUM,Week 3,Copy,TODO,2026-04-07,2026-04-21,High visibility placement
+"Simplify landing page form (name/email/phone only)",MEDIUM,Week 3,UX,TODO,2026-04-07,2026-04-21,Remove unnecessary fields
+"A/B test CTA: 'Apply Now' vs 'Schedule Interview'",MEDIUM,Week 3-4,Testing,TODO,2026-04-14,2026-04-28,Track conversion difference
+"Set up lead quality tracking spreadsheet",MEDIUM,Week 2,Analytics,TODO,2026-04-07,2026-04-14,"Columns: Date, Leads, Interviews, Offers, CPH"
+"Weekly sync with hiring manager: Lead quality",MEDIUM,Ongoing,Management,TODO,2026-04-07,2026-06-30,Assess quality feedback
+"Install Meta pixel on landing page",LOW,Week 2,Development,TODO,2026-04-07,2026-04-14,"If not already installed"
+"Create retargeting audience (7-day window)",LOW,Week 4,Targeting,TODO,2026-04-21,2026-04-28,Website visitors
+"Create awareness campaign: Company culture",LOW,Month 2,Creative,TODO,2026-05-01,2026-05-15,Budget: 20% of lead campaign
+"Monthly review: CPL/CTR/Conversion metrics",LOW,Ongoing,Analytics,TODO,2026-04-30,2026-06-30,"Every 30 days assessment"
+"Decision: Continue scaling or adjust?",CRITICAL,Week 4,Management,TODO,2026-04-28,2026-05-05,"Based on month 1 data"

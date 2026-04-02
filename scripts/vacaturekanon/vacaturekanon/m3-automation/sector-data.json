@@ -1,0 +1,127 @@
+{
+  "Oil & Gas": {
+    "avg_time_to_hire": "67",
+    "arbeidsmarkt_krapte": "2.3 vacatures per werkzoekende",
+    "avg_salary_range": "€3.500 — €6.500 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)",
+    "common_titles": [
+      "Process Engineer",
+      "HSE Advisor",
+      "Maintenance Technician",
+      "Instrument Engineer",
+      "Pipeline Engineer",
+      "Commissioning Engineer"
+    ],
+    "usps_suggestions": [
+      "Offshore rotaties met aantrekkelijke toeslagen",
+      "Certificeringen volledig vergoed",
+      "Internationale projecten wereldwijd",
+      "Marktconforme pensioenregeling"
+    ],
+    "market_insight": "De energietransitie drijft vraag naar ervaren Oil & Gas professionals die de overstap maken naar duurzame energie.",
+    "pain_point": "Technisch talent trekt naar energietransitie — Oil & Gas bedrijven verliezen kandidaten aan concurrerende sectoren"
+  },
+  "Constructie & Infra": {
+    "avg_time_to_hire": "58",
+    "arbeidsmarkt_krapte": "3.1 vacatures per werkzoekende",
+    "avg_salary_range": "€3.000 — €5.500 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #1b2a1b 0%, #2d4a2d 50%, #1a3a1a 100%)",
+    "common_titles": [
+      "Werkvoorbereider",
+      "Projectleider Bouw",
+      "Calculator",
+      "Uitvoerder",
+      "BIM Modelleur",
+      "Civiel Technisch Tekenaar"
+    ],
+    "usps_suggestions": [
+      "Werken aan zichtbare projecten in de regio",
+      "Doorgroeimogelijkheden naar projectleiding",
+      "Bedrijfsbus of leaseauto",
+      "Vaste aanstelling met goede CAO"
+    ],
+    "market_insight": "De bouwsector kampt met vergrijzing. 30% van de vakmensen gaat binnen 10 jaar met pensioen.",
+    "pain_point": "Vergrijzing raakt de bouw hard — 40% van werknemers is 50+, instroom blijft achter"
+  },
+  "Productie & Manufacturing": {
+    "avg_time_to_hire": "52",
+    "arbeidsmarkt_krapte": "2.8 vacatures per werkzoekende",
+    "avg_salary_range": "€2.800 — €5.000 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%)",
+    "common_titles": [
+      "CNC Operator",
+      "Productieleider",
+      "Kwaliteitsmanager",
+      "Maintenance Engineer",
+      "Supply Chain Planner",
+      "Procesoperator"
+    ],
+    "usps_suggestions": [
+      "Werken met state-of-the-art machines",
+      "Ploegentoeslag en ADV dagen",
+      "Interne opleidingen en certificeringen",
+      "Stabiele werkgever met lange historie"
+    ],
+    "market_insight": "Reshoring en automatisering drijven de vraag naar productie professionals met digitale vaardigheden.",
+    "pain_point": "Productie draait op ervaren vakmensen — elke lege stoel kost direct omzetverlies"
+  },
+  "Automation & High Tech": {
+    "avg_time_to_hire": "71",
+    "arbeidsmarkt_krapte": "3.8 vacatures per werkzoekende",
+    "avg_salary_range": "€3.500 — €6.000 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #0a192f 0%, #112240 50%, #1a365d 100%)",
+    "common_titles": [
+      "PLC Programmeur",
+      "Automation Engineer",
+      "Vision Engineer",
+      "Robotics Engineer",
+      "Systems Architect",
+      "Commissioning Engineer"
+    ],
+    "usps_suggestions": [
+      "Werken aan cutting-edge technologie",
+      "Internationale projecten bij top OEM's",
+      "Persoonlijk opleidingsbudget",
+      "Flexibel werken en hybride model"
+    ],
+    "market_insight": "De high tech sector groeit met 12% per jaar. Oost-Nederland en Brainport kampen met extreme schaarste.",
+    "pain_point": "De beste automation engineers worden benaderd door 5+ recruiters per maand — passief bereik is essentieel"
+  },
+  "Renewable Energy": {
+    "avg_time_to_hire": "63",
+    "arbeidsmarkt_krapte": "4.2 vacatures per werkzoekende",
+    "avg_salary_range": "€3.200 — €5.800 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)",
+    "common_titles": [
+      "Solar Engineer",
+      "Wind Turbine Technician",
+      "Project Developer Energy",
+      "Electrical Engineer",
+      "Energy Consultant",
+      "Grid Engineer"
+    ],
+    "usps_suggestions": [
+      "Bijdragen aan de energietransitie",
+      "Snelgroeiende sector met carrièrekansen",
+      "Werken aan innovatieve projecten",
+      "Aantrekkelijke groene arbeidsvoorwaarden"
+    ],
+    "market_insight": "De energietransitie creëert 45.000 nieuwe banen per jaar. Vraag overtreft aanbod met factor 4.",
+    "pain_point": "Energietransitie schreeuwt om talent — de sector groeit sneller dan de opleidingscapaciteit"
+  },
+  "Anders": {
+    "avg_time_to_hire": "55",
+    "arbeidsmarkt_krapte": "2.1 vacatures per werkzoekende",
+    "avg_salary_range": "€2.800 — €5.000 bruto/maand",
+    "hero_gradient": "linear-gradient(135deg, #1f2937 0%, #374151 100%)",
+    "common_titles": [],
+    "usps_suggestions": [
+      "Goede arbeidsvoorwaarden",
+      "Doorgroeimogelijkheden",
+      "Prettige werkomgeving",
+      "Marktconform salaris"
+    ],
+    "market_insight": "De technische arbeidsmarkt kampt breed met krapte, met gemiddeld 2+ vacatures per werkzoekende.",
+    "pain_point": "Technisch talent is schaars in vrijwel alle sectoren — snelheid van werving is doorslaggevend"
+  }
+}

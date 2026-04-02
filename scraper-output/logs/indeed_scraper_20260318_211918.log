@@ -1,0 +1,75 @@
+2026-03-18 21:19:18,509 - INFO - ======================================================================
+2026-03-18 21:19:18,509 - INFO - Indeed Vacatures Scraper v4.0 - FIXED + ANTI-BOT
+2026-03-18 21:19:18,509 - INFO - ======================================================================
+2026-03-18 21:19:18,509 - INFO - Locatie: Arnhem (30km radius)
+2026-03-18 21:19:18,509 - INFO - Zoektermen: projectleider, werkvoorbereider, monteur, engineer technisch, calculator
+2026-03-18 21:19:18,509 - INFO - Stealth mode: ✅ playwright-stealth geladen
+2026-03-18 21:19:18,509 - INFO - Gestart: 2026-03-18 21:19:18
+2026-03-18 21:19:18,509 - INFO - ======================================================================
+2026-03-18 21:19:18,514 - INFO - ✅ Database initialized
+2026-03-18 21:19:22,520 - INFO - ✅ Browser context aangemaakt | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...
+2026-03-18 21:19:22,521 - INFO - ✅ Browser gestart (stealth context)
+2026-03-18 21:19:22,521 - INFO - 
+[1/5] Verwerken: projectleider
+2026-03-18 21:19:22,521 - INFO - 🔍 Start scrape: 'projectleider'
+2026-03-18 21:19:22,659 - INFO -    🥷 Stealth mode actief (v2.x)
+2026-03-18 21:19:22,661 - INFO -    URL: https://www.indeed.nl/jobs?q=projectleider&l=Arnhem&radius=30&sort=date
+2026-03-18 21:19:37,237 - INFO -    Geen job links gevonden op pagina 1
+2026-03-18 21:19:37,241 - INFO -    ✅ 'projectleider': 0 NIEUW | 0 duplicaten | 0 pagina's
+2026-03-18 21:19:37,259 - INFO -    ⏳ Wachten 4.8s voor volgende zoekterm...
+2026-03-18 21:19:42,092 - INFO - 
+[2/5] Verwerken: werkvoorbereider
+2026-03-18 21:19:42,093 - INFO - 🔍 Start scrape: 'werkvoorbereider'
+2026-03-18 21:19:42,262 - INFO -    🥷 Stealth mode actief (v2.x)
+2026-03-18 21:19:42,267 - INFO -    URL: https://www.indeed.nl/jobs?q=werkvoorbereider&l=Arnhem&radius=30&sort=date
+2026-03-18 21:19:58,471 - INFO -    Geen job links gevonden op pagina 1
+2026-03-18 21:19:58,472 - INFO -    ✅ 'werkvoorbereider': 0 NIEUW | 0 duplicaten | 0 pagina's
+2026-03-18 21:19:58,485 - INFO -    ⏳ Wachten 5.7s voor volgende zoekterm...
+2026-03-18 21:20:04,215 - INFO - 
+[3/5] Verwerken: monteur
+2026-03-18 21:20:04,216 - INFO - 🔍 Start scrape: 'monteur'
+2026-03-18 21:20:04,305 - INFO -    🥷 Stealth mode actief (v2.x)
+2026-03-18 21:20:04,306 - INFO -    URL: https://www.indeed.nl/jobs?q=monteur&l=Arnhem&radius=30&sort=date
+2026-03-18 21:20:18,268 - INFO -    Geen job links gevonden op pagina 1
+2026-03-18 21:20:18,275 - INFO -    ✅ 'monteur': 0 NIEUW | 0 duplicaten | 0 pagina's
+2026-03-18 21:20:18,308 - INFO -    ⏳ Wachten 6.5s voor volgende zoekterm...
+2026-03-18 21:20:24,842 - INFO - 
+[4/5] Verwerken: engineer technisch
+2026-03-18 21:20:24,844 - INFO - 🔍 Start scrape: 'engineer technisch'
+2026-03-18 21:20:25,008 - INFO -    🥷 Stealth mode actief (v2.x)
+2026-03-18 21:20:25,013 - INFO -    URL: https://www.indeed.nl/jobs?q=engineer+technisch&l=Arnhem&radius=30&sort=date
+2026-03-18 21:20:39,558 - INFO -    Geen job links gevonden op pagina 1
+2026-03-18 21:20:39,559 - INFO -    ✅ 'engineer technisch': 0 NIEUW | 0 duplicaten | 0 pagina's
+2026-03-18 21:20:39,601 - INFO -    ⏳ Wachten 7.5s voor volgende zoekterm...
+2026-03-18 21:20:47,132 - INFO - 
+[5/5] Verwerken: calculator
+2026-03-18 21:20:47,134 - INFO - 🔍 Start scrape: 'calculator'
+2026-03-18 21:20:47,228 - INFO -    🥷 Stealth mode actief (v2.x)
+2026-03-18 21:20:47,230 - INFO -    URL: https://www.indeed.nl/jobs?q=calculator&l=Arnhem&radius=30&sort=date
+2026-03-18 21:21:02,847 - INFO -    Geen job links gevonden op pagina 1
+2026-03-18 21:21:02,849 - INFO -    ✅ 'calculator': 0 NIEUW | 0 duplicaten | 0 pagina's
+2026-03-18 21:21:02,891 - INFO - 
+✅ Alle zoektermen verwerkt
+2026-03-18 21:21:02,908 - INFO - ✅ Context gesloten
+2026-03-18 21:21:02,908 - INFO - ✅ Browser gesloten
+2026-03-18 21:21:02,908 - INFO - ✅ Playwright gesloten
+2026-03-18 21:21:02,913 - INFO - ✅ Database gesloten
+2026-03-18 21:21:02,913 - WARNING - Geen vacatures om te exporteren
+2026-03-18 21:21:02,914 - INFO - ✅ Stats geëxporteerd: /Users/wouterarts/recruitin/scraper-output/indeed_stats_20260318_211918.json
+2026-03-18 21:21:02,914 - INFO - ======================================================================
+2026-03-18 21:21:02,914 - INFO - SCRAPING KLAAR
+2026-03-18 21:21:02,914 - INFO - ======================================================================
+2026-03-18 21:21:02,914 - INFO - Totaal gevonden:   0
+2026-03-18 21:21:02,914 - INFO - Totaal NIEUW:      0
+2026-03-18 21:21:02,914 - INFO - Totaal fouten:     0
+2026-03-18 21:21:02,914 - INFO - 
+2026-03-18 21:21:02,914 - INFO - Per zoekterm:
+2026-03-18 21:21:02,914 - INFO -   projectleider: 0 nieuw | 0 dup | 0 pagina's
+2026-03-18 21:21:02,914 - INFO -   werkvoorbereider: 0 nieuw | 0 dup | 0 pagina's
+2026-03-18 21:21:02,914 - INFO -   monteur: 0 nieuw | 0 dup | 0 pagina's
+2026-03-18 21:21:02,914 - INFO -   engineer technisch: 0 nieuw | 0 dup | 0 pagina's
+2026-03-18 21:21:02,915 - INFO -   calculator: 0 nieuw | 0 dup | 0 pagina's
+2026-03-18 21:21:02,915 - INFO - 
+2026-03-18 21:21:02,915 - INFO - JSON: /Users/wouterarts/recruitin/scraper-output/indeed_stats_20260318_211918.json
+2026-03-18 21:21:02,915 - INFO - Log:  /Users/wouterarts/recruitin/scraper-output/logs/indeed_scraper_20260318_211918.log
+2026-03-18 21:21:02,915 - INFO - ======================================================================

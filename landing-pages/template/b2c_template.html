@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacature: {{FUNCTIE}} bij {{BEDRIJF}} | {{REGIO}}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Lovable Premium Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '{{META_PIXEL_ID}}');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id={{META_PIXEL_ID}}&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <style>
+        :root {
+
+            /* Dynamische Klant Branding */
+            --brand-primary: __BRAND_PRIMARY__;
+            --brand-secondary: __BRAND_SECONDARY__;
+            --brand-gradient: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+
+            /* Premium Lovable Design System */
+            --bg-body: #fafcff;
+            --bg-secondary: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.06);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            --glass-blur: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(0, 0, 0, 0.01) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 0, 0, 0.01) 0%, transparent 25%);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .logo {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Navigatie Glassmorphism */
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        .logo-wrap {
+            max-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-wrap img {
+            max-height: 40px;
+            max-width: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+        }
+
+        /* Premium Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 99px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--brand-gradient);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px -3px var(--brand-primary), 0 2px 6px -2px var(--brand-secondary);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px -5px var(--brand-primary), 0 4px 10px -3px var(--brand-secondary);
+            filter: brightness(1.1);
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 2rem;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Animatie Utilities */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        @keyframes fadeUpAnim {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Sectie - Full Bleed Background */
+        .hero {
+            padding: 8rem 5% 5rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('{{HERO_IMAGE}}');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 4rem 3rem;
+            background: rgba(40, 40, 50, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tag-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--brand-gradient);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--brand-primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+
+            70% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+        }
+
+        .hero h1 {
+            color: #ffffff;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .highlight {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--brand-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--brand-primary);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.8;
+                box-shadow: 0 0 0 0 rgba(var(--brand-primary), 0.7);
+            }
+
+            70% {
+                transform: scale(1.1);
+                opacity: 0;
+                box-shadow: 0 0 0 10px rgba(var(--brand-primary), 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0;
+                box-shadow: 0 0 0 0 rgba(var(--brand-primary), 0);
+            }
+        }
+
+        .highlight {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero {
+                padding-top: 7rem;
+            }
+
+            .hero-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .section {
+                padding: 5rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+        }
+
+        .section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-alt {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Organische blobs op alt sections */
+        .section-alt::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: var(--brand-gradient);
+            opacity: 0.04;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .content-block {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+        }
+
+        .content-label {
+            display: inline-block;
+            text-transform: uppercase;
+            color: var(--brand-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.02);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .content-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .content-block p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Lijst Items */
+        .check-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .check-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            /* SVG kleur hack: filter */
+            filter: invert(41%) sepia(87%) saturate(2250%) hue-rotate(352deg) brightness(97%) contrast(97%);
+            /* Let op: fallback color logic is lastig in plain CSS. We maken hem donkergrijs met mask of laten SVG brandcolor aannemen (kan niet direct)
+               We passen een slimme CSS mask toe: */
+        }
+
+        /* Modernere manier voor gekleurde icons in lists */
+        .check-list li .icon-wrapper {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--brand-primary);
+        }
+
+        /* Perks Grid */
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .perk-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .perk-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .perk-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .perk-card:hover::before {
+            opacity: 1;
+        }
+
+        .perk-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-primary);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .perk-card:hover .perk-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .perk-card h4 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .perk-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Formulier Sectie - Premium Glassmorphism Box */
+        .cta-wrapper {
+            background: #fff;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+        }
+
+        .cta-info {
+            background: var(--bg-secondary);
+            padding: 5rem 4rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cta-info::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--border-color), transparent);
+        }
+
+        .cta-form {
+            padding: 5rem 4rem;
+            background: #fff;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.3s;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-field::placeholder {
+            color: #a1a1aa;
+        }
+
+        .input-field:focus {
+            background: #fff;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.03);
+            transform: translateY(-2px);
+        }
+
+        .consent-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .consent-row input {
+            margin-top: 4px;
+            accent-color: var(--brand-primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .consent-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-body);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .cta-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-info::after {
+                display: none;
+            }
+
+            .cta-info,
+            .cta-form {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 3rem 1.5rem;
+                margin: 0 4%;
+            }
+
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero {
+                padding-top: 7rem;
+            }
+
+            .section {
+                padding: 5rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-wrap">
+            {{KLANT_LOGO_HTML}}
+        </div>
+        <a href="#solliciteren" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.95rem;">
+            Solliciteer Nu
+        </a>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="tag fade-up">
+                <span class="tag-dot"></span>
+                Actuele vacature in {{REGIO}}
+            </div>
+
+            <h1 class="fade-up delay-100">Jouw nieuwe rol als <br><span class="highlight">{{FUNCTIE}}</span></h1>
+
+            <p class="fade-up delay-200">
+                Klaar voor de volgende stap in de {{SECTOR}}? <br>Bouw mee aan innovatieve trajecten en ontdek wat wij
+                voor
+                jou in petto hebben bij <strong>{{BEDRIJF}}</strong>.
+            </p>
+
+            <div class="hero-buttons fade-up delay-300">
+                <a href="#solliciteren" class="btn btn-primary">Solliciteer in 60 sec</a>
+                <a href="#de-rol" class="btn btn-secondary">Ontdek de functie</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: INTRO & TAKEN -->
+    <section class="section section-alt" id="de-rol">
+        <div class="container">
+            <div class="grid-2">
+                <div class="content-block">
+                    <span class="content-label">De Impact</span>
+                    <h3>Wat ga je doen?</h3>
+                    <p>Als {{FUNCTIE}} ben je verantwoordelijk voor hoogwaardige resultaten. Je komt terecht in een
+                        dynamische en innovatieve technische omgeving in de regio {{REGIO}}.</p>
+                    <p>Je werkt nauw samen met gedreven specialisten uit eigen huis aan toonaangevende projecten binnen
+                        de {{SECTOR}}. Bij {{BEDRIJF}} delen we een nuchtere mentaliteit en liefde voor het vak.</p>
+                </div>
+
+                <div class="content-block">
+                    <span class="content-label">Het Profiel</span>
+                    <h3>Wie ben jij?</h3>
+                    <p>{{PROFIEL_OMSCHRIJVING}}</p>
+
+                    <ul class="check-list">
+                        {{VEREISTEN_LIJST}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: AANBOD & PERKS -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Wat verwachten wij terug te geven?</h2>
+                <p class="section-subtitle">We vragen inzet en passie, maar daar staat uiteraard iets heel moois
+                    tegenover. Voorwaarden gericht op de toekomst.</p>
+            </div>
+
+            <div class="perks-grid">
+                <!-- Perk 1 -->
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h4>Direct een dienstverband</h4>
+                    <p>We bieden direct een contract bij {{BEDRIJF}} met helder uitzicht op een vaste verbintenis.
+                        Vertrouwen vanaf dag één.</p>
+                </div>
+
+                <!-- Perk 2 -->
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h4>Stevig Salarishuis</h4>
+                    <p>{{SALARIS_OMSCHRIJVING}}</p>
+                </div>
+
+                <!-- Perk 3 -->
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h4>Snelle Procedure</h4>
+                    <p>Wij houden net als jij van doorpakken. Geen eindeloze rondes; wij koppelen binnen 24 uur terug en
+                        plannen we snel een kennismaking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FORMULIER / CTA -->
+    <section class="section section-alt" id="solliciteren">
+        <div class="container">
+            <div class="cta-wrapper">
+                <div class="cta-info">
+                    <h2 class="section-title" style="text-align: left;">Sluit je aan bij de professionals.</h2>
+                    <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 1rem;">
+                        Laat je gegevens achter zonder gedoe. Er is geen formele motivatiebrief of CV document vereist.
+                        Onze recruiter neemt persoonlijk contact met je op.
+                    </p>
+                </div>
+
+                <div class="cta-form">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 2rem;">Ik heb interesse in deze rol</h3>
+
+                    <form
+                        action="javascript:console.log('Lead Verzonden'); alert('Sollicitatie succesvol ontvangen!');">
+                        <div class="input-group">
+                            <input type="text" placeholder="Volledige Voor- en Achternaam" class="input-field" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" placeholder="Jouw Telefoonnummer" class="input-field" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder="E-mailadres" class="input-field" required>
+                        </div>
+
+                        <div class="consent-row">
+                            <input type="checkbox" id="consent" required>
+                            <label for="consent" class="consent-label">Ik ga ermee akkoord dat {{BEDRIJF}} vertrouwelijk
+                                contact met mij opneemt naar aanleiding van deze vacature voor de positie van
+                                {{FUNCTIE}}.</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; padding: 1.2rem; font-size: 1.1rem;">
+                            Verstuur Sollicitatie →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 {{BEDRIJF}}. Alle rechten voorbehouden. Ontwikkeld door Recruitin Automation Platform.</p>
+    </footer>
+
+    <!-- INTERACTIE JS -->
+    <script>
+        // Track formulier submissions
+        document.querySelector('form').addEventListener('submit', function () {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+        });
+
+        // Scroll animaties (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.perk-card, .content-block, .cta-wrapper').forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

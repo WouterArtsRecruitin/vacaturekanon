@@ -1,0 +1,164 @@
+{
+  "description": "Apollo.io prospecting filters voor Vacaturekanon ICP",
+  "versie": "1.0",
+  "datum": "2026-03-08",
+
+  "primaire_search": {
+    "naam": "VK Primair — HR Beslissers Technisch",
+    "contact_filters": {
+      "functietitels": [
+        "HR Manager",
+        "HR Director",
+        "Head of HR",
+        "Hoofd HR",
+        "Talent Acquisition Manager",
+        "Recruitment Manager",
+        "People Manager",
+        "HR Business Partner",
+        "Human Resources Manager"
+      ],
+      "senioriteit": ["manager", "director", "vp", "head"],
+      "taal_land": "NL",
+      "heeft_email": true,
+      "email_kwaliteit": ["verified", "likely"]
+    },
+    "bedrijf_filters": {
+      "regio": {
+        "land": "Nederland",
+        "provincies": ["Gelderland", "Overijssel", "Noord-Brabant"],
+        "uitgebreid_op_aanvraag": ["Utrecht", "Zuid-Holland", "Noord-Holland", "Limburg"]
+      },
+      "medewerkers_min": 50,
+      "medewerkers_max": 800,
+      "sectoren_sic": [
+        "1311 - Crude Petroleum and Natural Gas",
+        "1381 - Drilling Oil and Gas Wells",
+        "1389 - Oil and Gas Field Services",
+        "1521 - General Building Contractors",
+        "1541 - General Industrial and Commercial Building",
+        "1611 - Highway and Street Construction",
+        "1731 - Electrical Work",
+        "3559 - Special Industry Machinery",
+        "3569 - General Industrial Machinery",
+        "3679 - Electronic Components",
+        "3699 - Electrical Industrial Apparatus",
+        "3825 - Instruments for Measuring",
+        "4911 - Electric Services",
+        "4931 - Electric and Other Services"
+      ],
+      "trefwoorden_bedrijfsnaam_uitsluiten": [
+        "uitzendbureau",
+        "detachering",
+        "payroll",
+        "interim",
+        "recruitment",
+        "staffing",
+        "werving"
+      ]
+    },
+    "uitsluitingen": {
+      "eerder_gecontacteerd_apollo": true,
+      "al_klant_vacaturekanon": true,
+      "sector_codes_uitsluiten": [
+        "overheid",
+        "onderwijs",
+        "zorg",
+        "retail",
+        "horeca"
+      ]
+    }
+  },
+
+  "secundaire_search": {
+    "naam": "VK Secundair — DGA/CEO Klein Technisch Bedrijf",
+    "contact_filters": {
+      "functietitels": [
+        "DGA",
+        "CEO",
+        "Directeur",
+        "Algemeen Directeur",
+        "Managing Director",
+        "COO",
+        "Operations Manager",
+        "Bedrijfsleider"
+      ],
+      "senioriteit": ["c_suite", "owner", "founder", "director"],
+      "taal_land": "NL",
+      "heeft_email": true,
+      "email_kwaliteit": ["verified", "likely"]
+    },
+    "bedrijf_filters": {
+      "regio": {
+        "land": "Nederland",
+        "provincies": ["Gelderland", "Overijssel", "Noord-Brabant"]
+      },
+      "medewerkers_min": 30,
+      "medewerkers_max": 150,
+      "sectoren_trefwoorden": [
+        "machinebouwer",
+        "systeemintegrator",
+        "processindustrie",
+        "infrabedrijf",
+        "aannemer",
+        "technisch installateur",
+        "renewable energy",
+        "solar",
+        "windenergie",
+        "automation",
+        "PLC",
+        "SCADA"
+      ]
+    }
+  },
+
+  "intent_filters": {
+    "beschrijving": "Gebruik Apollo intent data om bedrijven te filteren die actief werven",
+    "job_posting_signalen": {
+      "actieve_vacatures": true,
+      "vacature_ouder_dan_dagen": 30,
+      "vacature_trefwoorden": [
+        "engineer", "technicus", "operator", "programmeur",
+        "werkvoorbereider", "uitvoerder", "projectleider",
+        "monteur", "onderhoudsmonteur", "service engineer"
+      ]
+    },
+    "linkedin_signalen": [
+      "recent bericht over 'we zoeken'",
+      "recent bericht over groei of uitbreiding",
+      "company headcount groei >10% afgelopen 12 maanden"
+    ]
+  },
+
+  "export_instellingen": {
+    "max_per_run": 200,
+    "velden": [
+      "first_name",
+      "last_name",
+      "email",
+      "title",
+      "company_name",
+      "company_website",
+      "company_employee_count",
+      "company_industry",
+      "city",
+      "province",
+      "linkedin_url",
+      "phone"
+    ],
+    "exportformaat": "CSV",
+    "naar": "lemlist_upload_ready"
+  },
+
+  "kwaliteitsdrempel": {
+    "min_score": 4,
+    "score_criteria": {
+      "verified_email": 2,
+      "linkedin_aanwezig": 1,
+      "sector_exact_match": 1,
+      "regio_primair": 1,
+      "medewerkers_50_300": 1,
+      "actieve_vacature_gevonden": 1
+    },
+    "max_score": 7
+  }
+}

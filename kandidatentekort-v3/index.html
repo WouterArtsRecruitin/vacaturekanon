@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kandidatentekort.nl — Transformeer je vacature in 24 uur</title>
+  <meta name="description" content="Jaagt jouw standaard vacaturetekst technisch talent weg? Upload je vacature en ontvang binnen 24 uur een verbeterde versie plus een wervingsrapport.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0b0e;
+      --bg-surface: #14161c;
+      --bg-surface-elevated: #1e2129;
+      --brand-orange: #E8630A;
+      --brand-orange-light: #ff8533;
+      --brand-orange-glow: rgba(232, 99, 10, 0.4);
+      --text-primary: #ffffff;
+      --text-secondary: #9aa2b1;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(20, 22, 28, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.05);
+      --transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Gradient Background Text */
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #a5adb8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gradient-orange {
+      background: linear-gradient(135deg, var(--brand-orange-light) 0%, var(--brand-orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Background Orbs Effect */
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .bg-orb-1 {
+      top: -10%; left: -5%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,99,10,0.15) 0%, transparent 70%);
+    }
+    .bg-orb-2 {
+      top: 30%; right: -10%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,99,10,0.1) 0%, transparent 70%);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--brand-orange) 0%, #c95204 100%);
+      color: #fff;
+      padding: 1.125rem 2.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 25px var(--brand-orange-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: all 0.3s var(--transition-bezier);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px var(--brand-orange-glow), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    .btn:hover::after {
+      left: 150%;
+      transition: 0.7s ease;
+    }
+    
+    .btn-secondary {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-surface-elevated);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed; width: 100%; top: 0; z-index: 100;
+      padding: 1.5rem 0;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+    nav.scrolled {
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+    }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.6rem; font-weight: 800; color: #fff; text-decoration: none;
+      letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo span { color: var(--brand-orange); }
+    
+    .nav-cta {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 180px 0 100px;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    
+    .hero-text { display: flex; flex-direction: column; align-items: flex-start; z-index: 2; }
+    
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem; border-radius: 50px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: var(--text-secondary); font-size: 0.85rem; font-weight: 500; margin-bottom: 1.5rem;
+    }
+    .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--brand-orange);
+      box-shadow: 0 0 10px var(--brand-orange);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(232,99,10,0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(232,99,10,0); }
+      100% { box-shadow: 0 0 0 0 rgba(232,99,10,0); }
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.8rem, 5vw, 4.2rem); margin-bottom: 1.5rem; 
+    }
+    .hero-text p.sub {
+      font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 540px; line-height: 1.7;
+    }
+
+    /* Interactive Output / Glass Card */
+    .hero-visual { position: relative; z-index: 2; perspective: 1000px; }
+    
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+      overflow: hidden;
+      transform: rotateY(-5deg) rotateX(5deg);
+      transition: transform 0.5s var(--transition-bezier);
+    }
+    .hero-visual:hover .glass-card {
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+
+    .card-header {
+      display: flex; align-items: center; background: rgba(0,0,0,0.4); padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color); gap: 0.5rem;
+    }
+    .mac-dots { display: flex; gap: 6px; }
+    .mac-dots span { width: 10px; height: 10px; border-radius: 50%; background: #4a4d55; }
+    .mac-dots span:nth-child(1) { background: #ff5f56; }
+    .mac-dots span:nth-child(2) { background: #ffbd2e; }
+    .mac-dots span:nth-child(3) { background: #27c93f; }
+    .card-title { margin-left: auto; margin-right: auto; font-size: 0.8rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; }
+
+    .slider-tabs { display: flex; background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--border-color); }
+    .slider-tab { flex: 1; text-align: center; padding: 1rem; cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); transition: 0.3s; }
+    .slider-tab.active { color: #fff; background: rgba(255,255,255,0.03); border-bottom: 2px solid var(--brand-orange); }
+
+    .slide-body { position: relative; height: 320px; padding: 2rem; }
+    .slide-content { position: absolute; inset: 0; padding: 2rem; opacity: 0; pointer-events: none; transition: 0.4s ease; }
+    .slide-content.active { opacity: 1; pointer-events: auto; }
+    
+    .code-mockup { font-family: 'DM Sans', monospace; font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary); }
+    .highlight-red { color: #ff5f56; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; letter-spacing: 1px; }
+    .highlight-green { color: var(--brand-orange); font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-size: 0.8rem; letter-spacing: 1px; }
+    
+    /* Social Proof Bar */
+    .social-proof {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255,255,255,0.01);
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .sp-text { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); font-weight: 600; }
+    .sp-logos {
+      display: flex; gap: 4rem; opacity: 0.5; filter: grayscale(100%);
+      font-family: 'Bricolage Grotesque'; font-size: 1.5rem; font-weight: 800;
+    }
+    .sp-logos span { transition: 0.3s; }
+    .sp-logos span:hover { opacity: 1; filter: grayscale(0%); color: var(--brand-orange); }
+
+    /* Features / Process */
+    .process { padding: 120px 0; position: relative; }
+    .section-header { text-align: center; margin-bottom: 5rem; z-index: 2; position: relative; }
+    .section-header h2 { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+    .section-header p { color: var(--text-secondary); font-size: 1.15rem; max-width: 650px; margin: 0 auto; line-height: 1.7; }
+    
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; z-index: 2; }
+    
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      transition: all 0.4s var(--transition-bezier);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at top right, rgba(232,99,10,0.1), transparent 50%);
+      opacity: 0; transition: 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(232,99,10,0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .feature-card:hover::before { opacity: 1; }
+    
+    .f-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(232,99,10,0.2) 0%, rgba(232,99,10,0.05) 100%);
+      border: 1px solid rgba(232,99,10,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; color: var(--brand-orange); margin-bottom: 2rem;
+      transition: 0.4s ease;
+    }
+    .feature-card:hover .f-icon { transform: scale(1.1) rotate(5deg); background: rgba(232,99,10,0.2); }
+    
+    .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
+    .feature-card p { color: var(--text-secondary); line-height: 1.6; }
+
+    /* FAQ Section */
+    .faq { padding: 100px 0; background: var(--bg-surface); position: relative; }
+    .faq-container { max-width: 800px; margin: 0 auto; z-index: 2; position: relative; }
+    
+    details {
+      background: var(--bg-dark); border: 1px solid var(--border-color);
+      border-radius: 16px; margin-bottom: 1.2rem; transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    details:hover { border-color: rgba(255,255,255,0.2); }
+    details[open] { border-color: var(--brand-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    
+    summary {
+      padding: 1.8rem; font-weight: 600; color: #fff; cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    
+    /* Custom Icon for Detail */
+    .faq-icon {
+      width: 24px; height: 24px; position: relative; flex-shrink: 0;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute; background: var(--brand-orange); transition: 0.3s;
+    }
+    .faq-icon::before { top: 11px; left: 0; width: 24px; height: 2px; }
+    .faq-icon::after { top: 0; left: 11px; width: 2px; height: 24px; }
+    details[open] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+    details[open] .faq-icon::before { transform: rotate(180deg); }
+    
+    .details-content { padding: 0 1.8rem 1.8rem; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
+
+    /* Form Section (Jotform Wrapper) */
+    .cta-section {
+      padding: 120px 0; position: relative; border-top: 1px solid var(--border-color);
+      background: radial-gradient(circle at center, rgba(232,99,10,0.05) 0%, var(--bg-dark) 70%);
+    }
+    .form-wrapper {
+      max-width: 750px; margin: 0 auto;
+      background: var(--bg-surface-elevated);
+      border-radius: 24px; border: 1px solid var(--border-color);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05);
+      padding: 1rem;
+      position: relative; z-index: 2;
+    }
+    .form-header { text-align: center; padding: 3rem 2rem 1rem; }
+    .form-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-header p { color: var(--text-secondary); font-size: 1.1rem; }
+
+    /* Footer */
+    footer { padding: 5rem 0 2rem; border-top: 1px solid var(--border-color); background: var(--bg-surface); }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    
+    .footer-col h3 { font-size: 1.3rem; margin-bottom: 1.5rem; color: #fff; }
+    .footer-col p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.8rem; }
+    .footer-col a { color: var(--text-secondary); text-decoration: none; transition: 0.2s; display: inline-block; margin-bottom: 0.8rem; }
+    .footer-col a:hover { color: var(--brand-orange); }
+    
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.9rem; }
+
+    /* Bedank Popup (Restyled) */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.4s var(--transition-bezier);
+      padding: 1.5rem;
+    }
+    .popup-overlay.active { opacity: 1; visibility: visible; }
+    
+    .popup-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid rgba(232,99,10,0.3);
+      border-radius: 24px; padding: 3.5rem;
+      max-width: 600px; width: 100%; text-align: center;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      transform: scale(0.95) translateY(20px); transition: all 0.4s var(--transition-bezier);
+    }
+    .popup-overlay.active .popup-card { transform: scale(1) translateY(0); }
+    
+    .popup-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(232,99,10,0.15); border: 2px solid rgba(232,99,10,0.4);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem; font-size: 2.5rem;
+      box-shadow: 0 0 30px rgba(232,99,10,0.2);
+    }
+    .popup-card h2 { font-size: 2.2rem; color: #fff; margin-bottom: 1rem; }
+    .popup-card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; }
+    .popup-card p strong { color: #fff; }
+    
+    .popup-steps {
+      background: rgba(0,0,0,0.3); border-radius: 16px; border: 1px solid var(--border-color);
+      padding: 1.5rem; margin: 2rem 0; text-align: left;
+    }
+    .popup-step { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; font-size: 1rem; color: var(--text-secondary); }
+    .popup-step:last-child { margin-bottom: 0; }
+    .popup-step-num { background: var(--brand-orange); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+    
+    /* Animation Classes */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero-text { align-items: center; }
+      .hero-text p.sub { margin: 0 auto 2.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .process { padding: 80px 0; }
+      .hero { padding-top: 140px; }
+      .form-wrapper { padding: 0.5rem; border: none; box-shadow: none; background: transparent; }
+      .form-header { padding: 0rem 1rem 1rem; }
+    }
+  </style>
+
+    <!-- GA4 Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3BDEP838GM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3BDEP838GM');
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1430141541402009');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1430141541402009&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <!-- Ambient Background Orbs -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="/" class="logo">Kandidaten<span>tekort</span></a>
+      <a href="#upload-sectie" class="btn btn-secondary nav-cta">Doe de gratis scan</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-content">
+        
+        <div class="hero-text fade-up">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Test het gratis (max. 2 per bedrijf)
+          </div>
+          <h1>Jaagt jouw <span class="text-gradient">vacaturetekst</span> technisch talent <span class="text-gradient-orange">weg?</span></h1>
+          <p class="sub">Vrijwel elke technische vacature sneuvelt op saai taalgebruik. Ontdek direct waar jij talent misloopt. Upload je tekst en ontvang binnen 24 uur een herschreven variant die wél converteert.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <a href="#upload-sectie" class="btn">Scan Mijn Vacature →</a>
+            <a href="/email_design_reference.html" target="_blank" rel="noopener" class="btn btn-secondary">Bekijk Voorbeeld</a>
+          </div>
+        </div>
+        
+        <div class="hero-visual fade-up delay-2">
+          <div class="glass-card">
+            <div class="card-header">
+              <div class="mac-dots"><span></span><span></span><span></span></div>
+              <div class="card-title">Analyse Resultaat</div>
+            </div>
+            <div class="slider-tabs">
+              <div class="slider-tab active" id="tab-before" onclick="switchTab('before')">❌ Huidige Tekst</div>
+              <div class="slider-tab" id="tab-after" onclick="switchTab('after')">✅ Onderscheidend</div>
+            </div>
+            <div class="slide-body">
+              
+              <div class="slide-content active code-mockup" id="content-before">
+                <span class="highlight-red">[SAAI & GENERIEK]</span><br>
+                Wij zoeken een enthousiaste Monteur voor ons team.<br>
+                Je onderhoudt de lijnen en lost storingen op in de fabriek.<br>
+                <br>
+                <span class="highlight-red">[CLICHÉ EISEN]</span><br>
+                - Je bent een echte teamspeler<br>
+                - Je hebt geen 9 tot 5 mentaliteit<br>
+                - Salaris marktconform afhankelijk van ervaring<br>
+              </div>
+              
+              <div class="slide-content code-mockup" style="color: #fff;" id="content-after">
+                <span class="highlight-green">[SCHERPE HOOK]</span><br>
+                Klaar om de regie te pakken over een hypermodern machinepark? Als Lead Monteur duld je geen bandenplakken, maar focus je puur op innovatie en uptime.<br>
+                <br>
+                <span class="highlight-green">[SPECIFIEKE WAARDE]</span><br>
+                - Vast contract + Salaris tussen €3.500 - €4.500<br>
+                - Je eigen ingerichte bus vól Hilti gereedschap<br>
+                - Geen stropdassencultuur, wél ruimte om door te groeien<br>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+
+  <!-- Social Proof Ticker -->
+  <section class="social-proof fade-up">
+    <div class="sp-text">Al 140+ technische vacatures geoptimaliseerd voor topbedrijven in de regio</div>
+    <div class="sp-logos">
+      <span>INSTALLATIE.</span>
+      <span>MACHINEBOUW</span>
+      <span>AUTOMATION_</span>
+      <span>INFRA+</span>
+      <span>ENERGY</span>
+    </div>
+  </section>
+
+  <!-- Process / Features -->
+  <section class="process" id="hoe-het-werkt">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2>Hoe we jouw wervingskracht vergroten</h2>
+        <p>Geen aannames of buikgevoel. Wij gebruiken een data-gedreven aanpak om jouw vacature onweerstaanbaar te maken voor technisch talent.</p>
+      </div>
+      
+      <div class="grid-3">
+        <div class="feature-card fade-up delay-1">
+          <div class="f-icon">1</div>
+          <h3>Upload je Tekst</h3>
+          <p>Plak direct je tekst in het systeem of upload een PDF/Word document. Het kost je minder dan een minuut en verplicht je tot niets.</p>
+        </div>
+        <div class="feature-card fade-up delay-2">
+          <div class="f-icon">2</div>
+          <h3>Grondige Analyse</h3>
+          <p>Ons systeem filtert clichés weg en benchmarkt jouw voorwaarden tegen de zwaarste concurrenten in de huidige technische markt.</p>
+        </div>
+        <div class="feature-card fade-up delay-3">
+          <div class="f-icon">3</div>
+          <h3>Kant & Klaar Actieplan</h3>
+          <p>Binnen 24 uur in je inbox: Een herschreven, wervende vacaturetekst die je direct online kunt zetten, plus een eerlijk wervingsrapport.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <div class="container faq-container fade-up">
+      <div class="section-header">
+        <h2>Veelgestelde Vragen</h2>
+      </div>
+      
+      <details>
+        <summary>
+          Wat gebeurt er exact met mijn geüploade document?
+          <div class="faq-icon"></div>
+        </summary>
+        <div class="details-content">
+          Zodra u een document uploadt, wordt dit strikt vertrouwelijk en eenmalig intern verwerkt door onze analyse-engine. Uw bedrijfsgegevens en interne formatteksten worden nooit gedeeld met derden of gebruikt voor andere doeleinden dan uw persoonlijke rapportage.
+        </div>
+      </details>
+      
+      <details>
+        <summary>
+          Is de analyse écht 100% gratis?
+          <div class="faq-icon"></div>
+        </summary>
+        <div class="details-content">
+          Ja, dit is een kosteloze en vrijblijvende introductieservice (maximaal 2 vacatures per bedrijf). Mochten jullie naar aanleiding van het succesvolle resultaat op zoek zijn naar structurele Recruitment & Werving ondersteuning, dan gaan we graag vrijblijvend het gesprek aan over onze abonnementsvormen of flexibele oplossingen.
+        </div>
+      </details>
+      
+      <details>
+        <summary>
+          Voor welke sectoren is dit platform het meest geschikt?
+          <div class="faq-icon"></div>
+        </summary>
+        <div class="details-content">
+          Onze expertise ligt uitsluitend binnen de techniek en industrie. Denk aan rollen in de installatietechniek, werktuigbouwkunde, industriële automatisering, bouw, en renewable energy. Dat is waar wij de taal van de kandidaat spreken.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="cta-section" id="upload-sectie">
+    <div class="container">
+      <div class="form-wrapper fade-up">
+        <div class="form-header">
+          <h2>Klaar om talent te overtuigen?</h2>
+          <p>Laat de concurrentie achter je. Upload je tekst en ontvang morgen het resultaat.</p>
+        </div>
+        
+        <!-- Jotform Embed -->
+        <script type="text/javascript" src="https://form.jotform.com/jsform/260825181570355"></script>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="bedankPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div class="popup-card">
+      <div class="popup-icon">✓</div>
+      <h2 id="popupTitle">Aanvraag succesvol ontvangen!</h2>
+      <p>Bedankt voor het insturen! Onze analyse draait warm. <strong>Check je inbox</strong> (en eventueel spambox) voor de bevestiging.</p>
+      
+      <div class="popup-steps">
+        <div class="popup-step"><div class="popup-step-num">1</div><span>Bevestigingsmail is verzonden <em>(binnen 2 min in je inbox)</em>.</span></div>
+        <div class="popup-step"><div class="popup-step-num">2</div><span>Wij benchmarken de voorwaarden en herschrijven de vacaturetekst.</span></div>
+        <div class="popup-step"><div class="popup-step-num">3</div><span>Binnen 24 uur ontvang je het complete pakket per mail!</span></div>
+      </div>
+      
+      <div style="margin-top: 2rem;">
+        <button class="btn btn-secondary" onclick="sluitPopup()" style="width: 100%; padding: 1rem;">Sluiten & Wachten op Rapport</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 class="logo">Kandidaten<span>tekort</span></h3>
+          <p>Een innovatief platform van Recruitin B.V. Wij zijn geen standaard CV-schuivers, maar een inhouse recruitment partner specifiek voor in de technische industrie. Wij spreken de taal van de werkvloer.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Links</h3>
+          <a href="#hoe-het-werkt">Hoe het werkt</a><br>
+          <a href="#upload-sectie">Vacature Scannen</a><br>
+          <a href="https://recruitin.nl" target="_blank">Hoofdwebsite Recruitin</a>
+        </div>
+        <div class="footer-col">
+          <h3>Contactgegevens</h3>
+          <p><strong>Recruitin B.V.</strong><br>Doesburg, Gelderland<br>KvK: 74603433</p>
+          <p style="margin-top: 1rem;">
+            Tel: <a href="tel:+31614314593">+31 (0)6 1431 4593</a><br>
+            Mail: <a href="mailto:info@kandidatentekort.nl">info@kandidatentekort.nl</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Recruitin B.V. Alle rechten voorbehouden.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab Switcher for Glass Card
+    function switchTab(tab) {
+      document.querySelectorAll('.slider-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.slide-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('content-' + tab).classList.add('active');
+    }
+    
+    // Auto switch tab to show interactivity
+    setTimeout(() => { switchTab('after'); }, 3000);
+
+    // Sticky Navbar
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Animation (Intersection Observer)
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-up');
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const animatedElements = document.querySelectorAll('.fade-up');
+      animatedElements.forEach(el => observer.observe(el));
+    });
+
+    // Popup Logic
+    function openPopup() {
+      document.getElementById('bedankPopup').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function sluitPopup() {
+      document.getElementById('bedankPopup').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('bedankPopup').addEventListener('click', function(e) {
+      if (e.target === this) sluitPopup();
+    });
+
+    // Jotform submission listener
+    window.addEventListener('message', function(e) {
+      if (typeof e.data === 'string') {
+        try {
+          const data = JSON.parse(e.data);
+          if (data.action === 'submission-completed' || data.type === 'formSubmitted') {
+            window.location.href = '/bedankt.html';
+          }
+        } catch(err) {
+          if (e.data.includes('formSubmitted') || e.data.includes('submission-completed')) {
+            window.location.href = '/bedankt.html';
+          }
+        }
+      }
+    });
+
+    // Redirect Success Handler
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        // Hide Jotform immediately
+        const formIframe = document.querySelector('iframe[src*="form.jotform.com"]');
+        if (formIframe) {
+          formIframe.style.display = 'none';
+        }
+        
+        // Clean up URL so refresh doesn't trigger it again
+        let newUrl = window.location.pathname;
+        if(window.location.hash) newUrl += window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+        
+        // Open the sexy popup 
+        setTimeout(() => {
+          openPopup();
+        }, 150);
+      }
+    });
+  </script>
+</body>
+</html>

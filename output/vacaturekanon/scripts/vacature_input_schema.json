@@ -1,0 +1,66 @@
+{
+  "_comment": "Vacaturekanon — Jotform Input Schema v2.0",
+  "_uitleg": "Vul dit in via Jotform of handmatig. Geef aan generate_landing_page.py met --input vacature.json",
+
+  "bedrijfsnaam": "J de Jonge",
+  "bedrijfsnaam_kort": "J",
+  "tagline": "Creating The Next-Gen Industry",
+  "over_bedrijf": "Sinds 1954 is J de Jonge een vertrouwde leider in EPC-contractering.\nGespecialiseerd in mechanische en piping systemen en laadtechnologie.\nMet locaties in Nederland, België, Duitsland en Saudi-Arabië.",
+  "website": "https://jdejonge.com",
+  "sector": "constructie",
+  "accent_kleur": "#f97316",
+  "hero_dark": "#0f172a",
+
+  "stats": [
+    {"waarde": "16.844m²", "label": "Productiecapaciteit"},
+    {"waarde": "217+", "label": "Medewerkers"},
+    {"waarde": "1954", "label": "Opgericht"},
+    {"waarde": "55+", "label": "Culturen"}
+  ],
+
+  "functietitel": "Voorman",
+  "functietitel_kort": "voorman",
+  "locatie": "Nederland",
+  "dienstverband": "Fulltime",
+  "hero_intro": "Join The Next Gen Connectors. Word onderdeel van een familiebedrijf waar innovatie en samenwerking de toekomst van engineering vormgeven.",
+
+  "taken": [
+    "Aansturen en coördineren van montage- en constructieploegen op locatie",
+    "Toezicht houden op kwaliteit en voortgang van mechanische en piping projecten",
+    "Werkplanningen opstellen en bewaken volgens projecteisen",
+    "Communiceren met projectmanagers, opdrachtgevers en onderaannemers",
+    "Zorgen voor een veilige werkomgeving (VCA en bedrijfsrichtlijnen)"
+  ],
+
+  "eisen": [
+    "Minimaal 5 jaar ervaring als voorman in de industriële of EPC-sector",
+    "Relevante technische opleiding (MBO/HBO niveau)",
+    "VCA-VOL certificaat (of bereid om te behalen)",
+    "Ervaring met mechanische installaties, piping en/of storage tanks",
+    "Uitstekende communicatieve en leidinggevende vaardigheden",
+    "Rijbewijs B, bereid tot reizen binnen Nederland en Europa"
+  ],
+
+  "benefits": [
+    {"icon": "💰", "titel": "Competitief Salaris",      "tekst": "Marktconform salaris passend bij jouw ervaring en verantwoordelijkheden"},
+    {"icon": "🚗", "titel": "Bedrijfsauto",             "tekst": "Volledige bedrijfsauto of -bus inclusief privégebruik"},
+    {"icon": "📚", "titel": "Flow Academy",             "tekst": "Persoonlijke groei via onze eigen Flow Academy"},
+    {"icon": "🛡️", "titel": "Pensioenregeling",        "tekst": "Uitstekende pensioenregeling voor een zorgeloze toekomst"},
+    {"icon": "🤝", "titel": "Familie Cultuur",          "tekst": "Hechte no-nonsense cultuur met teambuilding en family events"},
+    {"icon": "🌍", "titel": "Internationale Projecten", "tekst": "Werk aan uitdagende projecten in Nederland, Europa en daarbuiten"},
+    {"icon": "⚡", "titel": "Innovatieve Technologie",  "tekst": "Werk met cutting-edge oplossingen zoals waterstof laadarm"},
+    {"icon": "🌱", "titel": "Duurzaamheid",             "tekst": "Bijdragen aan duurzame projecten — CO₂ Prestatieladder niveau 3"}
+  ],
+
+  "sollicitatieproces": [
+    {"nr": "1", "titel": "Solliciteer",        "tekst": "Stuur je CV en korte motivatie naar hr@jdejonge.com",            "tijd": "~1 dag"},
+    {"nr": "2", "titel": "Kennismaking",       "tekst": "Telefonisch kennismakingsgesprek (±15 min) met onze recruiter",   "tijd": "~3 dagen"},
+    {"nr": "3", "titel": "Gesprek op kantoor", "tekst": "Face-to-face gesprek + rondleiding en kennismaking met het team", "tijd": "~1 week"},
+    {"nr": "4", "titel": "Jobaanbieding",      "tekst": "Welkom in het J de Jonge team! Onboarding en eerste werkdag",    "tijd": "~2-3 weken"}
+  ],
+
+  "hr_email": "hr@jdejonge.com",
+  "hr_telefoon": "+31 (0)10 248 58 00",
+  "careers_url": "https://jdejonge.com/careers",
+  "jotform_id": ""
+}

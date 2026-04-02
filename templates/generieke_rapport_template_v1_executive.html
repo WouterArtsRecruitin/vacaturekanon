@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Rapport: {{functie_titel}} - {{bedrijf_naam}} | Recruitin B.V.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Georgia&display=swap');
+
+        :root {
+            --primary: #0F172A;
+            --secondary: #334155;
+            --accent: #E8630A;
+            --bg: #F8FAFC;
+            --border: #E2E8F0;
+            --white: #FFFFFF;
+            --success: #059669;
+            --warning: #D97706;
+            --danger: #DC2626;
+            --muted: #94A3B8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--secondary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px;
+            font-size: 16px;
+        }
+
+        .report-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .report-header { padding: 60px 70px 40px; border-bottom: 2px solid var(--primary); background: var(--white); }
+        .report-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+        .report-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+        .report-title { font-size: 36px; font-weight: 800; line-height: 1.15; color: var(--primary); letter-spacing: -1px; margin-bottom: 16px; }
+        .meta-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+        .meta-tag { background: var(--bg); padding: 6px 14px; border-radius: 3px; font-size: 14px; font-weight: 600; color: var(--secondary); border: 1px solid var(--border); }
+        .report-date { text-align: right; font-size: 14px; color: var(--muted); }
+        .report-date strong { display: block; color: var(--primary); font-size: 15px; }
+
+        .narrative-intro { font-size: 18px; color: #1E293B; line-height: 1.8; padding: 50px 70px 0; }
+        .narrative-intro p { margin-bottom: 24px; }
+        .narrative-intro blockquote { border-left: 3px solid var(--accent); padding-left: 24px; margin: 32px 0; font-style: italic; color: var(--primary); font-size: 20px; font-family: 'Georgia', serif; letter-spacing: -0.2px; }
+
+        .report-body { padding: 40px 70px; }
+
+        h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: var(--primary); display: flex; align-items: center; gap: 16px; margin-top: 60px; }
+        h2:first-child { margin-top: 0; }
+        h2::before { content: ""; display: block; width: 4px; height: 24px; background: var(--accent); }
+        .section-desc { font-size: 16px; color: var(--secondary); margin-bottom: 35px; line-height: 1.7; max-width: 750px; }
+
+        .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 60px; }
+        .kpi-card { padding: 30px 24px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; text-align: center; }
+        .kpi-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--secondary); font-weight: 700; margin-bottom: 12px; }
+        .kpi-value { font-size: 42px; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 8px; letter-spacing: -1.5px; }
+        .kpi-sub { font-size: 14px; }
+
+        .scorecard { margin-bottom: 40px; }
+        .score-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; padding: 18px 24px; border-bottom: 1px solid var(--border); font-size: 15px; align-items: center; }
+        .score-row.header { background: var(--bg); font-weight: 700; color: var(--secondary); border-top: 1px solid var(--border); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        .score-name { font-weight: 600; color: var(--primary); }
+        .score-val { font-weight: 700; }
+
+        .analysis-block { background: #F8FAFC; border-left: 4px solid var(--primary); padding: 35px; margin-bottom: 60px; }
+        .analysis-block h3 { color: var(--primary); font-size: 20px; margin-bottom: 16px; font-weight: 700; }
+        .analysis-block p { color: var(--primary); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+        .analysis-block p:last-child { margin-bottom: 0; }
+
+        .list-section { margin-bottom: 60px; }
+        .item-card { padding: 30px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr; gap: 24px; }
+        .item-card:last-child { border-bottom: none; }
+        .item-number { width: 36px; height: 36px; border-radius: 4px; background: var(--primary); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+        .item-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+        .item-content p { font-size: 16px; color: var(--secondary); margin-bottom: 24px; line-height: 1.7; }
+
+        .comparison-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .comp-col { padding: 24px; border-radius: 4px; border: 1px solid var(--border); font-size: 15px; line-height: 1.6; }
+        .comp-col.voor { background: var(--white); color: var(--secondary); }
+        .comp-col.na { background: #F0FDF4; border-color: #BBF7D0; color: #166534; }
+        .comp-label { font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 12px; color: var(--muted); }
+        .comp-col.na .comp-label { color: var(--success); }
+
+        .roadmap-timeline { position: relative; padding-left: 30px; margin-top: 40px; }
+        .roadmap-timeline::before { content: ''; position: absolute; top: 0; left: 5px; bottom: 0; width: 2px; background: var(--border); }
+        .roadmap-step { position: relative; padding-bottom: 40px; }
+        .roadmap-step::before { content: ''; position: absolute; left: -30px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--border); }
+        .roadmap-step:last-child { padding-bottom: 0; }
+        .roadmap-step:last-child::before { background: var(--success); }
+        .roadmap-step h4 { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .roadmap-step p { font-size: 16px; color: var(--secondary); margin-bottom: 8px; line-height: 1.7; }
+
+        .report-footer { background: var(--primary); color: var(--white); padding: 60px 70px; text-align: center; }
+        .report-footer h3 { font-size: 28px; font-weight: 700; margin-bottom: 16px; color: var(--white); }
+        .report-footer p { font-size: 16px; color: #94A3B8; margin-bottom: 40px; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-block; background: var(--accent); color: var(--white); padding: 16px 32px; border-radius: 3px; text-decoration: none; font-weight: 600; font-size: 16px; }
+    </style>
+</head>
+<body>
+<div class="report-wrapper">
+    <div class="report-header">
+        <div class="report-header-top">
+            <div>
+                <div class="report-label">Strategic Vacancy Scan</div>
+                <h1 class="report-title">{{functie_titel}}</h1>
+                <div class="meta-tags">
+                    <span class="meta-tag">{{bedrijf_naam}}</span>
+                    <span class="meta-tag">{{sector}}</span>
+                    <span class="meta-tag">{{locatie}}</span>
+                </div>
+            </div>
+            <div class="report-date">
+                <strong>Referentie: {{analyse_id}}</strong>
+                Datum: {{analyse_datum}}
+            </div>
+        </div>
+    </div>
+
+    <div class="narrative-intro">
+        <p>Beste Wervingsverantwoordelijke,</p>
+        <p>De strijd om technisch talent in jouw regio is extreem hevig. Wij hebben de originele vacaturetekst voor <strong>{{functie_titel}}</strong> door de Recruitin AI-scan gehaald &mdash; 8 keiharde dimensies die bepalen of een technicus solliciteert, of afhaakt.</p>
+        <blockquote>"Een vacature is geen wensenlijstje. Het is je pitch. Jouw tekst moet twijfels wegnemen en keihard bewijzen waarom iemand 40 uur per week voor jullie moet komen bouwen."</blockquote>
+        <p>Hieronder vind je de harde cijfers, de bottlenecks en de bijgeleverde actiegerichte oplossingen.</p>
+    </div>
+
+    <div class="report-body">
+        <h2>1. Wat vertellen de data?</h2>
+        <p class="section-desc">We berekenen de 'Pull-Conversie'. Een score onder de 7.5 betekent dat je subliem talent verliest.</p>
+        <div class="kpi-grid">
+            <div class="kpi-card" style="border-top: 3px solid var(--accent);">
+                <div class="kpi-label">Huidige Pull-Score</div>
+                <div class="kpi-value">{{score}}/10</div>
+                <div class="kpi-sub">Benchmark: {{score_percentage}} | {{trend}}</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Prognose Sollicitanten</div>
+                <div class="kpi-value">{{expected_conversion_min}}-{{expected_conversion_max}}%</div>
+                <div class="kpi-sub">Verwachte view-to-apply ratio</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Time-To-Fill Est.</div>
+                <div class="kpi-value">{{ttf_min}}-{{ttf_max}}</div>
+                <div class="kpi-sub">Dagen tot aanwerving met huidige tekst</div>
+            </div>
+        </div>
+
+        <div class="scorecard">
+            <h2>2. Waar vallen de gaten precies?</h2>
+            <p class="section-desc">Een ontleding van het cijfer {{score}}. We kijken naar 8 dimensies.</p>
+            <div class="score-row header"><div>Conversie Dimensie</div><div>Score</div><div>Benchmark</div><div>Status</div></div>
+            <div class="score-row"><div class="score-name">Aanbod</div><div class="score-val">{{score_1}}</div><div style="color:var(--muted)">4.5</div><div>{{status_1}} (Gat: {{gap_1}})</div></div>
+            <div class="score-row"><div class="score-name">Duidelijkheid Rol</div><div class="score-val">{{score_2}}</div><div style="color:var(--muted)">5.2</div><div>{{status_2}} (Gat: {{gap_2}})</div></div>
+            <div class="score-row"><div class="score-name">Vereisten &amp; Eisen</div><div class="score-val">{{score_3}}</div><div style="color:var(--muted)">4.8</div><div>{{status_3}} (Gat: {{gap_3}})</div></div>
+            <div class="score-row"><div class="score-name" style="color:var(--danger)">Salaristransparantie</div><div class="score-val" style="color:var(--danger)">{{score_4}}</div><div style="color:var(--muted)">3.1</div><div>{{status_4}} (Gat: {{gap_4}})</div></div>
+            <div class="score-row"><div class="score-name">Drempel &amp; UX</div><div class="score-val">{{score_5}}</div><div style="color:var(--muted)">5.5</div><div>{{status_5}} (Gat: {{gap_5}})</div></div>
+            <div class="score-row"><div class="score-name">Vindbaarheid (SEO)</div><div class="score-val">{{score_6}}</div><div style="color:var(--muted)">4.2</div><div>{{status_6}} (Gat: {{gap_6}})</div></div>
+            <div class="score-row"><div class="score-name">Employer Branding</div><div class="score-val">{{score_7}}</div><div style="color:var(--muted)">4.0</div><div>{{status_7}} (Gat: {{gap_7}})</div></div>
+            <div class="score-row"><div class="score-name">Tone &amp; Gevoel</div><div class="score-val">{{score_8}}</div><div style="color:var(--muted)">4.3</div><div>{{status_8}} (Gat: {{gap_8}})</div></div>
+        </div>
+
+        <div class="analysis-block">
+            <h3>Conclusie: Wat betekent dit direct voor jouw instroom?</h3>
+            <p>{{samenvatting_probleem}}</p>
+            <p>Zoals je in de bijgeleverde vernieuwde tekst kunt teruglezen, hebben we deze pijnpunten keihard afgevangen door {{samenvatting_oplossing}}</p>
+        </div>
+
+        <div class="list-section">
+            <h2>3. De Quick Wins (Onze Vernieuwde Tekst)</h2>
+            <p class="section-desc">Waarom is onze meegestuurde tekst beter? Hier ontleden we exact de 3 cruciaalste optimalisaties.</p>
+            <div class="item-card">
+                <div class="item-number">1</div>
+                <div class="item-content">
+                    <h3>{{quick_win_1_titel}}</h3>
+                    <p>{{quick_win_1_uitleg}}</p>
+                    <div class="comparison-layout">
+                        <div class="comp-col voor"><div class="comp-label">X Frictie (Jouw origineel)</div>{{quick_win_1_voor}}</div>
+                        <div class="comp-col na"><div class="comp-label">✓ Tractie (Onze Tekst)</div>{{quick_win_1_na}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-number">2</div>
+                <div class="item-content">
+                    <h3>{{quick_win_2_titel}}</h3>
+                    <p>{{quick_win_2_uitleg}}</p>
+                    <div class="comparison-layout">
+                        <div class="comp-col voor"><div class="comp-label">X Frictie (Jouw origineel)</div>{{quick_win_2_voor}}</div>
+                        <div class="comp-col na"><div class="comp-label">✓ Tractie (Onze Tekst)</div>{{quick_win_2_na}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-number">3</div>
+                <div class="item-content">
+                    <h3>{{quick_win_3_titel}}</h3>
+                    <p>{{quick_win_3_uitleg}}</p>
+                    <div class="comparison-layout">
+                        <div class="comp-col voor"><div class="comp-label">X Frictie (Jouw origineel)</div>{{quick_win_3_voor}}</div>
+                        <div class="comp-col na"><div class="comp-label">✓ Tractie (Onze Tekst)</div>{{quick_win_3_na}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-section">
+            <h2>4. Jouw Executie-Roadmap</h2>
+            <p class="section-desc">Een betere vacaturetekst live zetten is stap 1. Daarna is het optimaliseren van je proces de sleutel.</p>
+            <div class="roadmap-timeline">
+                <div class="roadmap-step"><h4>Week 1: {{roadmap_week1_titel}}</h4><p>{{roadmap_week1_content}}</p></div>
+                <div class="roadmap-step"><h4>Week 2: {{roadmap_week2_titel}}</h4><p>{{roadmap_week2_content}}</p></div>
+                <div class="roadmap-step"><h4>Week 3: {{roadmap_week3_titel}}</h4><p>{{roadmap_week3_content}}</p></div>
+                <div class="roadmap-step"><h4>Vanaf Week 4: {{roadmap_week4_titel}}</h4><p>{{roadmap_week4_content}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="report-footer">
+        <h3>Pak direct 35% rendement</h3>
+        <p>In de bijgeleverde vacature pitch hebben we jouw originele vacaturetekst getransformeerd tot een krachtige kandidaten-magneet.</p>
+        <div style="margin-top:40px">
+            <a href="{{link_rapport}}" class="btn">Bekijk Volledige Vacaturetekst</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

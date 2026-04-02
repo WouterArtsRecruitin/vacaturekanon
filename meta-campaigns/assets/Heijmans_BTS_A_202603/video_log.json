@@ -1,0 +1,29 @@
+[
+  {
+    "scene_id": "A1_briefing",
+    "task_id": "860852335009611811",
+    "prompt": "Documentary footage: Senior Dutch infrastructure site director (male, 50s, grey beard, weathered face, tanned) confident…",
+    "submitted_at": "2026-03-12T00:28:29.448340",
+    "status": "completed",
+    "video_url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260312/debf3fbbc9a2b32ecb4abcacb025de7b-6b0c4e0b-f985-4d97-9d61-481dfe149e54.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAFPCsSg_CfqYXnqdwkjfBpZfbAH4pPSzaSfaKJCq0Rxb7nQWVyyPiFJLrNYMidLhRAfxx4QWRweloTfJ74fMSAFNeYv82moIJvjQeSvJp2O-pT-Yhd29ecgTbkrH7D6zSvGejr1jQ4J6QekvT4P3f-Xg1LYsqXfuuqLn0URRsVcbG7Hskp9uECIfg_rtlZORcJC0sJbok6ykhT0_zTlUIAfdkhau4AWFd8uoc_inBwsnBoSiK-SiyTQu2yvu8rTuMxr8vOaIiAIJHufQaXScB3gmkbkgpJl6JxDm8BYrLQngYdEbT2DZigFMAE&x-kcdn-pid=112781&ksSecret=fd12b3d2de0000539dc6c25f4c6632b1&ksTime=69d987e1",
+    "completed_at": "2026-03-12T00:29:39.325186"
+  },
+  {
+    "scene_id": "A2_inspection",
+    "task_id": "860852347605090319",
+    "prompt": "Documentary footage: Senior Dutch infrastructure site director (male, 50s, grey beard) walking with confident steady str…",
+    "submitted_at": "2026-03-12T00:28:32.515696",
+    "status": "completed",
+    "video_url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260312/41854cfda29b9f95313f31e6be8d48b8-2b192513-f673-462d-8895-32364e0be7c8.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAEaGkAEBf55RiFlHrWrmbp2ou0IPkn83F3MzJ8fo9Ffu4IhgxkodxsZvMIHCeb-AmRjlMO0nlZBUOZQB2nP0YlQN1L7o6sppBMhAEMfR1RpDyetr3JIi0nczVdOBA2WHo7VplBtcqyraiiWdHq5UfJ0mx8rJl-UucKCu1uUH_uLrF70DNpGjAbXKb2_6VY7kwWEv-skINtLyYoi4tLwigjnp7w_jFXZonenJvXcmS3r4hoSK9DDR3Zts0AO39BBzVqoebvyIiA4ZexYZ7olEzIMlAYHs4M8W40tKRpUA-GyKuVfwUWN2CgFMAE&x-kcdn-pid=112781&ksSecret=aa9c43198da3ed37fe1f1f15f48eb034&ksTime=69d987e5",
+    "completed_at": "2026-03-12T00:29:52.656562"
+  },
+  {
+    "scene_id": "A3_conversation",
+    "task_id": "860852357839208504",
+    "prompt": "Documentary footage: Senior Dutch infrastructure site director (male, 50s, grey beard) giving clear instructions to two …",
+    "submitted_at": "2026-03-12T00:28:34.870831",
+    "status": "completed",
+    "video_url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/834383334670860358/VIDEO/20260312/8307d3f04f246a5923c4bd58adb7a02a-48c64fd4-121b-4bd6-8412-8d00242d7f92.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAFEm-Xh0snZ2afiZfywgz8XRVsersQsSU4cE-SYrLumkHZSUvFc3GFPamwnT-Y_w81_qClT9Os1wisu42j9uK19mFCpXqHVjUkQ5Ug1vpZfnr_sGjsj-kWAEXJrWl_uYRwfbK8kj4GxVVMuclm182xVCoNnrsirfDL5TLXVVfT5J_NJGgbwpNZrk3Mr5uWMyl7MPK1TxdyopN-kOrIED_9q-YP4eGPExnX6rahfibHWpRoSk8Q9wF5iLa3FHD-a4yQLv8RpIiDvT79e-j1MmLtG7pSGBAkxkeRlz2hyzB7BaoP7c9eQQygFMAE&x-kcdn-pid=112781&ksSecret=4b8011445724ad024644674444805d68&ksTime=69d987f1",
+    "completed_at": "2026-03-12T00:30:10.258371"
+  }
+]

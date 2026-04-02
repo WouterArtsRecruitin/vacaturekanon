@@ -1,0 +1,135 @@
+headersOrigin = "config"
+redirectsOrigin = "config"
+plugins = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/m8-sales-page/dist"
+publishOrigin = "config"
+commandOrigin = "config"
+base = "/Users/wouterarts/Library/CloudStorage/OneDrive-Gedeeldebibliotheken-Recruitin/output/vacaturekanon/m8-sales-page"
+command = "npm run build"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+for = "/assets/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.jpg"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.png"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.svg"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.webp"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.woff2"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.woff"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/og-image.jpg"
+
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Cache-Control = "public, max-age=86400"
+
+[[headers]]
+for = "/sitemap.xml"
+
+[headers.values]
+Cache-Control = "public, max-age=86400"
+
+[[headers]]
+for = "/robots.txt"
+
+[headers.values]
+Cache-Control = "public, max-age=86400"
+
+[[redirects]]
+from = "/vacature-insturen"
+to = "/vacature-insturen.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/cookiebeleid"
+to = "/cookiebeleid.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

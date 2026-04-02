@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{functietitel}} bij {{bedrijfsnaam}} | {{regio}}</title>
+  <meta name="description" content="{{functietitel}} bij {{bedrijfsnaam}} in {{regio}}. {{salaris_range}}. Reageer direct &mdash; reactie binnen 2 werkdagen.">
+  <meta property="og:title" content="{{functietitel}} bij {{bedrijfsnaam}}">
+  <meta property="og:description" content="{{salaris_range}} | {{contract_type}} | {{regio}} | Solliciteer direct.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"JobPosting","title":"{{functietitel}}","hiringOrganization":{"@type":"Organization","name":"{{bedrijfsnaam}}"},"jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressRegion":"{{regio}}","addressCountry":"NL"}},"baseSalary":{"@type":"MonetaryAmount","currency":"EUR","value":{"@type":"QuantitativeValue","value":"{{salaris_range}}"}},"employmentType":"{{contract_type}}","datePosted":"{{date_posted}}","description":"{{functieomschrijving}}"}</script>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','{{PIXEL_ID}}');
+    fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{PIXEL_ID}}&ev=PageView&noscript=1"/></noscript>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{GA4_ID}}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{GA4_ID}}');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-primary:    {{opdrachtgever_kleur_primary}};
+      --brand-primary-dk: {{opdrachtgever_kleur_primary_dark}};
+      --brand-accent:     #E85D04;
+      --brand-accent-dk:  #C44B02;
+      --dark:   #111827;
+      --mid:    #374151;
+      --gray:   #6B7280;
+      --light:  #F9FAFB;
+      --white:  #FFFFFF;
+      --border: #E5E7EB;
+      --green:  #059669;
+    }
+
+    /* Brand color fallbacks for IE/old browsers */
+    :root { --brand-primary: #1A3F6F; --brand-primary-dk: #122D52; }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',Arial,sans-serif;font-size:16px;line-height:1.6;color:var(--dark);background:var(--white);}
+    h1,h2,h3,h4{font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em;}
+    a{text-decoration:none;color:inherit;}
+
+    /* Urgency strip */
+    .urgency-strip{background:var(--dark);color:rgba(255,255,255,.9);text-align:center;padding:10px 16px;font-size:13px;font-weight:500;}
+
+    /* Nav */
+    .nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .2s;}
+    .nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.1);}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+    .nav-brand{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;color:var(--brand-primary);text-transform:uppercase;letter-spacing:.02em;}
+    .nav-logo-img{height:36px;width:auto;object-fit:contain;}
+
+    /* Buttons */
+    .btn{display:inline-block;padding:10px 22px;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:background .15s,transform .1s;border:2px solid transparent;white-space:nowrap;}
+    .btn:active{transform:scale(.98);}
+    .btn-accent{background:var(--brand-accent);color:var(--white);border-color:var(--brand-accent);}
+    .btn-accent:hover{background:var(--brand-accent-dk);}
+    .btn-outline{background:transparent;color:var(--brand-primary);border-color:var(--brand-primary);}
+    .btn-outline:hover{background:var(--brand-primary);color:var(--white);}
+    .btn-lg{padding:14px 32px;font-size:16px;}
+
+    /* Hero */
+    .hero{background:var(--brand-primary);color:var(--white);padding:72px 24px 88px;text-align:center;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;bottom:-40px;left:-5%;width:110%;height:80px;background:var(--white);transform:skewY(-2deg);transform-origin:top left;}
+    .hero-inner{max-width:760px;margin:0 auto;position:relative;}
+    .hero-tag{display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;font-family:'Inter',sans-serif;}
+    .hero h1{font-size:clamp(36px,7vw,64px);font-weight:900;margin-bottom:12px;text-transform:uppercase;}
+    .hero-bedrijf{font-size:18px;color:rgba(255,255,255,.75);margin-bottom:28px;}
+    .hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px;}
+    .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);padding:6px 16px;border-radius:100px;font-size:13px;font-weight:600;}
+    .pill.accent{background:var(--brand-accent);border-color:var(--brand-accent);color:white;}
+    .hero-fine{font-size:13px;color:rgba(255,255,255,.5);margin-top:14px;}
+
+    /* Quick facts */
+    .quick-facts{background:var(--light);border-bottom:1px solid var(--border);padding:24px;}
+    .facts-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;}
+    .fact-value{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--brand-primary);line-height:1;margin-bottom:4px;}
+    .fact-label{font-size:12px;color:var(--gray);font-weight:500;text-transform:uppercase;letter-spacing:.05em;}
+
+    /* Sections */
+    section{padding:72px 24px;}
+    .section-inner{max-width:900px;margin:0 auto;}
+    .section-tag{font-size:12px;font-weight:700;color:var(--brand-accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;font-family:'Inter',sans-serif;}
+    .section-title{font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--dark);text-transform:uppercase;margin-bottom:32px;}
+
+    /* Prose */
+    .prose{font-size:16px;color:var(--mid);line-height:1.75;max-width:720px;}
+    .prose p{margin-bottom:16px;}
+
+    /* Checklist */
+    .checklist{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:0;}
+    .checklist li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--mid);}
+    .check-icon{width:22px;height:22px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:white;font-size:12px;font-weight:700;margin-top:2px;}
+
+    /* Voordelen grid */
+    .voordelen{background:var(--light);}
+    .voordelen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .voordeel-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;gap:12px;align-items:flex-start;}
+    .voordeel-card .check-icon{background:var(--green);}
+    .voordeel-card p{font-size:14px;color:var(--mid);line-height:1.5;}
+
+    /* Bedrijf */
+    .bedrijf{background:var(--white);}
+    .bedrijf-content{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    .bedrijf-text{font-size:16px;color:var(--mid);line-height:1.75;}
+    .bedrijf-usps{display:flex;flex-direction:column;gap:14px;}
+    .usp-item{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--light);border-radius:8px;border-left:3px solid var(--brand-accent);}
+    .usp-item p{font-size:14px;color:var(--mid);line-height:1.5;}
+
+    /* Solliciteer */
+    .solliciteer{background:var(--brand-primary);color:var(--white);text-align:center;padding:72px 24px;}
+    .solliciteer-inner{max-width:640px;margin:0 auto;}
+    .solliciteer h2{font-size:clamp(28px,5vw,48px);font-weight:900;text-transform:uppercase;margin-bottom:16px;color:var(--white);}
+    .solliciteer p{font-size:17px;color:rgba(255,255,255,.8);margin-bottom:32px;line-height:1.6;}
+    .contact-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px;font-size:14px;color:rgba(255,255,255,.65);}
+    .contact-row a{color:rgba(255,255,255,.85);font-weight:600;}
+    .contact-row a:hover{color:var(--white);}
+
+    /* Footer */
+    footer{background:var(--dark);color:rgba(255,255,255,.45);padding:28px 24px;text-align:center;}
+    footer p{font-size:13px;line-height:1.6;}
+    .footer-links{display:flex;gap:20px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+    .footer-links a{font-size:13px;color:rgba(255,255,255,.35);transition:color .15s;}
+    .footer-links a:hover{color:var(--white);}
+
+    /* Cookie */
+    .cookie-banner{position:fixed;bottom:0;left:0;right:0;background:var(--dark);color:var(--white);padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;z-index:1000;border-top:1px solid rgba(255,255,255,.1);font-size:14px;}
+    .cookie-banner.hidden{display:none;}
+    .cookie-banner p{margin:0;}
+    .cookie-btn{padding:8px 18px;border-radius:5px;font-weight:600;font-size:13px;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
+    .cookie-accept{background:var(--brand-accent);color:white;}
+    .cookie-reject{background:rgba(255,255,255,.1);color:white;}
+
+    /* Responsive */
+    @media(max-width:768px){
+      section{padding:56px 20px;}
+      .facts-inner{grid-template-columns:repeat(2,1fr);}
+      .voordelen-grid{grid-template-columns:1fr;}
+      .bedrijf-content{grid-template-columns:1fr;}
+      .hero-pills{gap:8px;}
+      .pill{font-size:12px;padding:5px 12px;}
+    }
+    @media(max-width:480px){
+      .facts-inner{grid-template-columns:repeat(2,1fr);}
+      .hero{padding:56px 20px 72px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Urgency Strip -->
+  <div class="urgency-strip">
+    &#128293; <strong>{{bedrijfsnaam}}</strong> zoekt direct een <strong>{{functietitel}}</strong> in {{regio}} &mdash; Reageer vandaag nog
+  </div>
+
+  <!-- Sticky Nav -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <div id="navBrand" class="nav-brand">{{bedrijfsnaam}}</div>
+      <a href="{{sollicitatie_url}}" class="btn btn-accent cta-trigger">Direct Solliciteren &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">{{sector}} &middot; {{regio}}</div>
+      <h1>{{functietitel}}</h1>
+      <p class="hero-bedrijf">bij <strong>{{bedrijfsnaam}}</strong> &mdash; {{regio}}</p>
+      <div class="hero-pills">
+        <span class="pill accent">{{salaris_range}}</span>
+        <span class="pill">{{contract_type}}</span>
+        <span class="pill">{{regio}}</span>
+        <span class="pill">{{opleidingsniveau}}</span>
+      </div>
+      <a href="{{sollicitatie_url}}" class="btn btn-accent btn-lg cta-trigger">Solliciteer Direct &rarr;</a>
+      <p class="hero-fine">Reactie binnen 2 werkdagen &middot; Geen CV nodig voor eerste gesprek</p>
+    </div>
+  </section>
+
+  <!-- Quick Facts -->
+  <div class="quick-facts">
+    <div class="facts-inner">
+      <div><div class="fact-value">{{salaris_range}}</div><div class="fact-label">Salaris</div></div>
+      <div><div class="fact-value">{{contract_type}}</div><div class="fact-label">Dienstverband</div></div>
+      <div><div class="fact-value">{{regio}}</div><div class="fact-label">Regio</div></div>
+      <div><div class="fact-value">{{opleidingsniveau}}</div><div class="fact-label">Opleiding</div></div>
+    </div>
+  </div>
+
+  <!-- De functie -->
+  <section>
+    <div class="section-inner">
+      <div class="section-tag">De Functie</div>
+      <h2 class="section-title">Wat Ga Je Doen?</h2>
+      <div class="prose" id="functieProse">
+        <!-- Filled by JS from {{functieomschrijving}} -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Wat wij zoeken -->
+  <section style="background:var(--light);padding:72px 24px;">
+    <div class="section-inner">
+      <div class="section-tag">Wat Wij Zoeken</div>
+      <h2 class="section-title">Jouw Profiel</h2>
+      <ul class="checklist" id="eisenList">
+        <!-- Filled by JS from {{eisen}} -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Wat wij bieden -->
+  <section class="voordelen">
+    <div class="section-inner">
+      <div class="section-tag">Wat Wij Bieden</div>
+      <h2 class="section-title">Jouw Arbeidsvoorwaarden</h2>
+      <div class="voordelen-grid" id="voordelenGrid">
+        <!-- Filled by JS from {{arbeidsvoorwaarden}} -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Over het bedrijf -->
+  <section class="bedrijf">
+    <div class="section-inner">
+      <div class="section-tag">Over {{bedrijfsnaam}}</div>
+      <h2 class="section-title">Jouw Toekomstige Werkgever</h2>
+      <div class="bedrijf-content">
+        <div class="bedrijf-text" id="bedrijfText">
+          <!-- Filled by JS from {{bedrijfsbeschrijving}} -->
+        </div>
+        <div class="bedrijf-usps" id="bedrijfUsps">
+          <!-- Filled by JS from {{usps_werkgever}} -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solliciteer -->
+  <section class="solliciteer">
+    <div class="solliciteer-inner">
+      <h2>Interesse? Solliciteer Direct</h2>
+      <p>Laat je gegevens achter en wij nemen binnen 2 werkdagen contact op. Geen uitgebreid CV nodig voor het eerste gesprek.</p>
+      <a href="{{sollicitatie_url}}" class="btn btn-accent btn-lg cta-trigger">Solliciteer Nu &rarr;</a>
+      <div class="contact-row">
+        <span>Vragen? Bel <a href="tel:{{telefoonnummer_recruiter}}">{{telefoonnummer_recruiter}}</a></span>
+        <span>of mail <a href="mailto:{{email_recruiter}}">{{email_recruiter}}</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Deze vacature wordt aangeboden via <strong style="color:rgba(255,255,255,.6)">Vacaturekanon</strong> &mdash; een dienst van Recruitin B.V.</p>
+    <div class="footer-links">
+      <a href="/privacy">Privacybeleid</a>
+      <a href="/voorwaarden">Voorwaarden</a>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Wij gebruiken cookies voor analyse en advertenties.</p>
+    <button class="cookie-btn cookie-accept" id="btnAccept">Accepteren</button>
+    <button class="cookie-btn cookie-reject" id="btnReject">Weigeren</button>
+  </div>
+
+  <script>
+    // ── Render functieomschrijving ─────────────────────────────────────────────
+    (function renderFunctie() {
+      var raw = '{{functieomschrijving}}';
+      var container = document.getElementById('functieProse');
+      if (!container) return;
+      raw.split(/\n\n+/).filter(Boolean).forEach(function(para) {
+        var p = document.createElement('p');
+        p.textContent = para.trim();
+        container.appendChild(p);
+      });
+    })();
+
+    // ── Render eisen ──────────────────────────────────────────────────────────
+    (function renderEisen() {
+      var raw = '{{eisen}}';
+      var list = document.getElementById('eisenList');
+      if (!list) return;
+      var items = raw.split(/[\n\r]|•|-/).map(function(s){ return s.trim(); }).filter(Boolean);
+      items.forEach(function(text) {
+        var li = document.createElement('li');
+        var icon = document.createElement('div');
+        icon.className = 'check-icon';
+        icon.textContent = '\u2713';
+        var span = document.createElement('span');
+        span.textContent = text;
+        li.appendChild(icon);
+        li.appendChild(span);
+        list.appendChild(li);
+      });
+    })();
+
+    // ── Render arbeidsvoorwaarden ─────────────────────────────────────────────
+    (function renderVoordelen() {
+      var raw = '{{arbeidsvoorwaarden}}';
+      var grid = document.getElementById('voordelenGrid');
+      if (!grid) return;
+      var items = raw.split(/[\n\r]|•|-/).map(function(s){ return s.trim(); }).filter(Boolean);
+      items.forEach(function(text) {
+        var card = document.createElement('div');
+        card.className = 'voordeel-card';
+
+        var icon = document.createElement('div');
+        icon.className = 'check-icon';
+        icon.textContent = '\u2713';
+
+        var p = document.createElement('p');
+        p.textContent = text;
+
+        card.appendChild(icon);
+        card.appendChild(p);
+        grid.appendChild(card);
+      });
+    })();
+
+    // ── Render bedrijfsbeschrijving ───────────────────────────────────────────
+    (function renderBedrijf() {
+      var raw = '{{bedrijfsbeschrijving}}';
+      var container = document.getElementById('bedrijfText');
+      if (!container) return;
+      raw.split(/\n\n+/).filter(Boolean).forEach(function(para) {
+        var p = document.createElement('p');
+        p.style.marginBottom = '16px';
+        p.style.color = '#374151';
+        p.style.lineHeight = '1.75';
+        p.textContent = para.trim();
+        container.appendChild(p);
+      });
+    })();
+
+    // ── Render USPs werkgever ─────────────────────────────────────────────────
+    (function renderUsps() {
+      var raw = '{{usps_werkgever}}';
+      var container = document.getElementById('bedrijfUsps');
+      if (!container) return;
+      var items = raw.split(/[\n\r]|•|-/).map(function(s){ return s.trim(); }).filter(Boolean);
+      items.slice(0, 4).forEach(function(text) {
+        var div = document.createElement('div');
+        div.className = 'usp-item';
+
+        var icon = document.createElement('div');
+        icon.className = 'check-icon';
+        icon.style.background = '#E85D04';
+        icon.textContent = '\u2713';
+
+        var p = document.createElement('p');
+        p.textContent = text;
+
+        div.appendChild(icon);
+        div.appendChild(p);
+        container.appendChild(div);
+      });
+    })();
+
+    // ── Nav logo: show image if available ─────────────────────────────────────
+    (function initNavLogo() {
+      var logoUrl = '{{logo_url}}';
+      var brand = document.getElementById('navBrand');
+      if (logoUrl && logoUrl !== '{{logo_url}}' && brand) {
+        var img = document.createElement('img');
+        img.src = logoUrl;
+        img.className = 'nav-logo-img';
+        img.alt = '{{bedrijfsnaam}}';
+        brand.textContent = '';
+        brand.appendChild(img);
+      }
+    })();
+
+    // ── Sticky nav ────────────────────────────────────────────────────────────
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // ── Scroll depth ──────────────────────────────────────────────────────────
+    var depthSent = {};
+    window.addEventListener('scroll', function() {
+      var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(function(d) {
+        if (pct >= d && !depthSent[d]) {
+          depthSent[d] = true;
+          if (typeof gtag === 'function') gtag('event', 'scroll_depth', { depth: d });
+        }
+      });
+    }, { passive: true });
+
+    // ── CTA click → Lead event ────────────────────────────────────────────────
+    document.querySelectorAll('.cta-trigger').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (typeof fbq === 'function') fbq('track', 'Lead');
+        if (typeof gtag === 'function') gtag('event', 'generate_lead');
+      });
+    });
+
+    // ── Cookie consent (document.cookie, SameSite=Lax) ───────────────────────
+    var banner = document.getElementById('cookieBanner');
+    function disableTracking() { window.fbq = function(){}; window.gtag = function(){}; }
+
+    function setCookie(name, value) {
+      document.cookie = name + '=' + value + '; max-age=31536000; path=/; SameSite=Lax';
+    }
+
+    function getCookie(name) {
+      var match = document.cookie.split('; ').find(function(c) { return c.startsWith(name + '='); });
+      return match ? match.split('=')[1] : null;
+    }
+
+    document.getElementById('btnAccept').addEventListener('click', function() {
+      setCookie('vk_consent', 'accepted');
+      banner.classList.add('hidden');
+    });
+    document.getElementById('btnReject').addEventListener('click', function() {
+      setCookie('vk_consent', 'rejected');
+      banner.classList.add('hidden');
+      disableTracking();
+    });
+
+    (function() {
+      var pref = getCookie('vk_consent');
+      if (pref) {
+        banner.classList.add('hidden');
+        if (pref === 'rejected') disableTracking();
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "total_found": 0,
+  "total_unique": 0,
+  "errors": 0,
+  "by_term": {
+    "projectleider": {
+      "new": 0,
+      "duplicates": 0,
+      "total": 0,
+      "pages": 1
+    },
+    "werkvoorbereider": {
+      "new": 0,
+      "duplicates": 0,
+      "total": 0,
+      "pages": 1
+    },
+    "monteur": {
+      "new": 0,
+      "duplicates": 0,
+      "total": 0,
+      "pages": 1
+    },
+    "engineer technisch": {
+      "new": 0,
+      "duplicates": 0,
+      "total": 0,
+      "pages": 1
+    },
+    "calculator": {
+      "new": 0,
+      "duplicates": 0,
+      "total": 0,
+      "pages": 1
+    }
+  },
+  "timestamp": "20260318_213233",
+  "location": "Arnhem",
+  "radius": "30",
+  "search_terms": [
+    "projectleider",
+    "werkvoorbereider",
+    "monteur",
+    "engineer technisch",
+    "calculator"
+  ],
+  "export_time": "2026-03-18T21:32:33.958200"
+}
